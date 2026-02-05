@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Menu - Raclette Party</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #764ba2;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+            font-size: 2em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin: 30px 0 15px 0;
+            font-size: 1.5em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .cocktail {
+            background: #f9f9f9;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .cocktail h3 {
+            margin-top: 0;
+        }
+
+        .ingredients {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .ingredients h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .ingredients ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ingredients li:before {
+            content: "🍸 ";
+            margin-right: 8px;
+        }
+
+        .instructions {
+            margin: 15px 0;
+        }
+
+        .instructions h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin: 5px 0;
+        }
+
+        .pro-tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .pro-tip:before {
+            content: "💡 Pro tip: ";
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .shopping-list {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .shopping-list h4 {
+            color: #2e7d32;
+            margin: 15px 0 10px 0;
+        }
+
+        .shopping-list ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .shopping-list li {
+            margin: 5px 0;
+        }
+
+        .tips-section {
+            background: #fff9e6;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #ffd700;
+        }
+
+        .tips-section h3 {
+            color: #b8860b;
+            margin-top: 20px;
+        }
+
+        .tips-section h4 {
+            color: #8b7500;
+            margin: 15px 0 10px 0;
+        }
+
+        .recommendation {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .recommendation strong {
+            color: #155724;
+        }
+
+        .avoid {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .avoid strong {
+            color: #721c24;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #eee;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .shopping-list ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍸 Cocktail Menu</h1>
+        <p class="subtitle">For the Raclette Party</p>
+
+        <h2>Main Menu</h2>
+
+        <div class="cocktail">
+            <h3>Espresso Martini</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Vodka</li>
+                    <li>1 oz Coffee liqueur (Kahlúa or Mr. Black)</li>
+                    <li>1 oz Fresh espresso (cooled) or cold brew concentrate</li>
+                    <li>1/2 oz Simple syrup (optional, adjust to taste)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Shake hard with ice</li>
+                    <li>Double strain into coupe or martini glass</li>
+                    <li>Garnish with 3 coffee beans</li>
+                </ol>
+            </div>
+            <div class="pro-tip">Brew espresso ahead and chill, or use quality cold brew</div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Amaretto Sour</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>1.5 oz Amaretto</li>
+                    <li>3/4 oz Bourbon (optional but recommended - makes it less sweet)</li>
+                    <li>1 oz Fresh lemon juice</li>
+                    <li>1/2 oz Simple syrup</li>
+                    <li>1/2 oz Egg white</li>
+                    <li>2 dashes Angostura bitters (optional)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Dry shake without ice first (to emulsify egg white)</li>
+                    <li>Add ice and shake again</li>
+                    <li>Strain into rocks glass</li>
+                    <li>Garnish with lemon wheel and cherry</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Mezcal Sour</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Mezcal</li>
+                    <li>3/4 oz Fresh lime juice</li>
+                    <li>1/2 oz Fresh lemon juice (or use all lime)</li>
+                    <li>1/2 oz Simple syrup or agave nectar</li>
+                    <li>1/2 oz Egg white</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Dry shake without ice first (to emulsify egg white)</li>
+                    <li>Add ice and shake again</li>
+                    <li>Strain into rocks glass</li>
+                    <li>Optional: smoked salt rim, garnish with lime wheel</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Negroni</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>1 oz Gin</li>
+                    <li>1 oz Campari</li>
+                    <li>1 oz Sweet vermouth</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Stir with ice for 30 seconds</li>
+                    <li>Strain into rocks glass over large ice cube</li>
+                    <li>Garnish with orange peel (express oils over drink)</li>
+                </ol>
+            </div>
+            <div class="pro-tip">Can batch this easily - just combine equal parts and stir before serving</div>
+        </div>
+
+        <hr>
+
+        <h2>Additional Options</h2>
+
+        <div class="cocktail">
+            <h3>Pisco Sour</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Pisco</li>
+                    <li>1 oz Fresh lime juice</li>
+                    <li>3/4 oz Simple syrup</li>
+                    <li>1/2 oz Egg white</li>
+                    <li>Angostura bitters (for garnish)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Dry shake without ice first (to emulsify egg white)</li>
+                    <li>Add ice and shake hard</li>
+                    <li>Strain into coupe or rocks glass</li>
+                    <li>Add 3 drops of Angostura bitters on top of foam</li>
+                    <li>Draw a design through the drops with a toothpick (optional)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Paper Plane</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>3/4 oz Bourbon</li>
+                    <li>3/4 oz Aperol</li>
+                    <li>3/4 oz Amaro Nonino</li>
+                    <li>3/4 oz Fresh lemon juice</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Shake with ice</li>
+                    <li>Strain into coupe</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Whiskey Sour</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Bourbon or Rye</li>
+                    <li>3/4 oz Fresh lemon juice</li>
+                    <li>1/2 oz Simple syrup</li>
+                    <li>1/2 oz Egg white (optional but recommended)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Shake hard with ice</li>
+                    <li>Strain into rocks glass</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Old Fashioned</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Bourbon or Rye</li>
+                    <li>1/4 oz Simple syrup (or 1 sugar cube)</li>
+                    <li>2-3 dashes Angostura bitters</li>
+                    <li>Orange peel</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Stir with ice</li>
+                    <li>Serve in rocks glass with large ice cube</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Paloma</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Tequila</li>
+                    <li>1/2 oz Fresh lime juice</li>
+                    <li>Grapefruit soda (Jarritos or Squirt)</li>
+                    <li>Salt rim (optional)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Build in highball glass with ice</li>
+                    <li>Garnish with lime</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Tommy's Margarita</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Tequila</li>
+                    <li>1 oz Fresh lime juice</li>
+                    <li>1/2 oz Agave nectar</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Shake with ice</li>
+                    <li>Strain into rocks glass (salt rim optional)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Aperol Spritz</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>3 oz Prosecco</li>
+                    <li>2 oz Aperol</li>
+                    <li>1 oz Soda water</li>
+                    <li>Orange slice</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Build in wine glass with ice</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Hugo</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>3 oz Prosecco</li>
+                    <li>1 oz Elderflower liqueur (St-Germain)</li>
+                    <li>Splash of soda</li>
+                    <li>Fresh mint, lime</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Build in wine glass with ice</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Boulevardier</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>1.5 oz Bourbon or Rye</li>
+                    <li>1 oz Campari</li>
+                    <li>1 oz Sweet vermouth</li>
+                    <li>Orange peel</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Stir with ice</li>
+                    <li>Strain into coupe or rocks glass</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cocktail">
+            <h3>Penicillin</h3>
+            <div class="ingredients">
+                <h4>Ingredients:</h4>
+                <ul>
+                    <li>2 oz Blended Scotch</li>
+                    <li>3/4 oz Fresh lemon juice</li>
+                    <li>3/4 oz Honey-ginger syrup</li>
+                    <li>1/4 oz Islay Scotch (float on top)</li>
+                </ul>
+            </div>
+            <div class="instructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Shake and strain into rocks glass</li>
+                </ol>
+            </div>
+            <div class="pro-tip">Honey-ginger syrup: Equal parts honey and hot water, add fresh ginger slices, steep and strain</div>
+        </div>
+
+        <hr>
+
+        <h2>Shopping List</h2>
+
+        <div class="shopping-list">
+            <h4>Spirits & Liqueurs (Main 4)</h4>
+            <ul>
+                <li>Vodka</li>
+                <li>Amaretto</li>
+                <li>Bourbon (for Amaretto Sour)</li>
+                <li>Mezcal - Montelobos Espadin</li>
+                <li>Gin</li>
+                <li>Campari</li>
+                <li>Sweet Vermouth (Carpano Antica or Cocchi di Torino)</li>
+                <li>Coffee liqueur (Kahlúa or Mr. Black)</li>
+            </ul>
+
+            <h4>Fresh Ingredients</h4>
+            <ul>
+                <li>Lemons (5-6)</li>
+                <li>Limes (3-4)</li>
+                <li>Oranges (1-2 for garnish)</li>
+                <li>Eggs (2-3 for whites)</li>
+                <li>Fresh espresso or cold brew concentrate</li>
+            </ul>
+
+            <h4>Pantry</h4>
+            <ul>
+                <li>Simple syrup</li>
+                <li>Ice (2-3 large bags)</li>
+                <li>Angostura bitters</li>
+            </ul>
+
+            <h4>Garnishes</h4>
+            <ul>
+                <li>Coffee beans</li>
+                <li>Maraschino cherries</li>
+                <li>Smoked salt (optional)</li>
+            </ul>
+
+            <h4>Equipment</h4>
+            <ul>
+                <li>Cocktail shaker</li>
+                <li>Jigger/measuring tool</li>
+                <li>Fine mesh strainer</li>
+                <li>Bar spoon</li>
+                <li>Citrus juicer</li>
+                <li>Peeler (for orange peel)</li>
+            </ul>
+
+            <h4>Additional Spirits (if making extra cocktails)</h4>
+            <ul>
+                <li>Pisco</li>
+                <li>Aperol, Amaro Nonino (Paper Plane)</li>
+                <li>Tequila - Olmeca Altos Plata (Paloma, Tommy's Margarita)</li>
+                <li>Prosecco (Aperol Spritz, Hugo)</li>
+                <li>St-Germain elderflower liqueur (Hugo)</li>
+                <li>Scotch (Penicillin)</li>
+                <li>Agave nectar</li>
+                <li>Grapefruit soda (Jarritos)</li>
+                <li>Fresh mint, ginger, honey</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>🇨🇭 Swiss Shopping Tips</h2>
+
+        <div class="tips-section">
+            <h3>Tequila Recommendations</h3>
+
+            <h4>What to Look For:</h4>
+            <ul>
+                <li><strong>Always choose "100% Agave"</strong> on the label</li>
+                <li>Get <strong>Blanco (Silver)</strong> for cocktails - unaged, pure agave flavor</li>
+                <li>Don't waste money on Reposado/Añejo for mixed drinks</li>
+            </ul>
+
+            <div class="recommendation">
+                <strong>Best Choice in Switzerland:</strong><br>
+                <strong>Olmeca Altos Plata</strong> - Widely available at Coop, Manor, Denner. 100% agave, made for cocktails, CHF 35-45. This is what Swiss bartenders use.
+            </div>
+
+            <h4>Other Good Options:</h4>
+            <ul>
+                <li><strong>El Jimador Blanco</strong> - Common in Swiss stores, 100% agave, CHF 30-40</li>
+                <li><strong>Espolòn Blanco</strong> - Sometimes at Manor, excellent value, CHF 40-50</li>
+            </ul>
+
+            <div class="avoid">
+                <strong>AVOID:</strong><br>
+                • <strong>Sierra Tequila</strong> - Very common in Switzerland but NOT 100% agave<br>
+                • <strong>Jose Cuervo Gold</strong> - Unless it says "Tradicional", it's mixto<br>
+                • <strong>Patrón</strong> - Overpriced (CHF 60-80+), not worth it for cocktails
+            </div>
+
+            <h3>Mezcal Recommendations</h3>
+
+            <h4>What to Look For:</h4>
+            <ul>
+                <li><strong>"100% Agave"</strong> (or "100% Maguey")</li>
+                <li><strong>Joven</strong> (young/unaged) - best for cocktails</li>
+                <li><strong>Espadin agave</strong> variety - most common, good for mixing</li>
+            </ul>
+
+            <div class="recommendation">
+                <strong>Perfect Choice:</strong><br>
+                <strong>Montelobos Espadin</strong> - Excellent for cocktails. 100% Espadin agave, balanced smokiness (not overwhelming), perfect for Mezcal Sour. Made for mixing, bartenders love it. CHF 55-70 at Manor or Globalus.
+            </div>
+
+            <h4>Alternative Good Options:</h4>
+            <ul>
+                <li><strong>Illegal Mezcal Joven</strong> - Available in Switzerland/Europe, smooth, CHF 55-65</li>
+                <li><strong>Los Amantes Joven</strong> - Sometimes at specialty shops, CHF 60-70</li>
+                <li><strong>Del Maguey Vida</strong> - Specifically made for cocktails, CHF 70-80</li>
+            </ul>
+
+            <h4>Where to Shop:</h4>
+            <ul>
+                <li><strong>Manor</strong> - Best spirits selection</li>
+                <li><strong>Globalus/Drinks of the World</strong> - Specialty stores, better mezcal selection</li>
+                <li><strong>Coop</strong> - Good for tequila, limited mezcal</li>
+                <li><strong>Denner</strong> - Budget-friendly, limited selection</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div style="text-align: center; color: #999; padding: 30px 0;">
+            <p>Enjoy your raclette party! 🧀🍸</p>
+        </div>
+    </div>
+</body>
+</html>
