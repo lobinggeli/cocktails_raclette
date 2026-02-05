@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby's First Year — Month-by-Month Guide</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --clr-bg: #fdf6f0;
+  --clr-text: #3a3a3a;
+  --clr-accent: #e8a0bf;
+  --clr-timeline: #d4a5c7;
+  --clr-dev: #a8d8ea;
+  --clr-tummy: #f9e79f;
+  --clr-feed: #abebc6;
+  --clr-sleep: #d2b4de;
+  --clr-stim: #f5cba7;
+  --clr-screen: #f1948a;
+  --clr-pedi: #85c1e9;
+  --clr-travel: #82e0aa;
+  --clr-train: #f7dc6f;
+  --clr-growth: #ffb3ba;
+  --clr-trigger: #c9b3d4;
+  --clr-routine: #b4e7ce;
+  --clr-teething: #ffd9b3;
+  --clr-highlights: #fff4e6;
+  --clr-card: #ffffff;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5, #e8eaf6);
+}
+.header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #6a3d6a;
+  margin-bottom: .5rem;
+}
+.header p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #7d5a7d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+  padding: 1.5rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.legend-item {
+  font-size: .78rem;
+  padding: .25rem .65rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* Timeline */
+.timeline-wrap {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+.timeline-wrap::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--clr-timeline), #e8a0bf, var(--clr-timeline));
+  border-radius: 2px;
+}
+
+/* Month card */
+.month-card {
+  position: relative;
+  margin-left: 60px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.month-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.month-dot {
+  position: absolute;
+  left: -46px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+  background: var(--clr-accent);
+  border: 4px solid var(--clr-bg);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 0 3px var(--clr-timeline);
+  transition: transform .3s;
+}
+.month-card:hover .month-dot { transform: scale(1.2); }
+
+.card-header {
+  background: var(--clr-card);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: box-shadow .2s;
+}
+.card-header:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.12); }
+.card-header h2 {
+  font-size: 1.15rem;
+  color: #5a3e6a;
+}
+.card-header .arrow {
+  font-size: 1.2rem;
+  transition: transform .3s;
+  color: #9b7aaa;
+}
+.month-card.open .card-header .arrow { transform: rotate(180deg); }
+
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  background: var(--clr-card);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: -6px;
+}
+.card-body-inner { padding: 1rem 1.25rem 1.25rem; }
+
+/* Badges / sections inside card */
+.section {
+  margin-bottom: .85rem;
+}
+.section:last-child { margin-bottom: 0; }
+.badge {
+  display: inline-block;
+  padding: .2rem .6rem;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-bottom: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.badge-dev  { background: var(--clr-dev); color: #1a5276; }
+.badge-tummy { background: var(--clr-tummy); color: #7d6608; }
+.badge-feed { background: var(--clr-feed); color: #1e8449; }
+.badge-sleep { background: var(--clr-sleep); color: #6c3483; }
+.badge-stim { background: var(--clr-stim); color: #935116; }
+.badge-screen { background: var(--clr-screen); color: #78281f; }
+.badge-pedi { background: var(--clr-pedi); color: #1a5276; }
+.badge-travel { background: var(--clr-travel); color: #1a5230; }
+.badge-train { background: var(--clr-train); color: #7d6608; }
+.badge-growth { background: var(--clr-growth); color: #8b0000; }
+.badge-trigger { background: var(--clr-trigger); color: #4a235a; }
+.badge-routine { background: var(--clr-routine); color: #0d5940; }
+.badge-teething { background: var(--clr-teething); color: #994d00; }
+.section a { color: #6a3d9a; text-decoration: underline; }
+.section a:hover { color: #4a1d7a; }
+
+.section p, .section ul {
+  font-size: .92rem;
+  margin-top: .15rem;
+}
+.section ul {
+  padding-left: 1.2rem;
+}
+.section li { margin-bottom: .15rem; }
+
+/* Month highlights */
+.highlights-box {
+  background: var(--clr-highlights);
+  border-left: 4px solid var(--clr-accent);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+.highlights-box h3 {
+  font-size: 1rem;
+  color: #6a3d6a;
+  margin-bottom: .5rem;
+}
+.highlights-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+.highlights-box li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: .4rem;
+  font-size: .9rem;
+}
+.highlights-box li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: bold;
+}
+
+/* After 12 months & warning sections */
+.info-section {
+  max-width: 780px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.info-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.info-box {
+  background: var(--clr-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+.info-box h2 {
+  color: #5a3e6a;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+th, td {
+  text-align: left;
+  padding: .55rem .75rem;
+  border-bottom: 1px solid #eee;
+}
+th { background: #f3e5f5; color: #5a3e6a; }
+tr:last-child td { border-bottom: none; }
+
+.warning-list { padding-left: 1.2rem; }
+.warning-list li { margin-bottom: .4rem; font-size: .92rem; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+  margin-top: 2rem;
+  font-size: .85rem;
+  color: #7d5a7d;
+}
+.footer a { color: #6a3d6a; }
+.footer .disclaimer {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #9b7a9b;
+}
+
+/* Quiz Modal */
+.quiz-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+.quiz-overlay.active { display: flex; }
+
+.quiz-modal {
+  background: var(--clr-card);
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  margin: auto;
+}
+
+.quiz-header {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  text-align: center;
+}
+.quiz-header h2 {
+  color: #6a3d6a;
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+.quiz-header p {
+  color: #7d5a7d;
+  font-size: .95rem;
+}
+
+.quiz-body {
+  padding: 2rem 1.5rem;
+}
+
+.quiz-field {
+  margin-bottom: 1.5rem;
+}
+.quiz-field label {
+  display: block;
+  font-weight: 600;
+  color: #5a3e6a;
+  margin-bottom: .5rem;
+  font-size: .95rem;
+}
+.quiz-field input[type="text"],
+.quiz-field input[type="date"] {
+  width: 100%;
+  padding: .7rem;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: .95rem;
+  font-family: inherit;
+  transition: border-color .2s;
+}
+.quiz-field input:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+}
+
+.quiz-field-description {
+  font-size: .85rem;
+  color: #7d5a7d;
+  margin-top: .25rem;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-top: .5rem;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: .5rem;
+  border-radius: 6px;
+  transition: background .2s;
+}
+.checkbox-label:hover {
+  background: #f9f9f9;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: .7rem;
+  cursor: pointer;
+  accent-color: var(--clr-accent);
+}
+.checkbox-label span {
+  font-size: .9rem;
+  color: var(--clr-text);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.btn {
+  padding: .75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--clr-accent), #d4a5c7);
+  color: white;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 160, 191, 0.4);
+}
+.btn-secondary {
+  background: #f0f0f0;
+  color: #5a3e6a;
+}
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+/* Settings button */
+.settings-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--clr-accent), #d4a5c7);
+  color: white;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all .2s;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settings-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.personalized-name {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .timeline-wrap::before { left: 16px; }
+  .month-card { margin-left: 42px; }
+  .month-dot { left: -36px; width: 20px; height: 20px; top: 16px; }
+  .card-header { padding: .85rem 1rem; }
+  .card-body-inner { padding: .85rem 1rem 1rem; }
+
+  .quiz-body { padding: 1.5rem 1rem; }
+  .quiz-header { padding: 1.5rem 1rem; }
+  .settings-btn { bottom: 1rem; right: 1rem; width: 45px; height: 45px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Quiz Modal -->
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-modal">
+    <div class="quiz-header">
+      <h2>Let's Personalize Your Experience!</h2>
+      <p>Tell us about your baby so we can tailor the content just for you</p>
+    </div>
+    <div class="quiz-body">
+      <form id="quizForm">
+        <!-- Baby's Name -->
+        <div class="quiz-field">
+          <label for="babyName">Baby's Name</label>
+          <input type="text" id="babyName" name="babyName" placeholder="Enter baby's name" required>
+          <p class="quiz-field-description">We'll use this to personalize the content</p>
+        </div>
+
+        <!-- Birth Date -->
+        <div class="quiz-field">
+          <label for="birthDate">Birth Date</label>
+          <input type="date" id="birthDate" name="birthDate" value="2025-12-26" required>
+          <p class="quiz-field-description">We'll calculate their current age and highlight relevant milestones</p>
+        </div>
+
+        <!-- Location -->
+        <div class="quiz-field">
+          <label for="location">Location (City, Country)</label>
+          <input type="text" id="location" name="location" placeholder="e.g., San Francisco, USA">
+          <p class="quiz-field-description">Optional: helps us provide location-specific resources</p>
+        </div>
+
+        <!-- Development Milestones -->
+        <div class="quiz-field">
+          <label>What can your baby currently do?</label>
+          <p class="quiz-field-description">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="smile">
+              <span>Social smile</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="hold-head">
+              <span>Hold head up</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="roll">
+              <span>Roll over</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="sit">
+              <span>Sit independently</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="crawl">
+              <span>Crawl</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="stand">
+              <span>Stand with support</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="milestone" value="walk">
+              <span>Walk independently</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Parent Concerns/Interests -->
+        <div class="quiz-field">
+          <label>What topics are you most interested in?</label>
+          <p class="quiz-field-description">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="feeding">
+              <span>Feeding & Nutrition</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="sleep">
+              <span>Sleep Training</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="development">
+              <span>Development & Milestones</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="training">
+              <span>Physical Training & Activities</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="travel">
+              <span>Travel Tips</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="concern" value="health">
+              <span>Health & Pediatric Care</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="quiz-actions">
+          <button type="submit" class="btn btn-primary">Save & Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Button -->
+<button class="settings-btn" id="settingsBtn" title="Update your information" style="display: none;">
+  ⚙️
+</button>
+
+<header class="header">
+  <h1>Baby's First Year &mdash; Month-by-Month Guide</h1>
+  <p>Born 26 December 2025 &mdash; Evidence-based milestones &amp; care recommendations</p>
+</header>
+
+<nav class="legend" aria-label="Category legend">
+  <span class="legend-item badge-dev">Development</span>
+  <span class="legend-item badge-tummy">Tummy Time</span>
+  <span class="legend-item badge-feed">Feeding</span>
+  <span class="legend-item badge-sleep">Sleep</span>
+  <span class="legend-item badge-stim">Stimulation</span>
+  <span class="legend-item badge-screen">Screen Time</span>
+  <span class="legend-item badge-pedi">Pediatric Visits</span>
+  <span class="legend-item badge-train">Training</span>
+  <span class="legend-item badge-travel">Travel</span>
+  <span class="legend-item badge-growth">Growth Spurts</span>
+  <span class="legend-item badge-trigger">Crying & Comfort</span>
+  <span class="legend-item badge-routine">Routines</span>
+  <span class="legend-item badge-teething">Teething</span>
+</nav>
+
+<div class="timeline-wrap" id="timeline"></div>
+
+<div class="info-section" id="after12">
+  <div class="info-box">
+    <h2>After 12 Months &mdash; Screen Time Guidelines</h2>
+    <table>
+      <thead><tr><th>Age Range</th><th>Recommendation (AAP / WHO)</th></tr></thead>
+      <tbody>
+        <tr><td>12 &ndash; 18 months</td><td>Avoid screen media other than video-chatting</td></tr>
+        <tr><td>18 &ndash; 24 months</td><td>If introducing media, choose high-quality programming; co-view with child</td></tr>
+        <tr><td>2 &ndash; 5 years</td><td>Limit to 1 hour/day of high-quality programs; co-view and discuss content</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="info-section" id="travel-essentials">
+  <div class="info-box">
+    <h2>Travel Essentials Checklist</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Items</th></tr></thead>
+      <tbody>
+        <tr><td>Safety</td><td>Rear-facing car seat, portable crib/travel bassinet, outlet covers, first-aid kit</td></tr>
+        <tr><td>Feeding</td><td>Bottles/cups, formula/breast milk storage, portable high chair, bibs, snack containers</td></tr>
+        <tr><td>Sleep</td><td>Sleep sack, white-noise machine, familiar lovey/blanket, blackout shade (portable)</td></tr>
+        <tr><td>Health</td><td>Infant thermometer, saline drops, infant pain reliever, sunscreen (6 mo+), insect repellent (2 mo+ for picaridin, check AAP), vaccination records</td></tr>
+        <tr><td>On-the-go</td><td>Lightweight stroller, baby carrier/wrap, changing pad, diaper bag with extras, wet bags for soiled clothes</td></tr>
+        <tr><td>Documents</td><td>Passport (required for international travel at any age), health insurance card, pediatrician contact info, travel medical insurance details</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="info-section" id="warnings">
+  <div class="info-box">
+    <h2>When to Talk to Your Pediatrician</h2>
+    <ul class="warning-list">
+      <li>No social smile by 2 months</li>
+      <li>Does not follow objects with eyes by 3 months</li>
+      <li>Does not babble or imitate sounds by 6 months</li>
+      <li>Does not sit independently by 9 months</li>
+      <li>Does not use gestures (waving, pointing) by 12 months</li>
+      <li>Loss of previously acquired skills at any age</li>
+      <li>Does not respond to their name by 9 months</li>
+      <li>No single words by 16 months</li>
+      <li>Persistent lack of eye contact</li>
+      <li>Extreme difficulty with feeding or sleep that does not improve</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>
+    Sources:
+    <a href="https://www.cdc.gov/ncbddd/actearly/milestones/index.html" target="_blank" rel="noopener">CDC Milestones</a> &middot;
+    <a href="https://www.aap.org" target="_blank" rel="noopener">American Academy of Pediatrics</a> &middot;
+    <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener">WHO Guidelines</a> &middot;
+    <a href="https://www.healthychildren.org" target="_blank" rel="noopener">HealthyChildren.org</a>
+  </p>
+  <p class="disclaimer">This page provides general guidance only and is not a substitute for professional medical advice.</p>
+</footer>
+
+<script>
+const months = [
+  {
+    title: "Month 1 — The Newborn (26 Dec 2025 – 26 Jan 2026)",
+    highlights: [
+      "🍼 Feed on demand every 2-3 hours (8-12 times/day) — no schedule yet",
+      "💤 Sleep 14-17 hours total with no predictable pattern",
+      "👶 First pediatric visit within 3-5 days, follow-up at 2 weeks",
+      "🔄 Start tummy time: 1-2 minutes, 2-3 times daily on your chest",
+      "⚠️ Growth spurt around 2-3 weeks: cluster feeding, extra fussiness",
+      "🚫 Zero screen time recommended (except video chat)",
+      "📋 Focus: Learn baby's patterns, establish day/night, safe sleep practices"
+    ],
+    dev: ["Reflexive movements (grasp, root, suck)", "Focuses on faces 8–12 inches away", "Startles at loud sounds", "Moves head side to side when on stomach"],
+    tummy: "Start with 1–2 minutes, 2–3 times per day on your chest or a firm surface. Always supervise.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula exclusively — no water, juice, or solids",
+      "<strong>Frequency:</strong> Feed on demand, roughly 8–12 times per day (every 2–3 hours), including overnight",
+      "<strong>Amount per feed:</strong> 30–90 ml (1–3 oz) per feeding, increasing throughout the month",
+      "<strong>Daily total:</strong> ~400–650 ml (14–22 oz)",
+      "<strong>Breastfeeding tip:</strong> Aim for at least 8 feeds/day to establish supply; watch for good latch, audible swallowing, and 6+ wet diapers/day",
+      "<strong>Formula tip:</strong> Use iron-fortified infant formula; do not dilute or concentrate",
+      "<strong>Signs of adequate intake:</strong> 6+ wet diapers/day, regains birth weight by ~10–14 days, steady weight gain after"
+    ],
+    sleep: "14–17 hours total. No predictable schedule yet. Always place on back to sleep (safe sleep).",
+    stim: ["High-contrast black-and-white images", "Gentle talking and singing", "Skin-to-skin contact"],
+    screen: "No screens. AAP and WHO recommend zero screen time for children under 18 months (except video chat).",
+    pedi: "First visit within 3–5 days of birth; follow-up at 2 weeks.",
+    train: [
+      "<strong>Tummy time on chest:</strong> Lay baby on your chest while you recline — the warmth and heartbeat make it comforting. Start with 1–2 min, 2–3× daily. <a href='https://pathways.org/topics-of-development/tummy-time/' target='_blank' rel='noopener'>Pathways.org — Tummy Time guide</a>",
+      "<strong>Side-lying play:</strong> Place baby on their side (supported by a rolled towel behind the back) and hold a toy at eye level — builds neck and core muscles. <a href='https://pathways.org/growth-development/0-3-months/activities/' target='_blank' rel='noopener'>Pathways.org — 0–3 month activities</a>",
+      "<strong>Lap soothe & lift:</strong> Place baby face-down across your lap and gently pat their back — this doubles as tummy time and a calming position",
+      "<strong>Visual tracking:</strong> Slowly move a high-contrast object (black-and-white card) 8–12 inches from baby's face in an arc — trains eye muscles and focus",
+      "<strong>Gentle stretches:</strong> During diaper changes, gently bend and straighten baby's legs, open and close arms — promotes body awareness"
+    ],
+    travel: ["Rear-facing car seat is mandatory — keep at a 45° recline for airway safety", "Avoid crowded places — immune system is immature", "Limit car trips; stop every 1–2 hours to take baby out of the seat", "Flying is generally safe after 1–2 weeks, but consult your pediatrician first", "Pack extra formula/breast milk, diapers, and a change of clothes beyond what you think you'll need", "Nurse or offer a pacifier during takeoff and landing to ease ear pressure"],
+    growth: {
+      timing: "2-3 weeks",
+      duration: "2-4 days",
+      signs: ["Increased hunger and feeding frequency (cluster feeding)", "More fussiness than usual", "Wanting to be held more", "Shorter naps or sleep disruption"],
+      howToHandle: ["Feed on demand — don't watch the clock", "For breastfeeding: nurse as often as baby wants to boost milk supply", "For formula: may need slightly larger bottles", "Extra comfort and skin-to-skin contact", "Rest when baby rests — growth spurts are exhausting for parents too", "Remember: this is temporary and signals healthy development"],
+      aftermath: ["Baby may sleep longer after the spurt ends", "You may notice baby has outgrown some clothing", "Breastfeeding mothers may notice increased milk supply"]
+    },
+    triggers: {
+      cryingTriggers: ["Hunger (most common)", "Wet or dirty diaper", "Temperature discomfort (too hot/cold)", "Need for comfort and closeness", "Gas or digestive discomfort", "Overstimulation from lights, sounds, or activity", "Overtiredness — newborns tire quickly"],
+      soothingTechniques: ["The 5 S's: Swaddle, Side/stomach position (while held), Shush, Swing, Suck (pacifier)", "Skin-to-skin contact", "White noise or heartbeat sounds", "Gentle rocking or walking", "Warm bath", "Infant massage", "Change of environment (go outside, dim lights)"],
+      excitementTriggers: ["Parent's face — especially eyes and mouth", "High-contrast black-and-white patterns", "Voices, especially high-pitched 'parentese'", "Gentle movement (rocking, bouncing)", "Skin-to-skin contact"],
+      redFlags: ["Inconsolable crying for 3+ hours (could be colic — consult pediatrician)", "Crying accompanied by fever (>100.4°F / 38°C rectal)", "Weak or high-pitched cry", "Refusing to eat", "Lethargy or difficulty waking"]
+    },
+    routines: {
+      readiness: "Too early for strict routines — focus on learning baby's natural patterns",
+      routinesToStart: ["Observe and track feeding and sleep patterns to identify emerging rhythms", "Simple calming sequence before sleep (swaddle, white noise, dim lights)", "Distinguish day from night: bright/active during day, dark/quiet at night", "Same safe sleep environment for all sleep (bassinet, crib)"],
+      benefits: ["Helps parents predict baby's needs", "Establishes day/night differentiation", "Creates associations between actions and sleep"],
+      tips: ["Don't force a schedule — newborns need to feed on demand", "Note patterns in a simple log if helpful", "Keep nighttime feeds calm and minimal interaction", "Consistency in sleep location builds safety cues"]
+    }
+  },
+  {
+    title: "Month 2 — Social Smiles (26 Jan – 26 Feb 2026)",
+    highlights: [
+      "😊 First social smile — major milestone!",
+      "💉 2-month vaccines (DTaP, IPV, Hib, PCV13, RV)",
+      "⚠️ PEAK of 'purple crying' around 6 weeks — worst fussiness period",
+      "🔄 Growth spurt at 6 weeks: intense cluster feeding for 3-7 days",
+      "🕐 May start sleeping 3-4 hour stretches at night",
+      "🏋️ Tummy time goal: 15-30 minutes total/day in short sessions",
+      "📋 Focus: Survive witching hour (5-9pm), respond to coos, start simple bedtime routine"
+    ],
+    dev: ["First social smile", "Follows objects briefly with eyes", "Makes cooing sounds", "Can hold head up briefly during tummy time"],
+    tummy: "Work toward 15–30 minutes total per day in short sessions.",
+    feed: [
+      "<strong>Type:</strong> Exclusive breast milk or formula",
+      "<strong>Frequency:</strong> 6–8 feedings per day; may start to space feeds slightly",
+      "<strong>Amount per feed:</strong> 120–150 ml (4–5 oz)",
+      "<strong>Daily total:</strong> ~720–900 ml (24–30 oz)",
+      "<strong>Breastfeeding tip:</strong> Supply is typically well established; continue on demand but feeds may become more efficient (10–20 min per breast)",
+      "<strong>Formula tip:</strong> Baby may show a more predictable feeding pattern; stick with the same formula unless pediatrician advises a change",
+      "<strong>Growth spurt:</strong> A growth spurt around 6 weeks may increase hunger temporarily — feed more frequently if baby seems unsatisfied"
+    ],
+    sleep: "14–17 hours. Slightly longer stretches at night may begin (3–4 hours).",
+    stim: ["Talk and read to baby frequently", "Slowly move colorful toys across their field of vision", "Respond to coos — take turns 'talking'"],
+    screen: "No screens (AAP: avoid digital media under 18 months except video chat).",
+    pedi: "2-month well-child visit: DTaP, IPV, Hib, PCV13, RV vaccines.",
+    train: [
+      "<strong>Tummy time progression:</strong> Place baby on a flat surface (not your chest) for 3–5 min sessions; use a rolled towel under the chest if needed. <a href='https://pathways.org/topics-of-development/tummy-time/' target='_blank' rel='noopener'>Pathways.org — Tummy Time</a>",
+      "<strong>Tracking exercises:</strong> Hold a colorful rattle and move it slowly left to right, then up and down — baby should begin tracking with both eyes. <a href='https://pathways.org/growth-development/0-3-months/activities/' target='_blank' rel='noopener'>Pathways.org — Visual tracking</a>",
+      "<strong>Bicycle legs:</strong> Gently cycle baby's legs in a pedaling motion — helps with gas and strengthens hip/leg muscles. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-4-to-7-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement</a>",
+      "<strong>Supported sitting:</strong> Hold baby in a seated position on your lap, supporting the torso — trains neck and back muscles for future sitting",
+      "<strong>Finger grasp exercise:</strong> Place your finger in baby's palm to trigger the grasp reflex — builds hand-eye coordination foundations"
+    ],
+    travel: ["Continue rear-facing car seat; check weight/height limits", "First vaccines at 2 months give some protection — travel is somewhat safer now", "Maintain feeding schedule on the road; pack a cooler for breast milk/formula", "Sun protection: keep baby in shade, use a stroller canopy — no sunscreen until 6 months", "Bring a familiar blanket or swaddle to help baby sleep in new environments"],
+    growth: {
+      timing: "6 weeks (around 1.5 months)",
+      duration: "3-7 days",
+      signs: ["Cluster feeding, especially in evenings", "May want to nurse/bottle feed every hour", "Crying more than usual, harder to soothe", "Sleep regression — shorter naps, more night wakings", "May seem unsatisfied after feeds"],
+      howToHandle: ["Feed on demand — this is NOT a sign of low milk supply", "Breastfeeding tip: The frequent nursing is building your supply for baby's next growth phase", "Formula tip: Increase bottle size by 30-60ml (1-2oz) if baby consistently drains bottles", "Babywearing can help comfort a fussy baby while keeping your hands free", "Tag-team with partner if possible — this phase is draining", "Avoid introducing bottles/pacifiers/formula if exclusively breastfeeding, as supply is still stabilizing"],
+      aftermath: ["Baby may sleep 4-6 hour stretches at night after the spurt", "Noticeable weight gain", "May need to size up in clothing and diapers", "Breastfeeding becomes more efficient — feeds may shorten"]
+    },
+    triggers: {
+      cryingTriggers: ["'Purple crying' peaks around 6 weeks — unexplained crying in evenings", "Hunger and cluster feeding", "Overstimulation from visitors or outings", "Digestive discomfort (gas, reflux)", "Tired but fighting sleep", "Growth spurt fussiness", "Colic (if crying >3 hours/day, >3 days/week)"],
+      soothingTechniques: ["Babywearing during 'witching hour' (5-9pm)", "Bicycle legs for gas relief", "Warm compress on belly for colic", "Car ride or stroller walk", "Vacuum cleaner or fan white noise", "Reduce stimulation in the evening", "Take breaks — it's okay to put baby in a safe space and step away for 5 minutes if you're overwhelmed"],
+      excitementTriggers: ["Social smiles start — smiling back is very rewarding for baby", "Animated facial expressions", "Singing and talking", "Moving objects (toys, mobiles)", "Ceiling fans", "Mirrors (starting to show interest)"],
+      redFlags: ["No social smile by end of month 2", "Not making eye contact", "Projectile vomiting after every feed", "Arching back excessively during feeds (possible reflux)", "Blood in stool", "Inconsolable crying with fever or other illness signs"]
+    },
+    routines: {
+      readiness: "Emerging patterns but still too early for rigid schedules — gentle structure begins",
+      routinesToStart: ["Simple bedtime routine (5-10 minutes): bath, massage, pajamas, feed, sleep", "Consistent wake-up routine: curtains open, cheerful greeting, diaper change", "Same order of activities even if timing varies (eat-play-sleep or eat-sleep pattern)", "Begin 'drowsy but awake' practice — put baby down not fully asleep"],
+      benefits: ["Bedtime routine signals sleep is coming", "Predictability reduces evening fussiness", "Teaches self-soothing foundations", "Parents feel more in control"],
+      tips: ["Keep bedtime routine calming and dim", "Same routine for naps (shortened version)", "Flexibility is still key — growth spurts disrupt everything", "Partner involvement in routine strengthens bonding"]
+    }
+  },
+  {
+    title: "Month 3 — Growing Stronger (26 Feb – 26 Mar 2026)",
+    highlights: [
+      "🎯 CRITICAL MONTH: Ideal time to establish bedtime routine & sleep schedule",
+      "😂 Laughing begins — interactive play becomes fun!",
+      "⚠️ 3-month growth spurt: increased appetite, sleep disruption (4-7 days)",
+      "🦷 Early teething signs may appear (drooling, hands in mouth)",
+      "🏋️ Tummy time: up to 1 hour/day — baby getting stronger",
+      "💤 Some babies sleep 5-6 hour stretches — set consistent bedtime (7-8pm)",
+      "📋 Focus: Establish eat-play-sleep routine, consistent wake/sleep times"
+    ],
+    dev: ["Opens and shuts hands", "Brings hands to mouth", "Pushes up on arms during tummy time", "Smiles at people, enjoys playing"],
+    tummy: "Aim for up to 1 hour spread throughout the day.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula only — no solids yet",
+      "<strong>Frequency:</strong> 5–7 feedings per day, spacing to every 3–4 hours",
+      "<strong>Amount per feed:</strong> 150–180 ml (5–6 oz)",
+      "<strong>Daily total:</strong> ~750–1,000 ml (25–33 oz)",
+      "<strong>Breastfeeding tip:</strong> Baby becomes more efficient; feeds may shorten to 10–15 min but intake increases",
+      "<strong>Formula tip:</strong> Do not add cereal to bottles — it's a choking hazard and adds unnecessary calories",
+      "<strong>Growth spurt:</strong> Another common spurt around 3 months; temporary increase in feeds is normal"
+    ],
+    sleep: "14–16 hours. Some babies sleep 5–6 hour stretches at night.",
+    stim: ["Rattles and soft toys to grasp", "Gentle bicycle leg movements", "Mirror play — babies love faces"],
+    screen: "No screens. Prioritize face-to-face interaction for language and social development.",
+    pedi: null,
+    train: [
+      "<strong>Extended tummy time:</strong> Work up to 10–15 min sessions. Place toys just out of reach to encourage mini push-ups. <a href='https://pathways.org/topics-of-development/tummy-time/' target='_blank' rel='noopener'>Pathways.org — Tummy Time</a>",
+      "<strong>Head lift practice:</strong> During tummy time, hold a toy slightly above eye level — baby should push up on forearms and lift head to 45°. <a href='https://pathways.org/growth-development/0-3-months/milestones/' target='_blank' rel='noopener'>Pathways.org — 0–3 month milestones</a>",
+      "<strong>Hands-to-midline play:</strong> Hold a toy at baby's chest level so both hands can reach for it — develops bilateral coordination",
+      "<strong>Supported pull-to-sit:</strong> Hold baby's hands and gently pull from lying to sitting position — strengthens neck and abdominal muscles. Do slowly, watching that head follows the body",
+      "<strong>Baby massage:</strong> Use gentle strokes on legs, arms, and belly — improves circulation, bonding, and body awareness. <a href='https://www.healthychildren.org/English/ages-stages/baby/bathing-skin-care/Pages/Suitable-for-Framing-Your-Babys-Skin.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Baby care</a>"
+    ],
+    travel: ["Baby may tolerate longer car rides but still stop every 2 hours", "A portable white-noise machine can help maintain sleep routines while traveling", "Avoid high-altitude destinations (above 2,500 m / 8,000 ft) — consult your pediatrician if needed", "Baby carriers/wraps are ideal for hands-free travel in airports and sightseeing", "Keep baby hydrated — offer extra feeds in hot or dry climates"],
+    growth: {
+      timing: "3 months (12 weeks)",
+      duration: "4-7 days",
+      signs: ["Sudden increase in appetite", "Fussiness and irritability", "Sleep disruption — may wake more at night", "Clinginess and wanting more physical contact", "May seem restless during feeds"],
+      howToHandle: ["Continue feeding on demand", "Increase bottle volumes if baby consistently finishes feeds and still seems hungry", "This is a major developmental leap — baby's brain is growing rapidly", "Extra tummy time and floor play can help with restlessness", "Sleep may be disrupted — maintain bedtime routine consistency", "Some babies may show early signs of 4-month sleep regression during this growth spurt"],
+      aftermath: ["Baby may have better head control and strength after this spurt", "May notice increased alertness and interaction", "Weight and length gain become more apparent", "Sleep often consolidates after the spurt — some babies start sleeping 5-6 hour stretches"]
+    },
+    triggers: {
+      cryingTriggers: ["Overtiredness — harder to self-soothe now", "Boredom — baby needs more stimulation", "Frustration at physical limitations (wants to reach but can't yet)", "Loneliness — wants interaction", "Teething may begin early for some babies"],
+      soothingTechniques: ["Distraction with toys and movement", "Change of scenery — go to different room or outside", "Predictable routines starting to help", "Gentle bouncing on exercise ball", "Reading books together", "Baby's preferences emerging — notice what works best"],
+      excitementTriggers: ["Laughing starts! — tickles, raspberries on belly", "Grabbing and holding toys", "Peek-a-boo games beginning to register", "Siblings or other children", "Pet animals (supervised)", "Crinkly toys and rattles", "Their own hands and feet", "Music with rhythm"],
+      redFlags: ["Still not tracking objects with eyes", "No response to loud sounds", "Not bringing hands to mouth", "Very stiff or very floppy muscle tone", "Not smiling at people"]
+    },
+    routines: {
+      readiness: "IDEAL time to establish consistent routines — baby's circadian rhythm developing",
+      routinesToStart: ["Bedtime routine 30-45 min before desired sleep time: bath, pajamas, book, song, feed, bed", "Consistent nap routine: darken room, white noise, sleep sack, same location", "Daily rhythm: wake at same time, predictable meal times, regular nap schedule", "Morning 'wake-up' routine to start the day positively"],
+      benefits: ["Supports circadian rhythm development (body clock)", "Reduces bedtime battles and night wakings", "Helps baby learn to self-soothe", "Creates sense of security and predictability", "Parents can plan around baby's schedule"],
+      tips: ["Wake baby at same time each morning to set body clock", "Earlier bedtime than you think — most 3-month-olds need 7-8pm bedtime", "Watch for sleep cues (rubbing eyes, yawning) to time naps", "Consistency matters more than perfection", "Keep routine even when traveling or visiting"]
+    },
+    teething: {
+      status: "⏰ Early teething signs may appear (though teeth usually erupt later)",
+      timeline: "Some babies show signs now, but first tooth typically appears 4-7 months",
+      teeth: "No teeth yet",
+      signs: ["Increased drooling", "Hands in mouth frequently (also normal development)", "Mild fussiness or irritability", "Possible slight temperature (<100.4°F / 38°C)"],
+      remedies: ["Cold (not frozen) teething rings", "Clean, damp washcloth chilled in fridge", "Gentle gum massage with clean finger", "Extra comfort and cuddles"],
+      avoid: ["Frozen teethers (can damage gums)", "Teething gels with benzocaine (FDA warning - can cause serious issues)", "Amber teething necklaces (choking/strangulation hazard)", "Teething tablets (not FDA-approved)"],
+      important: ["High fever (>100.4°F), diarrhea, rash are NOT teething — see pediatrician", "Not all babies teethe at same time — range is 3-12 months for first tooth", "Increased drooling alone doesn't mean a tooth is coming soon"]
+    }
+  },
+  {
+    title: "Month 4 — Reaching & Rolling (26 Mar – 26 Apr 2026)",
+    highlights: [
+      "🔄 First roll may happen! (front to back)",
+      "💉 4-month vaccines (DTaP dose 2, IPV, Hib, PCV13, RV dose 2)",
+      "⚠️ 4-MONTH SLEEP REGRESSION: aware of surroundings, harder to fall asleep",
+      "🦷 First tooth may appear (average is 6 months, but 4-7 months is normal)",
+      "💤 Sleep: 12-16 hours — maintain routine despite regression",
+      "🏋️ Reaches for toys, steady head control — ready for more play",
+      "📋 Focus: Don't abandon sleep routine, consider sleep training if needed"
+    ],
+    dev: ["Reaches for and grasps toys", "May begin to roll (front to back)", "Laughs out loud", "Steady head control"],
+    tummy: "Continue 1+ hour per day. Baby may start to enjoy it more as strength grows.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula; no solids unless pediatrician advises otherwise",
+      "<strong>Frequency:</strong> 5–6 feedings per day, every 3–4 hours",
+      "<strong>Amount per feed:</strong> 150–210 ml (5–7 oz)",
+      "<strong>Daily total:</strong> ~750–1,050 ml (25–35 oz); do not exceed 1,100 ml (36 oz) of formula/day",
+      "<strong>Readiness signs to watch:</strong> Sits with support, shows interest in food, opens mouth when food is near — but most pediatricians recommend waiting until 6 months",
+      "<strong>Vitamin D:</strong> Breastfed babies should receive 400 IU vitamin D supplement daily (formula-fed babies get it in formula if taking ≥1 L/day)"
+    ],
+    sleep: "12–16 hours. Many babies can sleep 6–8 hour stretches. Consider starting a bedtime routine.",
+    stim: ["Play gyms and activity mats", "Read board books together", "Sing songs with hand motions"],
+    screen: "No screens. Real-world play and interaction remain far more beneficial for brain development.",
+    pedi: "4-month well-child visit: DTaP (dose 2), IPV, Hib, PCV13, RV (dose 2).",
+    train: [
+      "<strong>Roll encouragement:</strong> During tummy time, place a toy to one side so baby turns their head and body — help them discover rolling. <a href='https://pathways.org/growth-development/4-6-months/activities/' target='_blank' rel='noopener'>Pathways.org — 4–6 month activities</a>",
+      "<strong>Reaching practice:</strong> Hold toys at varying heights and distances so baby must reach and stretch — builds shoulder and arm strength",
+      "<strong>Play gym workouts:</strong> Let baby bat at hanging toys from a play gym — practices hand-eye coordination and arm control. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-4-to-7-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement 4–7 months</a>",
+      "<strong>Supported standing bounces:</strong> Hold baby upright with feet on your lap — let them push down and 'bounce'. Builds leg strength for future standing",
+      "<strong>Airplane hold:</strong> Hold baby face-down along your forearm (head near your elbow) and gently 'fly' them around — strengthens back extensors"
+    ],
+    travel: ["Ensure vaccines are up to date before any trip — especially the 4-month series", "Bring a portable crib or travel bassinet that meets safe-sleep standards", "Time travel around nap schedules when possible", "Pack a basic first-aid kit: infant thermometer, saline drops, infant acetaminophen (ask pediatrician)", "International travel: check destination-specific vaccine requirements and health advisories"],
+    triggers: {
+      cryingTriggers: ["4-month sleep regression — aware of surroundings, harder to fall asleep", "Post-vaccine fussiness (shots at 4-month visit)", "Teething discomfort may start", "Frustration at wanting to move but can't yet", "Separation awareness beginning", "Overstimulation from new sights and sounds"],
+      soothingTechniques: ["Consistent sleep routine (bath, book, bed)", "Teething toys (cold washcloth, silicone teethers)", "Infant pain reliever 30-45 min before bedtime if teething (consult pediatrician)", "More independent play on play mat", "Routine consistency helps during sleep regression", "Darker room and white noise for sleep"],
+      excitementTriggers: ["Cause-and-effect toys (squeeze = squeak)", "Play gyms with dangling toys", "Rolling over — huge excitement!", "Bath time splashing", "Bouncing in jumper or on lap", "Squealing and making loud sounds themselves", "Tags on toys and clothing", "Treasure basket exploration (safe household items with different textures)"],
+      redFlags: ["Not reaching for toys or objects", "Cannot support head well", "No babbling or vocalizing", "Doesn't respond to affection", "One eye constantly turned in or out"]
+    },
+    routines: {
+      readiness: "Routines are well-established — now refine and maintain through sleep regression",
+      routinesToStart: ["Structured daily schedule: wake, eat, play, sleep pattern (WEPS or EASY)", "Consistent nap times: morning nap (~9am), afternoon nap (~1pm), possible catnap (~4pm)", "Pre-nap wind-down: 5-10 minutes of quiet activity before each nap", "Mealtime routine: same location, calm environment, predictable timing"],
+      benefits: ["Combats 4-month sleep regression", "Reduces overtiredness", "Supports developmental leaps", "Makes sleep training easier if you choose to do it", "Helps baby learn to fall asleep independently"],
+      tips: ["Don't abandon routine during regression — stay consistent", "May need to adjust nap times as sleep consolidates", "Watch wake windows (90-120 minutes at this age)", "Same sleep environment (dark, cool, white noise) for all sleep", "If sleep training, now is an appropriate age (consult pediatrician/sleep consultant)"]
+    },
+    teething: {
+      status: "🦷 First tooth may appear this month or next (average is 6 months)",
+      timeline: "Lower central incisors (bottom front teeth) typically first — between 4-7 months",
+      teeth: "0-2 teeth (most babies still have none at 4 months)",
+      signs: ["Increased drooling and drool rash on chin", "Gnawing on everything", "Swollen, tender gums", "Fussiness, especially at night", "Disrupted sleep", "Decreased appetite", "Ear pulling (referred pain)"],
+      remedies: ["Cold teething toys (refrigerated, not frozen)", "Teething biscuits or frozen fruit in mesh feeder (if started solids)", "Infant pain reliever (acetaminophen or ibuprofen — ask pediatrician for dosing)", "Gentle counter-pressure on gums", "Extra nursing/bottle comfort"],
+      avoid: ["Benzocaine gels (Orajel baby) — FDA black box warning", "Homeopathic teething tablets — FDA warning for safety", "Amber necklaces — AAP warns of strangulation/choking", "Frozen hard objects — can damage gums"],
+      important: ["Fever >100.4°F is NOT from teething — call doctor", "Diarrhea is NOT a teething symptom", "First tooth may come painlessly or with days of discomfort — varies widely"]
+    }
+  },
+  {
+    title: "Month 5 — Exploring the World (26 Apr – 26 May 2026)",
+    highlights: [
+      "🔄 Rolls both ways — never leave unattended on elevated surfaces!",
+      "👋 Recognizes familiar faces vs. strangers",
+      "🗣️ Babbling chains: ba-ba-ba, da-da-da",
+      "🦷 Teething active for many — drooling, gnawing everything",
+      "💤 12-16 hours sleep with 2-3 naps — some drop 3rd nap",
+      "🍼 May show solid readiness signs (discuss with pediatrician)",
+      "📋 Focus: Stranger awareness begins, maintain routine, prepare for solids"
+    ],
+    dev: ["Rolls both directions (some babies)", "Transfers objects between hands", "Recognizes familiar faces", "Babbles chains of consonants (ba-ba-ba)"],
+    tummy: "60–90 minutes per day in short play sessions. Baby may pivot or push up on extended arms.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula remains primary nutrition",
+      "<strong>Frequency:</strong> 5–6 feedings per day",
+      "<strong>Amount per feed:</strong> 180–210 ml (6–7 oz)",
+      "<strong>Daily total:</strong> ~900–1,050 ml (30–35 oz)",
+      "<strong>Solid readiness signs:</strong> Sits with support, good head control, shows interest in food, loss of tongue-thrust reflex — if all signs present, discuss with pediatrician whether to start solids now or wait until 6 months",
+      "<strong>Do NOT introduce:</strong> Honey (botulism risk until 12 months), cow's milk as a drink, choking hazards (whole grapes, nuts, popcorn, hard candy)"
+    ],
+    sleep: "12–16 hours including 2–3 naps. Night feedings may decrease.",
+    stim: ["Peekaboo and hiding games", "Textured toys and soft books", "Supported sitting play"],
+    screen: "No screens. Background TV can reduce parent-child interaction quality.",
+    pedi: null,
+    train: [
+      "<strong>Pivot practice:</strong> During tummy time, place toys in a circle around baby — they'll learn to pivot on their belly to reach them. <a href='https://pathways.org/growth-development/4-6-months/activities/' target='_blank' rel='noopener'>Pathways.org — 4–6 month activities</a>",
+      "<strong>Rolling both ways:</strong> Encourage back-to-tummy rolling by placing a toy to the side and gently guiding their hip. <a href='https://pathways.org/growth-development/4-6-months/milestones/' target='_blank' rel='noopener'>Pathways.org — Rolling milestones</a>",
+      "<strong>Sitting balance:</strong> Sit baby in a 'tripod' position (hands in front for support) and slowly reduce your support — builds core stability",
+      "<strong>Weight-bearing on legs:</strong> Hold baby standing on your lap and let them bounce and push — strengthens legs for future standing and walking",
+      "<strong>Transfer practice:</strong> Offer a toy to one hand, then present a second toy to the other — encourages bilateral coordination and midline crossing"
+    ],
+    travel: ["Baby is more alert and curious — bring a variety of small toys for the journey", "Rolls now — never leave unattended on hotel beds or changing tables", "Consider travel-friendly feeding options: pre-mixed formula or frozen breast milk", "For flights: request a bassinet seat on long-haul flights (usually for under 10 kg)", "Jet lag tip: gradually shift schedule 15–30 min per day before departure"],
+    triggers: {
+      cryingTriggers: ["Teething pain (first teeth usually appear 4-7 months)", "Frustration at not being able to sit or crawl yet", "Stranger anxiety beginning", "Separation from primary caregiver", "Disrupted naps as sleep pattern matures", "Wanting to be upright more to see the world"],
+      soothingTechniques: ["Frozen teething toys or cold fruit in mesh feeder", "Amber teething necklaces are NOT recommended (choking/strangulation risk)", "Sitting supported in Boppy or between legs", "Outdoor time in carrier or stroller", "Baby safe mirror for floor play", "Textured books and toys"],
+      excitementTriggers: ["Their own reflection in mirror", "Blowing raspberries", "Transfer games (handing toys back and forth)", "Dropping things and watching them fall", "Food (if starting solids soon)", "Water play in bath or small basin", "Other babies — social interest increases", "Texture exploration — different fabrics"],
+      redFlags: ["Very stiff or floppy when picked up", "Not showing affection to caregivers", "Not making vowel sounds (ah, eh, oh)", "Not rolling in either direction by 6 months", "Persistent asymmetry (always turns head one way, uses only one hand)"]
+    },
+    routines: {
+      readiness: "Maintain and strengthen established routines — baby thrives on predictability",
+      routinesToStart: ["3-nap schedule solidifies: morning, midday, late afternoon", "Introduce pre-solid feeding routine if starting foods next month", "Consistent bedtime between 6:30-8pm", "Daily floor play time for motor development", "Outdoor time at consistent time of day"],
+      benefits: ["Secure routines allow confident exploration", "Predictability reduces separation anxiety", "Better sleep = easier development of new skills", "Regular schedule makes planning activities easier"],
+      tips: ["Watch for signs of transitioning from 3 to 2 naps (usually 6-9 months)", "Maintain routine even during teething", "Build flexibility into routine (30-minute windows)", "Include social routine: regular playgroups or baby classes"]
+    },
+    teething: {
+      status: "🦷 Teething often active — first teeth may be emerging",
+      timeline: "Lower central incisors may erupt this month (if not already)",
+      teeth: "0-2 teeth typical",
+      signs: ["Constant drooling with chin/neck rash", "Everything goes in mouth", "Red, swollen gums", "Sleep disruption", "Clingy behavior", "Mild diarrhea (from swallowed saliva, not true teething symptom)", "Refusing bottle/breast or biting during feeding"],
+      remedies: ["Variety of teething toys (different textures)", "Cold foods if starting solids (chilled applesauce, yogurt)", "Teething biscuits or rusks", "Silicone teethers", "Wet washcloth tied in knot and frozen", "Infant pain reliever before bedtime (consult pediatrician)"],
+      avoid: ["Rubbing alcohol on gums (dangerous)", "Teething jewelry (choking hazard)", "Lidocaine or benzocaine products", "Clove oil (can cause issues in infants)"],
+      important: ["Biting during nursing is behavioral, not just teething — unlatch and say 'no biting'", "Teething pain doesn't last 24/7 — if baby is inconsolable, check for other issues", "Keep drool rash at bay with barrier cream (petroleum jelly)"]
+    }
+  },
+  {
+    title: "Month 6 — Starting Solids (26 May – 26 Jun 2026)",
+    highlights: [
+      "🍎 START SOLID FOODS! Begin with 1 meal/day, single-ingredient purees",
+      "💉 6-month vaccines (DTaP dose 3, PCV13, IPV if not at 4mo, flu vaccine)",
+      "🪑 Sits with support — ready for high chair",
+      "⚠️ 6-month growth spurt: may refuse solids, wants only milk",
+      "🦷 Lower front teeth likely present; upper teeth coming (2-4 teeth typical)",
+      "☀️ Sunscreen now safe (SPF 30+, broad-spectrum)",
+      "📋 Focus: Establish mealtime routine, early allergen introduction (peanut, egg, dairy)"
+    ],
+    dev: ["Sits with minimal support", "Begins to pass objects hand to hand", "Responds to own name", "Shows curiosity about things out of reach"],
+    tummy: "Continue daily. Many babies are now pushing to hands-and-knees position.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula PLUS introduction of solids",
+      "<strong>Milk feeds:</strong> 4–6 per day; ~720–960 ml (24–32 oz) — milk remains the primary nutrition source",
+      "<strong>Solids schedule:</strong> Start with 1 meal/day, working up to 2 by end of month",
+      "<strong>Solid portions:</strong> 1–2 tablespoons per serving; increase based on interest",
+      "<strong>Foods to introduce:</strong> Single-ingredient purees (sweet potato, avocado, banana, peas, carrots) or soft finger foods (baby-led weaning)",
+      "<strong>Allergen introduction:</strong> Introduce peanut (thinned peanut butter), egg, dairy, wheat, soy, and fish early and often — AAP recommends early exposure to reduce allergy risk",
+      "<strong>Iron-rich foods:</strong> Fortified infant cereal, pureed meat, lentils — baby's iron stores from birth begin to deplete around 6 months",
+      "<strong>Water:</strong> Offer small sips of water (30–60 ml / 1–2 oz) from an open cup or sippy cup at mealtimes"
+    ],
+    sleep: "12–15 hours with 2–3 naps. Most can sleep through the night (some still wake).",
+    stim: ["Stacking cups and nesting toys", "Cause-and-effect toys (press button → sound)", "Name objects and body parts frequently"],
+    screen: "No screens. Use mealtimes as screen-free family interaction time.",
+    pedi: "6-month well-child visit: DTaP (dose 3), PCV13, IPV (if not given at 4 mo), possible flu vaccine.",
+    train: [
+      "<strong>Supported sitting to independent:</strong> Sit baby on the floor with cushions around them (the 'ring of support') and gradually remove support. <a href='https://pathways.org/growth-development/4-6-months/activities/' target='_blank' rel='noopener'>Pathways.org — Sitting activities</a>",
+      "<strong>Pre-crawl rocking:</strong> When baby is on hands and knees, gently rock them forward and back — teaches weight shifting needed for crawling. <a href='https://pathways.org/growth-development/7-9-months/activities/' target='_blank' rel='noopener'>Pathways.org — 7–9 month activities</a>",
+      "<strong>Reaching while sitting:</strong> Place toys slightly out of arm's reach so baby must lean and stretch — builds balance and core strength",
+      "<strong>Spoon and cup practice:</strong> Let baby hold a spoon and small cup — fine motor training that also supports self-feeding development",
+      "<strong>Clapping and hand games:</strong> Patty-cake, hand clapping, and hand-over-hand play — trains bilateral coordination. <a href='https://www.cdc.gov/ncbddd/actearly/milestones/milestones-6mo.html' target='_blank' rel='noopener'>CDC — 6 month milestones</a>"
+    ],
+    travel: ["Now starting solids — pack pouches or jarred baby food for travel; check airline liquid rules", "Sunscreen is now safe (SPF 30+, broad-spectrum) — apply 15 min before sun exposure", "A portable high chair or clip-on seat makes restaurant dining easier", "Swimwear with UPF 50+ protection for beach/pool destinations", "Ensure 6-month vaccines are complete before international travel", "Carry a copy of vaccination records when traveling abroad"],
+    growth: {
+      timing: "6 months (around 26 weeks)",
+      duration: "3-7 days",
+      signs: ["Increased appetite for both milk and solids", "May refuse solids during the spurt — wants only milk", "More night wakings", "Extra clingy and wants to be held constantly", "May seem frustrated or cranky"],
+      howToHandle: ["Prioritize milk feeds over solids during the growth spurt — milk is still the primary nutrition", "If baby refuses solids, don't force it — appetite will return after the spurt", "Offer extra nursing/bottle sessions", "This coincides with major motor development (sitting, rolling) — baby needs extra calories", "Teething may also start around this time, adding to fussiness", "Maintain safe sleep practices even if baby wakes more — avoid sleep crutches you can't sustain"],
+      aftermath: ["Baby may sit independently after this spurt", "Noticeable increase in size — may jump a clothing size", "Appetite for solids increases after spurt ends", "May show new physical skills like pivoting or pre-crawling movements"]
+    },
+    triggers: {
+      cryingTriggers: ["Teething — first teeth often erupt now (lower front incisors)", "Post-vaccine fussiness (6-month shots)", "Separation anxiety intensifying", "Frustration at immobility (wants to crawl but can't)", "Food refusal during teething", "Sleep disruption from developmental leaps"],
+      soothingTechniques: ["Cold teething rings (not frozen solid — can damage gums)", "Gentle gum massage with clean finger", "Distraction with new toys", "Letting baby practice sitting with pillow support", "Acknowledging frustration verbally — 'I know you want to move!'", "Consistent bedtime routine to counter sleep disruptions"],
+      excitementTriggers: ["Solid foods — new tastes and textures!", "Sitting up — whole new perspective", "Cause-and-effect toys (pressing buttons)", "Knocking down stacked blocks", "Splashing in bath", "Peek-a-boo (now understands object permanence)", "Household items (wooden spoons, plastic containers)", "Music and songs with actions (If You're Happy and You Know It)"],
+      redFlags: ["Not sitting with support", "No babbling (ba-ba, da-da) by end of 6 months", "Doesn't reach for objects", "Shows no affection for caregivers", "Doesn't respond to sounds or name", "One side of body much stronger than the other"]
+    },
+    routines: {
+      readiness: "Adding solids — mealtime routines become crucial for healthy eating habits",
+      routinesToStart: ["Solids at consistent time of day (after morning nap or lunch)", "Sit in high chair for meals, even if just practicing", "Family mealtime routine: baby joins family at table", "Pre-meal routine: wash hands, put on bib, sit in chair", "Post-meal cleanup routine baby can observe"],
+      benefits: ["Builds positive associations with mealtimes", "Prevents feeding battles later", "Teaches mealtime = sitting, not playing", "Develops healthy circadian rhythm for digestion", "Social eating skills develop early"],
+      tips: ["Keep first solid meals relaxed and playful", "Same time and place for meals daily", "Don't force eating — respect baby's cues", "Milk feeds still on schedule, solids are practice", "Avoid screens or toys during meals — focus on food and family"]
+    },
+    teething: {
+      status: "🦷🦷 Lower central incisors usually present; upper may be coming",
+      timeline: "Upper central incisors (top front teeth) often erupt 7-8 months",
+      teeth: "2-4 teeth typical by end of month",
+      signs: ["May have gotten easier after first teeth broke through", "New round of symptoms when upper teeth come", "May refuse solids during active teething (normal)", "Increased nursing for comfort", "Waking at night"],
+      remedies: ["Cold foods: frozen banana, chilled cucumber spears, cold watermelon (in mesh feeder)", "Teething crackers/biscuits", "Silicone feeders with frozen fruit", "Gentle brushing of existing teeth with soft brush (good habit to start)", "Pain reliever before naps/bedtime if needed"],
+      avoid: ["Hard, frozen items that don't give", "Small pieces that could break off", "Honey on teether (botulism risk)", "Over-reliance on pain medication (use sparingly)"],
+      important: ["Start dental hygiene now — wipe teeth with damp cloth or soft brush after feeds", "Teething doesn't cause high fever or severe illness", "Some babies get all teeth with minimal fuss, others struggle with each one"]
+    }
+  },
+  {
+    title: "Month 7 — On the Move (26 Jun – 26 Jul 2026)",
+    highlights: [
+      "🪑 SITS INDEPENDENTLY — game changer!",
+      "🐛 May begin to crawl or scoot — baby-proofing essential",
+      "😰 SEPARATION ANXIETY begins — cries when you leave room",
+      "🦷 Upper front teeth erupting (4 front teeth by now for many)",
+      "🍽️ 2-3 solid meals/day — moving to mashed/lumpy textures",
+      "💤 12-15 hours, 2 naps typical — maintain bedtime routine",
+      "📋 Focus: Goodbye rituals, baby-proof home, start dental hygiene"
+    ],
+    dev: ["Sits independently", "May begin to crawl or scoot", "Uses raking grasp to pick up small objects", "Understands 'no' (tone)"],
+    tummy: "Formal tummy time transitions to floor play and crawling practice.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula plus expanding solids",
+      "<strong>Milk feeds:</strong> 4–5 per day; ~720–900 ml (24–30 oz)",
+      "<strong>Solids schedule:</strong> 2 meals per day, working toward 3",
+      "<strong>Textures:</strong> Move from smooth purees to mashed and lumpy textures — this helps develop chewing skills",
+      "<strong>New foods:</strong> Yogurt (full-fat, plain), soft cheese, well-cooked pasta, flaked fish, soft fruits",
+      "<strong>Finger foods:</strong> Soft steamed vegetables (broccoli florets, carrot sticks), toast strips, banana pieces",
+      "<strong>Water:</strong> Continue offering water at meals from a cup (60–120 ml / 2–4 oz per day)",
+      "<strong>Avoid:</strong> Honey, added salt/sugar, whole nuts, cow's milk as main drink"
+    ],
+    sleep: "12–15 hours, typically 2 naps. Separation anxiety may cause night waking.",
+    stim: ["Soft blocks and containers for filling/dumping", "Interactive songs (Itsy Bitsy Spider)", "Safe exploration of rooms (baby-proof first!)"],
+    screen: "No screens. Interactive play with caregivers supports cognitive development far more than passive media.",
+    pedi: null,
+    train: [
+      "<strong>Crawling obstacle course:</strong> Use cushions and rolled blankets to create low obstacles for baby to crawl over — builds strength and problem-solving. <a href='https://pathways.org/growth-development/7-9-months/activities/' target='_blank' rel='noopener'>Pathways.org — 7–9 month activities</a>",
+      "<strong>Kneeling play:</strong> Place toys on a low table or couch cushion so baby must kneel to play — strengthens hips and core for standing. <a href='https://pathways.org/growth-development/7-9-months/milestones/' target='_blank' rel='noopener'>Pathways.org — 7–9 month milestones</a>",
+      "<strong>Container play:</strong> Give baby a container and soft objects to put in and take out — trains fine motor skills and cause-and-effect understanding",
+      "<strong>Assisted standing:</strong> Let baby pull up on your fingers from sitting to standing — builds leg and core strength. Let them hold briefly before guiding them down",
+      "<strong>Ball rolling:</strong> Sit facing baby and roll a ball toward them — encourages reaching, grasping, and teaches turn-taking. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-8-to-12-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement 8–12 months</a>"
+    ],
+    travel: ["Baby is mobile — baby-proof hotel rooms on arrival (cover outlets, remove small objects, check for cords)", "A lightweight travel stroller is worth the investment for this stage", "Bring familiar sleep items (sleep sack, lovey) to ease transitions to new sleep environments", "Separation anxiety begins — keep routines consistent even on vacation", "Pack electrolyte solution (e.g., Pedialyte) in case of traveler's diarrhea"],
+    triggers: {
+      cryingTriggers: ["Separation anxiety peaks — cries when you leave the room", "Stranger anxiety — fearful of unfamiliar people", "Teething continues", "Frustration at crawling attempts", "Dropping naps — overtiredness", "Wanting to explore but hitting boundaries"],
+      soothingTechniques: ["Practice short separations (leave room for 30 seconds, return)", "Narrate what you're doing when leaving ('Mama is going to the kitchen, I'll be right back')", "Transitional object (lovey or small blanket)", "Baby gates to let them see you while staying safe", "Extra cuddles before and after separations", "Predictable goodbye routine"],
+      excitementTriggers: ["Crawling — even just a few 'steps'", "Pulling to standing at furniture", "Containers and lids", "Putting objects in and taking them out", "Musical instruments (shakers, drums)", "Opening and closing doors/drawers (baby-proof!)", "Chasing games (crawl after baby)", "Clapping games and pat-a-cake", "Animals — real and in books"],
+      redFlags: ["Not sitting independently", "No consonant babbling (ba, da, ga)", "Doesn't show interest in interactive games", "Very passive, doesn't try to get objects", "No crawling movement by 9 months (some skip crawling but should show mobility)"]
+    },
+    routines: {
+      readiness: "Routines provide security during separation anxiety — consistency is critical",
+      routinesToStart: ["Goodbye/hello rituals: same words, wave, kiss when leaving/returning", "Predictable daily sequence: wake, breakfast, play, nap, lunch, play, nap, dinner, bed", "Independent play time in safe space while you're visible", "Transition warnings: 'In 5 minutes we'll clean up and have lunch'", "Consistent response to waking at night"],
+      benefits: ["Reduces separation anxiety — baby knows you'll return", "Predictability = emotional security", "Better sleep despite developmental changes", "Easier to enforce boundaries consistently", "Baby learns to trust their environment"],
+      tips: ["Maintain routine through travel if possible", "Same caregiver routine when others watch baby", "Don't sneak away — always say goodbye with same ritual", "Practice short separations with consistent routine", "Routine helps baby predict and prepare for what's next"]
+    },
+    teething: {
+      status: "🦷🦷🦷 Upper central incisors may erupt; 4 front teeth by now for many babies",
+      timeline: "Upper lateral incisors (next to front teeth) may start 9-11 months",
+      teeth: "2-4 teeth typical (4 front teeth is average)",
+      signs: ["Upper teeth often more painful than lower", "Pulling ears (referred pain)", "Disturbed sleep", "Less interested in solid foods", "Chewing on everything"],
+      remedies: ["Soft-bristled toothbrush with tiny bit of fluoride toothpaste (rice-grain size)", "Cold washcloths knotted and chilled", "Silicone teethers in various shapes", "Mesh feeders with frozen fruit", "Teething rusks (supervise to prevent choking)"],
+      avoid: ["Numbing gels with benzocaine", "Teething jewelry", "Hard objects that could chip emerging teeth", "Giving pain reliever automatically — only when truly needed"],
+      important: ["Book first dental visit when first tooth erupts or by age 1", "Clean teeth twice daily to prevent cavities", "Don't put baby to bed with bottle (causes bottle tooth decay)"]
+    }
+  },
+  {
+    title: "Month 8 — Babbling & Bonding (26 Jul – 26 Aug 2026)",
+    highlights: [
+      "🧍 Pulls to stand with support — furniture cruising begins",
+      "👌 Pincer grasp developing — picks up small objects with thumb & finger",
+      "😰 STRANGER ANXIETY at peak — very wary of unfamiliar people",
+      "🦷 4 front teeth present (2 top, 2 bottom) for most babies",
+      "🍽️ 3 solid meals + optional snack; self-feeding with fingers",
+      "🗣️ Babbles with intonation — sounds like real conversation!",
+      "📋 Focus: 'Slow warm-up' with strangers, baby-proof for standing, simple sign language"
+    ],
+    dev: ["Pulls to stand with support", "Babbles with varied intonation", "Developing pincer grasp", "Stranger anxiety is common"],
+    tummy: "Floor play continues. Encourage cruising along furniture.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula plus 3 solid meals",
+      "<strong>Milk feeds:</strong> 3–5 per day; ~600–900 ml (20–30 oz)",
+      "<strong>Solids schedule:</strong> 3 meals per day + optional snack",
+      "<strong>Finger foods:</strong> Banana pieces, ripe avocado chunks, cooked peas, scrambled egg, small pasta shapes, shredded chicken",
+      "<strong>Self-feeding:</strong> Encourage baby to use pincer grasp — offer small, soft pieces they can pick up independently",
+      "<strong>Combination meals:</strong> Baby can now eat mixed-ingredient meals (e.g., rice with lentils and vegetables, pasta with tomato sauce)",
+      "<strong>Drinks:</strong> Breast milk/formula at feeds; water at meals. No juice, no cow's milk as main drink yet"
+    ],
+    sleep: "12–15 hours, 2 naps. Consistent bedtime routine helps with any sleep regression.",
+    stim: ["Pat-a-cake, clapping games", "Stacking and knocking down blocks", "Point to and name objects throughout the day"],
+    screen: "No screens. Babies learn language best from live human interaction, not recordings.",
+    pedi: null,
+    train: [
+      "<strong>Pull-to-stand practice:</strong> Place favorite toys on the couch edge so baby is motivated to pull up — builds leg and arm strength. <a href='https://pathways.org/growth-development/7-9-months/activities/' target='_blank' rel='noopener'>Pathways.org — Pull to stand</a>",
+      "<strong>Cruising along furniture:</strong> Arrange furniture so baby can cruise from one piece to another (small gaps) — trains balance and lateral stepping. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-8-to-12-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement 8–12 months</a>",
+      "<strong>Pincer grasp games:</strong> Offer small, safe foods (peas, cheerios) or pom-poms in a muffin tin — trains thumb-and-forefinger precision",
+      "<strong>Stacking and nesting:</strong> Show baby how to stack 2–3 blocks and knock them down — develops hand-eye coordination and understanding of gravity",
+      "<strong>Clap and wave imitation:</strong> Practice clapping, waving, and blowing kisses — trains motor planning and social gestures"
+    ],
+    travel: ["Pulling to stand — watch for furniture tipping hazards in unfamiliar places", "Finger foods make travel feeding easier; pack resealable snack bags", "Stranger anxiety peaks — allow extra time for baby to warm up to new people and places", "For road trips: plan stops at parks or rest areas where baby can crawl and move", "Keep a waterproof changing pad in your day bag for on-the-go changes"],
+    triggers: {
+      cryingTriggers: ["Stranger danger — very wary of unfamiliar people", "Separation anxiety at peak intensity", "Bedtime battles as sleep awareness increases", "Bonking head while learning to pull up and cruise", "Teething molars may start (though usually 12-16 months)", "Not being able to communicate needs"],
+      soothingTechniques: ["'Slow warm-up' with new people — don't force interaction", "Stay calm and reassuring during separation anxiety", "Consistent sleep training if you choose to (many methods available)", "Helmet not needed for normal bumps — supervise play area", "Simple sign language can reduce frustration (more, all done, milk)", "Acknowledge emotions: 'You're sad Mama left. She'll come back!'"],
+      excitementTriggers: ["Pulling up to standing — huge pride!", "Cruising along furniture", "Dropping objects and watching you pick them up (repeat 1000x)", "Emptying containers, cabinets, drawers", "Simple shape sorters", "Stacking rings", "Dancing to music", "Imitating actions (waving, clapping)", "Silly faces and funny sounds from adults"],
+      redFlags: ["Doesn't bear weight on legs when supported", "Cannot sit independently", "Doesn't babble or make consonant sounds", "Doesn't play interactive games (peek-a-boo)", "Shows no interest in familiar people", "Loss of skills previously mastered"]
+    },
+    routines: {
+      readiness: "Routines help manage stranger anxiety and sleep disruptions",
+      routinesToStart: ["Consistent nap transition: moving from 3 to 2 naps (morning ~9am, afternoon ~1-2pm)", "Gradual stranger introduction ritual: let baby observe from safe distance first", "Bedtime at same time every night (6:30-7:30pm typically)", "Morning routine: wake, diaper, breakfast, play — same order daily", "Cleanup routine after playtime: sing cleanup song, put toys away together"],
+      benefits: ["Two-nap schedule provides better consolidated sleep", "Routine reduces anxiety around new people", "Consistent bedtime improves night sleep quality", "Cleanup routine teaches responsibility early", "Predictable day = less fussiness"],
+      tips: ["Watch for signs of nap transition (fighting one nap, very tired)", "Keep nap routine identical to bedtime routine (shortened)", "Stranger anxiety will pass — maintain warm but gradual introductions", "Include baby in daily routines (folding laundry, cooking) at same times"]
+    },
+    teething: {
+      status: "🦷🦷🦷🦷 Four front teeth often present (2 top, 2 bottom)",
+      timeline: "May have a teething 'break' before laterals and molars",
+      teeth: "4-6 teeth average",
+      signs: ["If new teeth coming: increased drooling again", "Biting behavior increases (teething + exploration)", "May resist tooth brushing", "Night waking if new teeth emerging"],
+      remedies: ["Continue with cold teethers and foods", "Toothbrush with water to soothe and clean", "Distraction during active teething", "Maintain bedtime routine even with disruptions", "Pain reliever sparingly for really tough nights"],
+      avoid: ["Punishing biting (it's developmental, not malicious)", "Skipping tooth brushing because baby resists", "Over-using medication"],
+      important: ["Teach 'gentle' — when baby bites, say 'gentle' and model soft touch", "Make tooth brushing a game (let baby brush your teeth, then you do theirs)", "Fluoride toothpaste is safe in tiny amounts (rice grain size)"]
+    }
+  },
+  {
+    title: "Month 9 — Little Explorer (26 Aug – 26 Sep 2026)",
+    highlights: [
+      "🐛 CRAWLS WELL — constant supervision needed!",
+      "🚶 Cruises along furniture — walking preparation",
+      "💉 9-month well-visit: developmental screening, anemia check (Hb/Hct)",
+      "⚠️ 9-month growth spurt: increased hunger, sleep regression",
+      "🦷 6-8 teeth typical; lateral incisors may be erupting",
+      "👉 Gestures: points, waves, claps — major communication milestone",
+      "📋 Focus: Safe exploration spaces, communication via signs, consistent routines"
+    ],
+    dev: ["Crawls well", "May cruise along furniture", "Uses pincer grasp (thumb & forefinger)", "Understands several words; may say 'mama' or 'dada' (non-specific)"],
+    tummy: "N/A — replaced by active floor play, crawling, pulling up, and cruising.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula plus 3 meals and 1–2 snacks",
+      "<strong>Milk feeds:</strong> 3–4 per day; ~500–800 ml (17–27 oz)",
+      "<strong>Solids schedule:</strong> 3 meals + 1–2 snacks; solids are becoming a significant calorie source",
+      "<strong>Textures:</strong> Soft table foods — minced or small chopped pieces; avoid purees unless needed for variety",
+      "<strong>New foods:</strong> Soft diced fruits, well-cooked beans, hummus, tofu cubes, oatmeal fingers, cheese cubes",
+      "<strong>Self-feeding:</strong> Baby should be practicing with spoon (pre-loaded by parent); let them explore messily",
+      "<strong>Iron check:</strong> Pediatrician may check iron levels at 9-month visit — continue iron-rich foods (meat, fortified cereals, beans)"
+    ],
+    sleep: "12–14 hours, transitioning from 2 naps to 1–2 naps. Separation anxiety can affect sleep.",
+    stim: ["Simple shape sorters", "Reading together — let baby turn pages", "Hide-and-seek with toys"],
+    screen: "No screens. The AAP emphasizes that interactive play is the best way to learn at this age.",
+    pedi: "9-month well-child visit: developmental screening, anemia check (Hb/Hct).",
+    train: [
+      "<strong>Crawling speed drills:</strong> Crawl alongside baby and playfully 'race' them — increases speed, coordination, and confidence. <a href='https://pathways.org/growth-development/7-9-months/activities/' target='_blank' rel='noopener'>Pathways.org — Crawling activities</a>",
+      "<strong>Controlled lowering from standing:</strong> Help baby learn to bend their knees and lower to sitting from standing — prevents falling backward. <a href='https://pathways.org/growth-development/10-12-months/activities/' target='_blank' rel='noopener'>Pathways.org — 10–12 month activities</a>",
+      "<strong>Climbing cushion mountain:</strong> Stack firm cushions or use a couch cushion on the floor — let baby climb up and over (supervised). Builds strength, balance, and spatial awareness",
+      "<strong>Shape sorter introduction:</strong> Guide baby's hand to place shapes into holes — trains fine motor precision and problem-solving",
+      "<strong>Pointing practice:</strong> Point at objects and name them; encourage baby to point too — builds communication and fine motor control. <a href='https://www.cdc.gov/ncbddd/actearly/milestones/milestones-9mo.html' target='_blank' rel='noopener'>CDC — 9 month milestones</a>"
+    ],
+    travel: ["Baby crawls fast — constant supervision in non-baby-proofed spaces", "Self-feeding skills make restaurant travel more feasible; bring a bib and portable placemat", "Consider travel health insurance that covers infants for international trips", "Pool/water safety: arm's-reach supervision at all times; swim diapers required", "Maintain bedtime and nap routines as closely as possible to avoid overtiredness"],
+    growth: {
+      timing: "9 months (around 37 weeks)",
+      duration: "4-7 days",
+      signs: ["Increased hunger — may want larger portions of solids and more milk", "Sleep regression — waking more at night", "Separation anxiety intensifies", "May be extra cranky or easily frustrated", "Constantly on the move, very active"],
+      howToHandle: ["Offer larger portions of solids if baby is consistently finishing meals", "Continue offering 3-4 milk feeds per day", "Separation anxiety is peaking — practice short separations and quick returns to build trust", "Baby is learning to crawl, cruise, or pull up — burns more calories and needs more food", "Maintain consistent sleep routines despite regressions", "Offer safe spaces for active play to burn energy"],
+      aftermath: ["Major motor milestones often emerge after this spurt (crawling, pulling to stand)", "Language comprehension increases significantly", "May start using gestures like waving or pointing", "Weight gain continues steadily — may need larger diaper size"]
+    },
+    triggers: {
+      cryingTriggers: ["Separation anxiety still very strong", "Frustration at physical limitations", "Can't communicate specific wants yet", "Sleep disturbances from practicing new skills at night", "Getting into unsafe situations and being redirected", "Teething continues"],
+      soothingTechniques: ["Teaching simple signs (more, all done, milk, help)", "Narrating the day to build vocabulary", "Safe 'yes' spaces where baby can explore freely", "Offering choices when possible (two safe options)", "Consistent responses to limit-setting", "Comfort object for sleep and stress"],
+      excitementTriggers: ["Crawling fast and exploring everywhere", "Pulling to stand and cruising", "Opening and closing things", "Putting small objects in containers", "Knocking things over", "Making things happen (cause-and-effect)", "Climbing (supervised!)", "Books with flaps", "Balls to roll and chase", "Imitating daily activities (cleaning, cooking)"],
+      redFlags: ["Not sitting well independently", "Doesn't crawl, scoot, or show any form of mobility", "No babbling with consonants", "Doesn't respond to own name", "Doesn't recognize familiar people", "Doesn't point or use gestures", "Seems very stiff or floppy"]
+    },
+    routines: {
+      readiness: "Routines crucial for managing separation anxiety and building independence",
+      routinesToStart: ["Independent play routine: start with 5 minutes in safe space while you're visible", "Mealtime participation: baby sits at table for all family meals", "Pre-outing routine: shoes on, jacket, wave goodbye to house/pets", "Bath-book-bed sequence every single night", "Weekend routine different from weekday but still structured"],
+      benefits: ["Independence within safe boundaries", "Baby knows what to expect next — reduces tantrums", "Mealtimes become social learning time", "Consistent sleep despite developmental leaps", "Routine flexibility teaches adaptability"],
+      tips: ["Gradually increase independent play time as baby tolerates", "Non-negotiable bedtime despite protests", "Visual schedule can help (photos of routine steps)", "Same routine in different locations (grandparents, vacation)", "Involve baby in routine choices: 'which pajamas tonight?'"]
+    },
+    teething: {
+      status: "🦷🦷🦷🦷 Upper and lower lateral incisors may be erupting",
+      timeline: "Upper laterals: 9-11 months; Lower laterals: 10-12 months",
+      teeth: "4-8 teeth by end of month (wide variation is normal)",
+      signs: ["Renewed teething symptoms after a break", "More drooling", "Finger in mouth constantly", "Fussy during the day, restless at night", "May reject foods that require chewing"],
+      remedies: ["Frozen washcloths", "Cold cucumber or carrot (supervised, large enough not to break)", "Chilled pacifier if baby uses one", "Teething crackers", "Distraction with activity", "Pain reliever if truly uncomfortable"],
+      avoid: ["Forcing solid foods during active teething", "Giving bottle/nursing every time baby fusses (can create sleep association)", "Hard frozen items"],
+      important: ["Lateral incisors can be sharp — may bite more during nursing/feeding", "Continue twice-daily tooth brushing", "If no teeth by 12 months, mention to pediatrician (usually not concerning, but worth noting)"]
+    }
+  },
+  {
+    title: "Month 10 — Standing Tall (26 Sep – 26 Oct 2026)",
+    highlights: [
+      "🧍 Stands briefly without support!",
+      "👋 Waves bye-bye consistently — social gestures mastered",
+      "🦷 6-8 teeth; lateral incisors still coming",
+      "🍽️ Eating family foods (adjusted texture) — ¼ to ⅓ adult portions",
+      "🗣️ Understands simple instructions: 'give me the ball'",
+      "💤 12-14 hours; may transition from 2 naps to 1-2",
+      "📋 Focus: Self-care routines (tooth brushing), helping with tasks, social play"
+    ],
+    dev: ["Stands briefly without support", "Waves bye-bye", "Imitates gestures and sounds", "Enjoys dropping and throwing objects"],
+    tummy: "Active play replaces tummy time. Encourage standing, stepping, and climbing safely.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula plus family-style meals",
+      "<strong>Milk feeds:</strong> 3–4 per day; ~500–700 ml (17–24 oz)",
+      "<strong>Solids schedule:</strong> 3 meals + 2 snacks; baby eats many of the same foods as the family (adjusted texture)",
+      "<strong>Portions:</strong> About ¼ to ⅓ of an adult portion; let baby's appetite guide quantity",
+      "<strong>Foods:</strong> Chopped table foods — soft-cooked vegetables, diced fruit, small pieces of meat/fish, whole-grain bread, pasta, rice",
+      "<strong>Cup practice:</strong> Encourage drinking from an open cup (with help) or straw cup",
+      "<strong>Avoid:</strong> Honey (until 12 months), cow's milk as main drink (until 12 months), added salt/sugar, choking hazards (whole grapes, hot dogs, raw carrots, popcorn, nuts)"
+    ],
+    sleep: "12–14 hours with 1–2 naps. Consistent routines are key.",
+    stim: ["Nesting cups and stacking rings", "Music and dancing together", "Simple verbal instructions ('give me the ball')"],
+    screen: "No screens. Engaging with real-world objects builds better neural connections.",
+    pedi: null,
+    train: [
+      "<strong>Freestanding practice:</strong> Let baby stand holding a toy with both hands, then gently let go for a few seconds — builds balance confidence. <a href='https://pathways.org/growth-development/10-12-months/activities/' target='_blank' rel='noopener'>Pathways.org — 10–12 month activities</a>",
+      "<strong>Furniture cruising circuits:</strong> Set up a loop of furniture so baby can cruise in a continuous path — trains endurance and coordination. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-8-to-12-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement 8–12 months</a>",
+      "<strong>Squat-to-stand with toys:</strong> Place toys on the floor near a support surface — baby squats to pick them up and stands back up. Excellent for quadriceps and glutes",
+      "<strong>Dropping and throwing:</strong> Give baby soft balls or beanbags to throw — develops arm strength, release control, and spatial awareness",
+      "<strong>Stair climbing (supervised):</strong> Let baby crawl up 2–3 carpeted stairs with you right behind — builds strength and teaches safe navigation. Always supervise closely"
+    ],
+    travel: ["Standing and cruising — watch for sharp edges on hotel furniture and unfamiliar tables", "Shoes with flexible soles help if walking on rough or hot outdoor surfaces", "Toddler-proof any accommodation: lock balcony doors, check stair gates", "Snack cups with lids prevent spills during car rides and flights", "At this age, exploring new environments is stimulating — short outings to local parks, markets, or gardens are great"],
+    triggers: {
+      cryingTriggers: ["Falling while cruising or attempting to stand", "Wanting to walk but can't yet", "Communication frustration — understands more than they can express", "Testing boundaries — upset when told 'no'", "Wanting independence but needing help", "Separation anxiety ongoing"],
+      soothingTechniques: ["Let them practice standing/cruising in safe spaces", "Baby-proof thoroughly to say 'yes' more than 'no'", "Teach gentle touch with 'soft hands' modeling", "Sign language increasingly helpful", "Redirect rather than just saying 'no' — offer alternative", "Extra patience during tantrums — emotion coaching begins"],
+      excitementTriggers: ["Standing independently for a few seconds", "Cruising furniture", "Push toys and walkers", "Throwing and dropping games", "Balls of all sizes", "Stacking blocks higher", "Simple pretend play (feeding doll)", "Books they can 'read' by turning pages", "Finger painting (edible paint)", "Climbing stairs (supervised)", "Dancing and music"],
+      redFlags: ["Doesn't pull to stand with support", "No pincer grasp (thumb and finger)", "Doesn't search for hidden objects", "Doesn't say single words or use gestures", "Doesn't recognize familiar people", "Loses previously acquired skills"]
+    },
+    routines: {
+      readiness: "Routines help toddler-in-training navigate big emotions and new skills",
+      routinesToStart: ["Self-care routines: brush teeth after breakfast and before bed, wash hands before meals", "Two consistent naps with identical pre-nap routine", "Contribution routine: baby 'helps' with age-appropriate tasks (putting things in trash)", "Limit-setting routine: consistent response to 'no' — redirect, explain briefly, distract", "Social routine: regular interaction with other babies/toddlers"],
+      benefits: ["Self-care foundations for toddlerhood", "Helping builds self-esteem and cooperation", "Consistent limits reduce power struggles", "Social exposure supports language and sharing skills", "Two solid naps = better nighttime sleep"],
+      tips: ["Make tooth-brushing fun (sing a song, let baby hold spare brush)", "Let baby 'help' even if it slows you down — builds skills", "Consistent consequences for unsafe behavior (remove from situation)", "Playgroups or library time at same day/time weekly", "Prepare for nap drop to 1 nap around 12-18 months"]
+    },
+    teething: {
+      status: "🦷🦷🦷🦷🦷🦷 May have 6-8 teeth; laterals still coming for some",
+      timeline: "First molars may start as early as 12-16 months (painful!)",
+      teeth: "6-8 teeth average by now",
+      signs: ["If molars starting: significant pain (molars are biggest, most painful teeth)", "Drooling, irritability, sleep disruption", "Ear pulling (referred pain from molars)", "Cheek rubbing", "Loose stools (from swallowed saliva)"],
+      remedies: ["Frozen bagel or teething biscuit", "Cold sippy cup with water", "Gentle cheek/jaw massage", "Pain reliever before sleep if needed (consult pediatrician for dosing)", "Extra patience and comfort"],
+      avoid: ["Neglecting oral hygiene because baby resists", "Assuming all fussiness is teething (could be illness, growth spurt, etc.)", "Teething necklaces or bracelets"],
+      important: ["Molars take WEEKS to fully erupt — long process", "First dental visit should happen by 12 months or when first tooth appeared", "Keep brushing teeth even when baby protests — cavities can start early"]
+    }
+  },
+  {
+    title: "Month 11 — Almost Walking (26 Oct – 26 Nov 2026)",
+    highlights: [
+      "👣 FIRST STEPS may happen!",
+      "🗣️ Says 1-2 words with meaning: 'mama', 'dada', 'uh-oh'",
+      "🦷 6-8 teeth; FIRST MOLARS may start (12-16 mo) — most painful!",
+      "🍼 Begin bottle weaning — goal is no bottles by 12-15 months",
+      "👉 Points to desired objects — communication improving",
+      "😤 Tantrums emerging — 'me do it!' phase begins",
+      "📋 Focus: Bottle transition, two-choice routine, pre-transition warnings, first steps support"
+    ],
+    dev: ["May take first steps", "Says 1–2 words with meaning", "Follows simple instructions", "Points to desired objects"],
+    tummy: "Active floor and standing play. Support first steps if baby shows interest.",
+    feed: [
+      "<strong>Type:</strong> Breast milk or formula plus 3 meals and 2 snacks",
+      "<strong>Milk feeds:</strong> 3 per day; ~500–600 ml (17–20 oz); solids are now the main calorie source",
+      "<strong>Solids schedule:</strong> 3 meals + 2 snacks; baby should be eating a wide variety of foods from all food groups",
+      "<strong>Textures:</strong> Soft chopped/diced table foods; minimal purees",
+      "<strong>Self-feeding:</strong> Baby uses fingers and attempts spoon; provide thick foods (yogurt, porridge) for spoon practice",
+      "<strong>Bottle transition:</strong> Begin reducing bottle feeds; practice with open cup and straw cup — goal is weaned from bottle by 12–15 months",
+      "<strong>Approaching 12 months:</strong> Plan the transition from formula to whole cow's milk (or continue breastfeeding) — discuss with pediatrician"
+    ],
+    sleep: "12–14 hours. Most babies are on 1–2 naps. Keep wind-down routine consistent.",
+    stim: ["Push toys and walkers (supervised)", "Simple puzzles (1–2 pieces)", "Narrate your day to build vocabulary"],
+    screen: "No screens. Real-time social interaction remains the gold standard for language development.",
+    pedi: null,
+    train: [
+      "<strong>Supported walking:</strong> Hold both of baby's hands and walk together; gradually move to holding just one hand. <a href='https://pathways.org/growth-development/10-12-months/activities/' target='_blank' rel='noopener'>Pathways.org — Walking activities</a>",
+      "<strong>Push toy walking:</strong> Give baby a sturdy push toy (weighted cart or walker) to push across the room — builds confidence for independent walking. <a href='https://www.healthychildren.org/English/ages-stages/baby/Pages/Movement-8-to-12-Months.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Movement 8–12 months</a>",
+      "<strong>Standing balance games:</strong> While baby stands supported, hand them toys so they must balance on one hand — trains weight distribution",
+      "<strong>Stepping over obstacles:</strong> Place a pool noodle or rolled towel on the floor and help baby step over it — teaches foot clearance and body planning",
+      "<strong>Crayon scribbling:</strong> Tape paper to the floor and give baby a large crayon — trains fine motor grip (palmar grasp transitioning to a more mature hold)"
+    ],
+    travel: ["Baby may be taking first steps — bring supportive shoes for uneven terrain", "Transition from carry-on bassinet to own seat on flights (FAA recommends car seat on plane)", "Pack comfort items: favorite toy, blanket, sippy cup", "Be flexible with itineraries — overtired toddlers are harder to manage", "Insect repellent with up to 30% DEET is now considered safe by AAP; apply to clothing when possible"],
+    triggers: {
+      cryingTriggers: ["First steps = lots of falls", "Toddler tantrums emerging (can't have what they want)", "Food throwing and mealtime battles", "Asserting independence — 'me do it!'", "Difficulty transitioning between activities", "Molars teething (12-16 months)", "Hitting/biting exploration (not aggression yet)"],
+      soothingTechniques: ["Natural consequences for safe situations", "Offer choices: 'red cup or blue cup?'", "Transition warnings: '5 more minutes then bath time'", "Name emotions: 'You're angry because we can't play now'", "Physical outlet for energy before quiet time", "Consistent boundaries with empathy", "Model gentle behavior rather than punishing exploration"],
+      excitementTriggers: ["First independent steps!", "Walking with push toys", "Climbing everything", "Opening and closing doors", "Turning light switches on/off", "Flushing toilets", "Simple puzzles (2-3 pieces)", "Pretend play (phone, cooking)", "Helping with tasks (putting things in trash)", "Bubbles", "Playground equipment"],
+      redFlags: ["Not standing with support", "Doesn't use gestures (point, wave)", "Doesn't say any words", "Doesn't understand simple instructions", "Shows no interest in exploring", "Loss of skills", "No eye contact or shared attention"]
+    },
+    routines: {
+      readiness: "Approaching toddlerhood — strong routines prevent 'terrible twos' intensity",
+      routinesToStart: ["Transition from bottle routine: cup at meals, bottle only at wake/sleep (then eliminate)", "Two-choice routine for cooperation: 'Walk to bath or be carried?'", "Calm-down routine for tantrums: safe space, validate feelings, offer comfort when ready", "Pre-transition warnings: '2 more minutes playing, then we clean up'", "Consistent 'no' items: dangerous things get same response every time"],
+      benefits: ["Bottle weaning is easier with routine", "Choices build autonomy without losing boundaries", "Tantrum routine keeps you calm and effective", "Warnings reduce surprise and meltdowns", "Consistency teaches what's truly non-negotiable"],
+      tips: ["Start bottle weaning now — goal is no bottles by 12-15 months", "Use timer for transitions (visual or auditory cue)", "Stay calm during tantrums — your regulation teaches theirs", "Praise cooperation with choices", "Bedtime stays sacred even as baby tests limits"]
+    },
+    teething: {
+      status: "🦷🦷🦷🦷🦷🦷🦷🦷 Lateral incisors usually present; molars may start",
+      timeline: "First molars typically erupt 12-16 months (most painful teeth)",
+      teeth: "6-8 teeth typical, some may have up to 10",
+      signs: ["Molar pain is significant — large surface area breaking through", "Increased fussiness, clingy behavior", "Night waking even if previously sleeping through", "May refuse to chew foods", "Drooling, loose stools", "Low-grade fever possible (<100.4°F)"],
+      remedies: ["Frozen washcloth for back gum chewing", "Cold foods: frozen peas in mesh feeder, popsicles", "Teething crackers for back teeth", "Pain reliever before bed if needed", "Extra patience — this is rough!", "Cold sippy cup to drink and chew on spout"],
+      avoid: ["Stopping oral hygiene", "Assuming sleep regression is behavioral (may be molar pain)", "Over-medicating"],
+      important: ["FIRST DENTAL VISIT by age 1 (now!) — establish dental home", "Brush teeth morning and night with tiny smear of fluoride toothpaste", "No bottles in bed — causes tooth decay", "Molars can take 4-6 weeks to fully erupt"]
+    }
+  },
+  {
+    title: "Month 12 — Happy Birthday! (26 Nov – 26 Dec 2026)",
+    highlights: [
+      "🎂 FIRST BIRTHDAY! You made it through year one!",
+      "👣 May walk independently or cruise confidently",
+      "💉 12-month vaccines: Hep A, MMR, varicella — developmental screening",
+      "🥛 TRANSITION TO WHOLE MILK (or continue breastfeeding)",
+      "🦷 6-12 teeth (avg 8); FIRST MOLARS erupting 12-16 mo — VERY painful!",
+      "🦷 FIRST DENTAL VISIT by age 1 (schedule if not done)",
+      "🗣️ Says 2-3 words; understands much more",
+      "📋 Focus: Bottle weaning complete, whole milk transition, celebrate milestones, toddler routines"
+    ],
+    dev: ["May walk independently or cruise confidently", "Says 2–3 words ('mama', 'dada', 'uh-oh')", "Follows simple directions", "Shows preferences for people and toys"],
+    tummy: "N/A — replaced by walking, climbing, and active play.",
+    feed: [
+      "<strong>Type:</strong> Transition to whole cow's milk (or continue breastfeeding) + family meals",
+      "<strong>Cow's milk:</strong> 480–720 ml (16–24 oz) per day of whole (full-fat) milk; do not exceed 720 ml to avoid iron-deficiency anemia",
+      "<strong>Solids schedule:</strong> 3 meals + 2 snacks; baby eats what the family eats (cut appropriately)",
+      "<strong>Daily nutrition goals:</strong> ~900–1,000 calories/day from a mix of grains, proteins, fruits, vegetables, and dairy",
+      "<strong>Bottle weaning:</strong> Wean from bottle entirely by 12–15 months; switch to open cup or straw cup",
+      "<strong>Now safe:</strong> Honey, whole cow's milk as main drink, pasteurized soft cheeses",
+      "<strong>Still avoid:</strong> Choking hazards (whole grapes — quarter them, hot dogs — slice lengthwise, raw carrots, popcorn, nuts), added sugar and excessive salt, unpasteurized dairy, raw/undercooked meat or eggs"
+    ],
+    sleep: "11–14 hours with 1–2 naps. Most toddlers settle into 1 afternoon nap by 15–18 months.",
+    stim: ["Shape sorters, simple puzzles", "Coloring with large crayons", "Outdoor play and nature walks", "Parallel play with other children"],
+    screen: "Avoid screen media other than video chatting until 18 months (AAP). If you choose to introduce at 18–24 months, co-view high-quality content.",
+    pedi: "12-month well-child visit: Hep A, MMR, varicella vaccines. Developmental screening.",
+    train: [
+      "<strong>Independent walking practice:</strong> Create a safe, open space and encourage baby to walk between two adults — gradually increase the distance. <a href='https://pathways.org/growth-development/10-12-months/activities/' target='_blank' rel='noopener'>Pathways.org — Walking milestones</a>",
+      "<strong>Walking on different surfaces:</strong> Grass, sand, soft mats — different textures challenge balance and sensory integration. Barefoot is best for developing foot muscles. <a href='https://www.healthychildren.org/English/ages-stages/toddler/Pages/default.aspx' target='_blank' rel='noopener'>HealthyChildren.org — Toddler development</a>",
+      "<strong>Bending and picking up:</strong> Scatter toys on the floor and ask baby to pick them up — practices squatting and returning to standing (builds strength and balance)",
+      "<strong>Simple ball kick:</strong> Roll a large, soft ball toward baby's feet and encourage them to kick — early gross motor coordination for legs",
+      "<strong>Stacking towers:</strong> Build 3–4 block towers together — trains fine motor precision, hand-eye coordination, and patience. <a href='https://pathways.org/growth-development/10-12-months/milestones/' target='_blank' rel='noopener'>Pathways.org — 10–12 month milestones</a>",
+      "<strong>Dance party:</strong> Play music and dance together — moving to rhythm trains balance, bilateral coordination, and is a great bonding activity"
+    ],
+    travel: ["Walking toddlers need sturdy shoes and constant supervision in new environments", "Rear-facing car seat remains the safest option until at least age 2 (AAP recommendation)", "For international travel: ensure MMR and varicella vaccines (given at 12 months) are administered at least 2 weeks before departure", "A toddler backpack leash can be helpful in airports and crowded tourist areas", "Pack a portable potty seat if toilet training is approaching", "Consider travel medical insurance and know the location of the nearest hospital at your destination"],
+    triggers: {
+      cryingTriggers: ["Full-blown tantrums (normal developmental stage)", "Wanting to do things independently but lacking skills", "Post-vaccine fussiness (12-month shots)", "Molar teething pain", "Frustration at limited vocabulary", "Not getting desired object or activity", "Transitioning from bottle (if weaning)", "Asserting will — the beginning of 'terrible twos'"],
+      soothingTechniques: ["Stay calm during tantrums — your regulation helps theirs", "Safe space for tantrum (not isolation, just safe environment)", "Validate feelings: 'I see you're upset'", "Distraction still works sometimes", "Consistent routines reduce meltdowns", "Ensure adequate sleep and regular meals — hunger/tiredness = tantrums", "Pick battles — not everything needs to be a 'no'", "Offer acceptable choices to give sense of control"],
+      excitementTriggers: ["Walking independently — everywhere!", "Running (more like fast walking)", "Dancing to music with movement", "Stacking multiple blocks", "Shape sorters", "Pretend play (feeding baby, talking on phone)", "Helping with chores (sweeping, wiping)", "Playing with other children (parallel play)", "Animals — petting zoos, books, videos", "Outdoor exploration", "Painting and coloring"],
+      redFlags: ["Not walking with support", "Doesn't say any single words", "Doesn't use gestures (point, wave, shake head)", "Doesn't understand simple commands", "Loses skills they previously had", "Doesn't make eye contact", "Doesn't show interest in people", "By 16 months: no single words is a concern — early intervention recommended"]
+    },
+    routines: {
+      readiness: "ONE YEAR OLD! — Established routines are foundation for toddler success",
+      routinesToStart: ["Full toddler schedule: wake 6:30-7:30am, breakfast, play, nap 9-10am (if 2 naps) or 12-2pm (if 1 nap), lunch, play, nap (if 2 naps), dinner 5:30pm, bath, bed 7-8pm", "Language-building routine: read books at same times daily (after nap, before bed)", "Social skills routine: regular playdates, classes, or park time", "Responsibility routine: baby has 'jobs' (putting napkins on table, feeding pet)", "Celebration routine: acknowledge milestones and efforts, not just achievements"],
+      benefits: ["Predictable schedule reduces tantrums dramatically", "Regular reading builds vocabulary (crucial 12-18 month language explosion)", "Social exposure teaches sharing, empathy, parallel play", "Responsibilities build competence and self-esteem", "Positive reinforcement encourages trying new things"],
+      tips: ["Most babies transition to 1 nap between 12-18 months — watch for cues", "Read the same books repeatedly — repetition builds language", "Playmates don't need to be same age — variety is good", "Cheer for attempts, not just success — 'You tried so hard!'", "Keep routines but allow flexibility — rigidity causes stress", "CELEBRATE THIS MILESTONE — you've completed baby's first year together! 🎉"]
+    },
+    teething: {
+      status: "🦷🦷🦷🦷🦷🦷🦷🦷 Most have 8 teeth; molars erupting or coming soon",
+      timeline: "First molars: 12-16 months (4 molars total); Canines: 16-20 months; Second molars: 20-30 months",
+      teeth: "6-12 teeth (average is 8 by first birthday)",
+      signs: ["If molars active: this is the HARDEST teething period", "Significant pain, sleep disruption", "May regress in eating and sleeping", "Irritable during day", "Chewing on everything, including furniture"],
+      remedies: ["All previous remedies still work", "Let baby chew on cold, wet washcloth", "Massage gums with clean finger", "Offer cold foods baby can self-feed", "Pain reliever at bedtime if pediatrician approves", "LOTS of patience and cuddles — this is tough"],
+      avoid: ["Giving up on oral hygiene", "Blaming all behavior on teething (could be development, illness, etc.)", "Using unapproved teething products"],
+      important: ["✅ FIRST DENTAL VISIT NOW if not done yet!", "By 12 months, baby should see dentist", "Brush twice daily with fluoride toothpaste (rice-grain size)", "Wean from bottle by 12-15 months to prevent tooth decay", "Full set of 20 baby teeth by age 2.5-3 years", "Teething continues through age 2-3, but molars at 12-16 months are the hardest"]
+    }
+  }
+];
+
+// Build timeline
+const timeline = document.getElementById('timeline');
+
+months.forEach((m, i) => {
+  const card = document.createElement('div');
+  card.className = 'month-card';
+
+  let bodyHTML = '';
+
+  // Month Highlights (appears first)
+  if (m.highlights) {
+    bodyHTML += `<div class="highlights-box"><h3>📌 Month ${i + 1} Highlights</h3><ul>${m.highlights.map(h => `<li>${h}</li>`).join('')}</ul></div>`;
+  }
+
+  // Development
+  bodyHTML += `<div class="section"><span class="badge badge-dev">Development</span><ul>${m.dev.map(d => `<li>${d}</li>`).join('')}</ul></div>`;
+
+  // Tummy Time
+  bodyHTML += `<div class="section"><span class="badge badge-tummy">Tummy Time</span><p>${m.tummy}</p></div>`;
+
+  // Feeding
+  if (Array.isArray(m.feed)) {
+    bodyHTML += `<div class="section"><span class="badge badge-feed">Feeding</span><ul>${m.feed.map(f => `<li>${f}</li>`).join('')}</ul></div>`;
+  } else {
+    bodyHTML += `<div class="section"><span class="badge badge-feed">Feeding</span><p>${m.feed}</p></div>`;
+  }
+
+  // Sleep
+  bodyHTML += `<div class="section"><span class="badge badge-sleep">Sleep</span><p>${m.sleep}</p></div>`;
+
+  // Stimulation
+  bodyHTML += `<div class="section"><span class="badge badge-stim">Stimulation</span><ul>${m.stim.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
+
+  // Screen Time
+  bodyHTML += `<div class="section"><span class="badge badge-screen">Screen Time</span><p>${m.screen}</p></div>`;
+
+  // Growth Spurts
+  if (m.growth) {
+    bodyHTML += `<div class="section"><span class="badge badge-growth">Growth Spurt</span>`;
+    bodyHTML += `<p><strong>Timing:</strong> ${m.growth.timing} (lasts ${m.growth.duration})</p>`;
+    bodyHTML += `<p><strong>Signs to watch for:</strong></p><ul>${m.growth.signs.map(s => `<li>${s}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>How to handle:</strong></p><ul>${m.growth.howToHandle.map(h => `<li>${h}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>What to expect after:</strong></p><ul>${m.growth.aftermath.map(a => `<li>${a}</li>`).join('')}</ul>`;
+    bodyHTML += `</div>`;
+  }
+
+  // Crying & Comfort Triggers
+  if (m.triggers) {
+    bodyHTML += `<div class="section"><span class="badge badge-trigger">Crying & Comfort</span>`;
+    bodyHTML += `<p><strong>What triggers crying:</strong></p><ul>${m.triggers.cryingTriggers.map(t => `<li>${t}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>Soothing techniques:</strong></p><ul>${m.triggers.soothingTechniques.map(s => `<li>${s}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>What excites baby:</strong></p><ul>${m.triggers.excitementTriggers.map(e => `<li>${e}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>⚠️ Red flags — consult pediatrician:</strong></p><ul>${m.triggers.redFlags.map(r => `<li>${r}</li>`).join('')}</ul>`;
+    bodyHTML += `</div>`;
+  }
+
+  // Routines & Structure
+  if (m.routines) {
+    bodyHTML += `<div class="section"><span class="badge badge-routine">Routines & Structure</span>`;
+    bodyHTML += `<p><strong>Developmental readiness:</strong> ${m.routines.readiness}</p>`;
+    bodyHTML += `<p><strong>Routines to start:</strong></p><ul>${m.routines.routinesToStart.map(r => `<li>${r}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>Benefits:</strong></p><ul>${m.routines.benefits.map(b => `<li>${b}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>💡 Tips:</strong></p><ul>${m.routines.tips.map(t => `<li>${t}</li>`).join('')}</ul>`;
+    bodyHTML += `</div>`;
+  }
+
+  // Teething
+  if (m.teething) {
+    bodyHTML += `<div class="section"><span class="badge badge-teething">Teething</span>`;
+    bodyHTML += `<p><strong>Status:</strong> ${m.teething.status}</p>`;
+    bodyHTML += `<p><strong>Timeline:</strong> ${m.teething.timeline}</p>`;
+    bodyHTML += `<p><strong>Teeth count:</strong> ${m.teething.teeth}</p>`;
+    bodyHTML += `<p><strong>Signs of teething:</strong></p><ul>${m.teething.signs.map(s => `<li>${s}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>Safe remedies:</strong></p><ul>${m.teething.remedies.map(r => `<li>${r}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>⚠️ Avoid:</strong></p><ul>${m.teething.avoid.map(a => `<li>${a}</li>`).join('')}</ul>`;
+    bodyHTML += `<p><strong>❗ Important:</strong></p><ul>${m.teething.important.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    bodyHTML += `</div>`;
+  }
+
+  // Training
+  if (m.train) {
+    bodyHTML += `<div class="section"><span class="badge badge-train">Training</span><ul>${m.train.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+  }
+
+  // Travel
+  if (m.travel) {
+    bodyHTML += `<div class="section"><span class="badge badge-travel">Travel</span><ul>${m.travel.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+  }
+
+  // Pediatric Visits
+  if (m.pedi) {
+    bodyHTML += `<div class="section"><span class="badge badge-pedi">Pediatric Visits</span><p>${m.pedi}</p></div>`;
+  }
+
+  card.innerHTML = `
+    <div class="month-dot"></div>
+    <div class="card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-${i}">
+      <h2>${m.title}</h2>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="card-body" id="body-${i}">
+      <div class="card-body-inner">${bodyHTML}</div>
+    </div>`;
+
+  timeline.appendChild(card);
+
+  // Toggle expand/collapse
+  const header = card.querySelector('.card-header');
+  const body = card.querySelector('.card-body');
+
+  function toggle() {
+    const isOpen = card.classList.toggle('open');
+    header.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+      body.style.maxHeight = '0';
+    }
+  }
+
+  header.addEventListener('click', toggle);
+  header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+
+// Scroll-reveal with IntersectionObserver
+const revealTargets = document.querySelectorAll('.month-card, .info-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+revealTargets.forEach(el => observer.observe(el));
+
+// ===== Quiz & Personalization =====
+
+// Get quiz data from localStorage
+function getQuizData() {
+  const data = localStorage.getItem('babyQuizData');
+  return data ? JSON.parse(data) : null;
+}
+
+// Save quiz data to localStorage
+function saveQuizData(data) {
+  localStorage.setItem('babyQuizData', JSON.stringify(data));
+}
+
+// Show/hide quiz modal
+function showQuiz() {
+  document.getElementById('quizOverlay').classList.add('active');
+}
+
+function hideQuiz() {
+  document.getElementById('quizOverlay').classList.remove('active');
+}
+
+// Calculate age in months from birth date
+function calculateAgeInMonths(birthDate) {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  const months = (today.getFullYear() - birth.getFullYear()) * 12 + (today.getMonth() - birth.getMonth());
+
+  // If the current day is before the birth day of the month, subtract one
+  if (today.getDate() < birth.getDate()) {
+    return Math.max(0, months - 1);
+  }
+  return Math.max(0, months);
+}
+
+// Apply personalization to the page
+function applyPersonalization(data) {
+  if (!data) return;
+
+  // Update header with baby's name
+  const headerTitle = document.querySelector('.header h1');
+  const headerSubtitle = document.querySelector('.header p');
+
+  if (data.babyName) {
+    headerTitle.textContent = `${data.babyName}'s First Year — Month-by-Month Guide`;
+  }
+
+  if (data.birthDate) {
+    const birthDateFormatted = new Date(data.birthDate).toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    const ageInMonths = calculateAgeInMonths(data.birthDate);
+    const locationText = data.location ? ` • ${data.location}` : '';
+    headerSubtitle.innerHTML = `Born ${birthDateFormatted} • Currently ${ageInMonths} month${ageInMonths !== 1 ? 's' : ''} old${locationText}`;
+
+    // Auto-expand the current month card
+    setTimeout(() => {
+      const currentMonthCard = document.querySelectorAll('.month-card')[ageInMonths];
+      if (currentMonthCard) {
+        const header = currentMonthCard.querySelector('.card-header');
+        if (header && !currentMonthCard.classList.contains('open')) {
+          header.click();
+          // Scroll to current month
+          currentMonthCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 500);
+  }
+
+  // Show settings button after quiz is completed
+  document.getElementById('settingsBtn').style.display = 'flex';
+}
+
+// Handle quiz form submission
+document.getElementById('quizForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Collect form data
+  const formData = new FormData(e.target);
+  const data = {
+    babyName: formData.get('babyName'),
+    birthDate: formData.get('birthDate'),
+    location: formData.get('location'),
+    milestones: formData.getAll('milestone'),
+    concerns: formData.getAll('concern'),
+    completedAt: new Date().toISOString()
+  };
+
+  // Save to localStorage
+  saveQuizData(data);
+
+  // Hide quiz
+  hideQuiz();
+
+  // Apply personalization
+  applyPersonalization(data);
+});
+
+// Settings button - retake quiz
+document.getElementById('settingsBtn').addEventListener('click', () => {
+  // Pre-fill form with existing data
+  const data = getQuizData();
+  if (data) {
+    document.getElementById('babyName').value = data.babyName || '';
+    document.getElementById('birthDate').value = data.birthDate || '';
+    document.getElementById('location').value = data.location || '';
+
+    // Check milestone checkboxes
+    data.milestones?.forEach(milestone => {
+      const checkbox = document.querySelector(`input[name="milestone"][value="${milestone}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+
+    // Check concern checkboxes
+    data.concerns?.forEach(concern => {
+      const checkbox = document.querySelector(`input[name="concern"][value="${concern}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+  }
+
+  showQuiz();
+});
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const quizData = getQuizData();
+
+  if (!quizData) {
+    // First visit - show quiz
+    showQuiz();
+  } else {
+    // Returning visit - apply personalization
+    applyPersonalization(quizData);
+  }
+});
+</script>
+</body>
+</html>
