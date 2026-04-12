@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vital — App Mockups</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Force background colors and images to print */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: #F5F5F0;
+      color: #1A1A1A;
+      width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── PDF Page Break Controls ── */
+    .section,
+    .biz-section {
+      page-break-before: always;
+      page-break-inside: avoid;
+    }
+    /* First content block after header — no forced break */
+    .biz-section:first-of-type {
+      page-break-before: always;
+    }
+    .phone-wrap,
+    .phone,
+    .phone-screen,
+    .phones {
+      page-break-inside: avoid;
+    }
+    .biz-card,
+    .biz-grid {
+      page-break-inside: avoid;
+    }
+    .page-header {
+      page-break-after: always;
+    }
+
+    /* ── Page Header (Cover) ── */
+    .page-header {
+      background: #0D1117;
+      color: #fff;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Background decorative rings */
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -180px;
+      right: -180px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,164,0.1);
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,164,0.15);
+    }
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-wordmark {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #4ECDA4;
+    }
+    .cover-tag {
+      font-size: 12px;
+      color: #555;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid #2A2A3A;
+      border-radius: 20px;
+    }
+    .cover-middle {
+      position: relative;
+      z-index: 1;
+    }
+    .cover-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4ECDA4;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .cover-headline {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+    .cover-headline span {
+      color: #4ECDA4;
+    }
+    .cover-sub {
+      font-size: 18px;
+      color: #7A7A8A;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-stats {
+      display: flex;
+      gap: 48px;
+    }
+    .cover-stat .val {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+    .cover-stat .lbl {
+      font-size: 12px;
+      color: #555;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .cover-meta {
+      text-align: right;
+      font-size: 12px;
+      color: #3A3A4A;
+      line-height: 1.8;
+    }
+
+    /* ── Section Headers ── */
+    .section {
+      padding: 72px 48px;
+    }
+    .section:nth-child(even) {
+      background: #ECEEE8;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #4ECDA4;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0D1117;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: #666;
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 56px;
+    }
+
+    /* ── Phone Frame ── */
+    .phones {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .phone-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      letter-spacing: 0.3px;
+    }
+    .phone {
+      width: 280px;
+      background: #0D1117;
+      border-radius: 46px;
+      padding: 16px;
+      box-shadow:
+        0 0 0 2px #2A2A3A,
+        0 0 0 4px #1A1A2A,
+        0 40px 80px rgba(0,0,0,0.35),
+        0 8px 24px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #0D1117;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
+    }
+    .phone-screen {
+      background: #111318;
+      border-radius: 32px;
+      overflow: hidden;
+      min-height: 560px;
+      position: relative;
+    }
+
+    /* ── Status Bar ── */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 48px 20px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .status-bar .time { font-size: 13px; font-weight: 700; }
+    .status-icons { display: flex; gap: 4px; align-items: center; }
+
+    /* ── Shared App Elements ── */
+    .app-content { padding: 0 16px 24px; }
+
+    /* ── Colors & Utilities ── */
+    .green { color: #4ECDA4; }
+    .amber { color: #F5A623; }
+    .red { color: #E05C5C; }
+    .muted { color: #7A7A8A; }
+    .white { color: #FFFFFF; }
+
+    /* ═══════════════════════════════════════
+       SCREEN 1: ONBOARDING — WELCOME
+    ═══════════════════════════════════════ */
+    .onboard-welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 32px;
+      text-align: center;
+      min-height: 560px;
+      background: linear-gradient(160deg, #0D1117 0%, #0F2027 100%);
+    }
+    .onboard-icon {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 32px;
+    }
+    .onboard-welcome h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .onboard-welcome p {
+      font-size: 14px;
+      color: #8B8B9A;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .btn-primary {
+      background: #4ECDA4;
+      color: #0D1117;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #8B8B9A;
+      border: 1px solid #2A2A3A;
+      border-radius: 14px;
+      padding: 13px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    /* ═══════════════════════════════════════
+       SCREEN 2: ONBOARDING — GOALS
+    ═══════════════════════════════════════ */
+    .onboard-goals {
+      padding: 52px 20px 24px;
+      background: #111318;
+      min-height: 560px;
+    }
+    .onboard-goals h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .onboard-goals .sub {
+      font-size: 13px;
+      color: #7A7A8A;
+      margin-bottom: 28px;
+    }
+    .goal-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #2A2A3A;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .goal-option.selected {
+      border-color: #4ECDA4;
+      background: rgba(78,205,164,0.08);
+    }
+    .goal-emoji { font-size: 20px; width: 28px; text-align: center; }
+    .goal-text { font-size: 14px; color: #DDD; font-weight: 500; }
+    .goal-check {
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #2A2A3A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .goal-option.selected .goal-check {
+      background: #4ECDA4;
+      border-color: #4ECDA4;
+      color: #0D1117;
+      font-size: 11px;
+    }
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #2A2A3A;
+    }
+    .dot.active { background: #4ECDA4; width: 20px; border-radius: 3px; }
+
+    /* ═══════════════════════════════════════
+       SCREEN 3: CONNECT DEVICES
+    ═══════════════════════════════════════ */
+    .connect-screen {
+      padding: 52px 20px 24px;
+      background: #111318;
+      min-height: 560px;
+    }
+    .connect-screen h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .connect-screen .sub { font-size: 13px; color: #7A7A8A; margin-bottom: 28px; }
+    .connect-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #1A1A28;
+      margin-bottom: 10px;
+    }
+    .connect-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .connect-icon.apple { background: #1C1C1E; }
+    .connect-icon.oura { background: #1A1A3A; }
+    .connect-icon.garmin { background: #0A2A0A; }
+    .connect-icon.strava { background: #2A1500; }
+    .connect-info { flex: 1; }
+    .connect-name { font-size: 14px; font-weight: 600; color: #EEE; }
+    .connect-desc { font-size: 11px; color: #7A7A8A; margin-top: 1px; }
+    .connect-btn {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: none;
+    }
+    .connect-btn.linked { background: rgba(78,205,164,0.15); color: #4ECDA4; }
+    .connect-btn.link { background: #4ECDA4; color: #0D1117; }
+
+    /* ═══════════════════════════════════════
+       SCREEN 4: TODAY (HOME)
+    ═══════════════════════════════════════ */
+    .today-screen {
+      background: #0D1117;
+      min-height: 560px;
+    }
+    .today-header {
+      padding: 48px 20px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .today-header .date { font-size: 13px; color: #7A7A8A; font-weight: 500; }
+    .today-header .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #0D1117;
+    }
+    .coach-card {
+      margin: 0 16px 16px;
+      background: linear-gradient(140deg, #141E2A, #0F1820);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid #1E3040;
+    }
+    .coach-card .coach-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .coach-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+    }
+    .coach-name { font-size: 12px; font-weight: 600; color: #4ECDA4; }
+    .coach-card .greeting { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .coach-card .body {
+      font-size: 13px;
+      color: #AAA;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .coach-card .body strong { color: #fff; }
+    .action-list { display: flex; flex-direction: column; gap: 8px; }
+    .action-item {
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .action-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4ECDA4; margin-top: 5px; flex-shrink: 0;
+    }
+    .action-item span { font-size: 13px; color: #DDD; line-height: 1.4; }
+    .card-actions {
+      display: flex; gap: 8px; margin: 0 16px 16px;
+    }
+    .pill-btn {
+      flex: 1; padding: 11px 8px; border-radius: 12px;
+      border: 1px solid #2A2A3A; background: #1A1A28;
+      font-size: 12px; font-weight: 600; color: #CCC; text-align: center;
+    }
+    .pill-btn.primary-pill {
+      background: rgba(78,205,164,0.12);
+      border-color: rgba(78,205,164,0.3);
+      color: #4ECDA4;
+    }
+    .metrics-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 8px; margin: 0 16px 16px;
+    }
+    .metric-cell {
+      background: #1A1A28;
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .metric-cell .m-val { font-size: 15px; font-weight: 700; color: #fff; }
+    .metric-cell .m-unit { font-size: 9px; color: #7A7A8A; }
+    .metric-cell .m-label { font-size: 10px; color: #7A7A8A; margin-top: 2px; }
+    .metric-cell .m-trend { font-size: 9px; margin-top: 3px; }
+
+    /* ═══════════════════════════════════════
+       SCREEN 5: COACH CHAT
+    ═══════════════════════════════════════ */
+    .chat-screen {
+      background: #0D1117;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      padding: 48px 20px 14px;
+      border-bottom: 1px solid #1A1A28;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-header-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .chat-header-info .name { font-size: 14px; font-weight: 700; color: #fff; }
+    .chat-header-info .status { font-size: 11px; color: #4ECDA4; }
+    .chat-messages { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .msg { display: flex; flex-direction: column; max-width: 88%; }
+    .msg.coach { align-self: flex-start; }
+    .msg.user { align-self: flex-end; }
+    .msg-bubble {
+      padding: 11px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .msg.coach .msg-bubble {
+      background: #1A1A28;
+      color: #DDD;
+      border-radius: 4px 16px 16px 16px;
+    }
+    .msg.user .msg-bubble {
+      background: #4ECDA4;
+      color: #0D1117;
+      font-weight: 500;
+      border-radius: 16px 16px 4px 16px;
+    }
+    .msg-time { font-size: 10px; color: #555; margin-top: 4px; padding: 0 4px; }
+    .msg.user .msg-time { text-align: right; }
+    .quick-log {
+      margin: 0 16px 12px;
+      background: #1A1A28;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .quick-log-label { font-size: 11px; color: #7A7A8A; font-weight: 600; margin-bottom: 10px; }
+    .quick-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      padding: 6px 11px;
+      background: #252535;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #CCC;
+      cursor: pointer;
+    }
+    .chat-input {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px 20px;
+      border-top: 1px solid #1A1A28;
+    }
+    .chat-input-field {
+      flex: 1; background: #1A1A28; border: 1px solid #2A2A3A;
+      border-radius: 20px; padding: 10px 16px;
+      font-size: 13px; color: #7A7A8A;
+    }
+    .send-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #4ECDA4; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 14px; cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════
+       SCREEN 6: DATA / TRENDS
+    ═══════════════════════════════════════ */
+    .data-screen {
+      background: #0D1117;
+      min-height: 560px;
+    }
+    .data-header {
+      padding: 48px 20px 16px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .period-tabs {
+      display: flex; gap: 4px; margin: 0 16px 16px;
+    }
+    .period-tab {
+      padding: 7px 16px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+    }
+    .period-tab.active { background: #4ECDA4; color: #0D1117; }
+    .period-tab:not(.active) { background: #1A1A28; color: #7A7A8A; }
+    .trend-card {
+      margin: 0 16px 12px;
+      background: #1A1A28;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .trend-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .trend-card-label { font-size: 12px; color: #7A7A8A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .trend-card-value { font-size: 22px; font-weight: 700; color: #fff; }
+    .trend-card-sub { font-size: 11px; color: #7A7A8A; margin-top: 2px; }
+    .trend-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+    .trend-badge.down { background: rgba(224,92,92,0.15); color: #E05C5C; }
+    .trend-badge.up { background: rgba(78,205,164,0.15); color: #4ECDA4; }
+    .sparkline {
+      display: flex; align-items: flex-end; gap: 4px; height: 36px;
+    }
+    .bar {
+      flex: 1; border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, #4ECDA4 0%, rgba(78,205,164,0.3) 100%);
+    }
+    .bar.low { background: linear-gradient(180deg, #E05C5C 0%, rgba(224,92,92,0.3) 100%); }
+    .bar.mid { background: linear-gradient(180deg, #F5A623 0%, rgba(245,166,35,0.3) 100%); }
+    .biomarker-section { margin: 0 16px 12px; }
+    .biomarker-title {
+      font-size: 12px; color: #7A7A8A; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex; justify-content: space-between;
+    }
+    .biomarker-title a { color: #4ECDA4; font-size: 11px; text-decoration: none; text-transform: none; letter-spacing: 0; }
+    .biomarker-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: #1A1A28;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .bm-name { flex: 1; font-size: 13px; color: #DDD; font-weight: 500; }
+    .bm-val { font-size: 13px; font-weight: 700; color: #fff; }
+    .bm-unit { font-size: 11px; color: #7A7A8A; width: 50px; }
+    .bm-status { font-size: 11px; font-weight: 600; }
+
+    /* ═══════════════════════════════════════
+       SCREEN 7: LAB UPLOAD
+    ═══════════════════════════════════════ */
+    .lab-screen {
+      background: #0D1117;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+    }
+    .lab-header {
+      padding: 48px 20px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .back-btn { color: #4ECDA4; font-size: 20px; }
+    .lab-header h2 { font-size: 18px; font-weight: 700; color: #fff; }
+    .upload-zone {
+      margin: 0 16px 16px;
+      border: 2px dashed #2A2A3A;
+      border-radius: 18px;
+      padding: 32px 20px;
+      text-align: center;
+      background: #0F1520;
+    }
+    .upload-icon { font-size: 36px; margin-bottom: 12px; }
+    .upload-zone h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .upload-zone p { font-size: 13px; color: #7A7A8A; margin-bottom: 20px; }
+    .upload-btns { display: flex; gap: 10px; justify-content: center; }
+    .upload-btn {
+      padding: 10px 20px; border-radius: 12px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .upload-btn.primary { background: #4ECDA4; color: #0D1117; }
+    .upload-btn.secondary { background: #1A1A28; color: #CCC; border: 1px solid #2A2A3A; }
+    .extracted-title {
+      margin: 0 16px 12px;
+      font-size: 13px; font-weight: 700; color: #7A7A8A;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .extracted-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      margin: 0 16px 8px;
+      background: #1A1A28;
+      border-radius: 12px;
+    }
+    .ex-name { flex: 1; font-size: 13px; color: #EEE; }
+    .ex-val { font-size: 13px; font-weight: 700; color: #fff; }
+    .ex-unit { font-size: 11px; color: #7A7A8A; width: 48px; text-align: right; }
+    .ex-check { font-size: 14px; }
+    .ex-warn { font-size: 12px; color: #F5A623; }
+    .confirm-btn {
+      margin: 16px;
+      background: #4ECDA4; color: #0D1117;
+      border: none; border-radius: 14px;
+      padding: 15px; font-size: 15px; font-weight: 700;
+      width: calc(100% - 32px); cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════
+       WEEKLY SUMMARY
+    ═══════════════════════════════════════ */
+    .summary-screen {
+      background: #0D1117;
+      min-height: 560px;
+    }
+    .summary-header {
+      padding: 48px 20px 16px;
+    }
+    .summary-header .week-label { font-size: 12px; color: #4ECDA4; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .summary-header h2 { font-size: 20px; font-weight: 700; color: #fff; }
+    .score-card {
+      margin: 0 16px 16px;
+      background: linear-gradient(140deg, #0F2027, #141E2A);
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid #1E3040;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .score-ring {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: conic-gradient(#4ECDA4 0% 72%, #1A1A28 72% 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .score-inner {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: #0D1117;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .score-num { font-size: 18px; font-weight: 800; color: #4ECDA4; }
+    .score-info .label { font-size: 12px; color: #7A7A8A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .score-info .title { font-size: 17px; font-weight: 700; color: #fff; }
+    .score-info .sub { font-size: 12px; color: #7A7A8A; margin-top: 3px; }
+    .summary-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; margin: 0 16px 16px;
+    }
+    .sum-metric {
+      background: #1A1A28; border-radius: 14px;
+      padding: 12px 10px; text-align: center;
+    }
+    .sum-metric .val { font-size: 18px; font-weight: 700; color: #fff; }
+    .sum-metric .lbl { font-size: 10px; color: #7A7A8A; margin-top: 2px; }
+    .sum-metric .chg { font-size: 10px; margin-top: 3px; }
+    .insights-title {
+      margin: 0 16px 10px;
+      font-size: 13px; font-weight: 700; color: #7A7A8A;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .insight-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 16px;
+      margin: 0 16px 8px;
+      background: #1A1A28;
+      border-radius: 12px;
+    }
+    .insight-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .insight-text { font-size: 12px; color: #CCC; line-height: 1.5; }
+
+    /* ── Tab Bar ── */
+    .tab-bar {
+      display: flex;
+      border-top: 1px solid #1A1A28;
+      background: #0D1117;
+      padding: 12px 0 20px;
+    }
+    .tab-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 500; color: #555;
+    }
+    .tab-item.active { color: #4ECDA4; }
+    .tab-icon { font-size: 20px; }
+
+    /* ── Page Flow Connector ── */
+    .flow-arrow {
+      font-size: 28px; color: #CCC;
+      align-self: center; margin-top: -30px; flex-shrink: 0;
+    }
+
+    /* ── Business Summary Section ── */
+    .biz-section {
+      background: #0D1117;
+      color: #fff;
+      padding: 72px 48px;
+    }
+    .biz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .biz-card {
+      background: #1A1A28;
+      border-radius: 18px;
+      padding: 28px 24px;
+      border: 1px solid #2A2A3A;
+    }
+    .biz-card .biz-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: #4ECDA4; margin-bottom: 10px;
+    }
+    .biz-card .biz-title {
+      font-size: 32px; font-weight: 800; color: #fff;
+      margin-bottom: 8px; letter-spacing: -1px;
+    }
+    .biz-card .biz-desc {
+      font-size: 14px; color: #7A7A8A; line-height: 1.5;
+    }
+
+    .footer {
+      background: #0D1117;
+      border-top: 1px solid #1A1A28;
+      padding: 32px 48px;
+      text-align: center;
+      color: #555;
+      font-size: 13px;
+    }
+    .footer strong { color: #4ECDA4; }
+
+    @media (max-width: 768px) {
+      .section { padding: 48px 20px; }
+      .phones { gap: 20px; }
+      .phone { width: 240px; }
+    }
+
+    @media print {
+      body { width: 1400px; }
+
+      .page-header { padding: 40px 60px; min-height: 460px; }
+      .cover-headline { font-size: 52px; letter-spacing: -1.5px; }
+
+      .section { padding: 40px 48px; }
+      .biz-section { padding: 40px 48px; }
+
+      .section-title { font-size: 26px; margin-bottom: 6px; }
+      .section-desc { margin-bottom: 32px; font-size: 15px; }
+
+      .phone { width: 240px; }
+      .phone-screen { min-height: 480px; }
+      .phones { gap: 24px; }
+
+      /* Shrink internal screen elements proportionally */
+      .status-bar { padding: 38px 16px 6px; }
+      .today-header { padding: 38px 16px 12px; }
+      .coach-card { padding: 14px; margin: 0 12px 12px; }
+      .metrics-row { margin: 0 12px 12px; }
+      .card-actions { margin: 0 12px 12px; }
+      .chat-messages { padding: 12px; gap: 10px; }
+      .data-header { padding: 38px 16px 12px; }
+      .summary-header { padding: 38px 16px 12px; }
+      .lab-header { padding: 38px 16px 12px; }
+
+      .biz-card { padding: 20px 18px; }
+      .biz-card .biz-title { font-size: 24px; }
+
+      .flow-arrow { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     PAGE HEADER
+════════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="cover-top">
+    <div class="cover-wordmark">vital</div>
+    <div class="cover-tag">Confidential · April 2026</div>
+  </div>
+  <div class="cover-middle">
+    <div class="cover-eyebrow">Product Mockups</div>
+    <div class="cover-headline">Your health data,<br><span>finally understood.</span></div>
+    <div class="cover-sub">An AI health coach that combines wearables, blood results, and daily life into one conversation — every morning in 30 seconds.</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="val">€69<span style="font-size:18px;font-weight:600;">/mo</span></div>
+        <div class="lbl">Core subscription</div>
+      </div>
+      <div class="cover-stat">
+        <div class="val">93%</div>
+        <div class="lbl">Gross margin</div>
+      </div>
+      <div class="cover-stat">
+        <div class="val">€1.4M</div>
+        <div class="lbl">Year 1 ARR target</div>
+      </div>
+    </div>
+    <div class="cover-meta">
+      Apple Health · Oura · Garmin · Strava<br>
+      Swiss lab integration · Claude AI
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     KEY METRICS
+════════════════════════════════════════════ -->
+<div class="biz-section">
+  <div class="section-label" style="color:#4ECDA4;">The Opportunity</div>
+  <div class="section-title" style="color:#fff;">Built for people who track everything but understand nothing</div>
+  <div class="biz-grid">
+    <div class="biz-card">
+      <div class="biz-label">Market Size</div>
+      <div class="biz-title">$152B</div>
+      <div class="biz-desc">Wearable health device market by 2029. Growing 27.5% per year.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">Target Pricing</div>
+      <div class="biz-title">€69/mo</div>
+      <div class="biz-desc">Core subscription. Users already spend €1,000+ on hardware with no software synthesis.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">AI Cost per User</div>
+      <div class="biz-title">€0.50/mo</div>
+      <div class="biz-desc">Claude API with prompt caching. Less than 1% of revenue. 93%+ gross margin.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">Year 1 ARR Target</div>
+      <div class="biz-title">€1.4M</div>
+      <div class="biz-desc">2,000 paying users at €69/month. Breakeven at Month 6.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION: ONBOARDING
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Onboarding</div>
+  <div class="section-title">Up and running in 5 minutes</div>
+  <div class="section-desc">Users connect their existing devices — no new hardware required. Vital reads 30 days of historical data on first launch.</div>
+
+  <div class="phones">
+
+    <!-- Screen 1: Welcome -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="onboard-welcome">
+            <div class="onboard-icon">✦</div>
+            <h1>Your data finally makes sense</h1>
+            <p>Vital combines your wearables, workouts, and blood results into one daily health conversation.</p>
+            <button class="btn-primary">Get started</button>
+            <button class="btn-secondary">I already have an account</button>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Welcome</div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <!-- Screen 2: Goals -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="onboard-goals">
+            <div class="status-bar" style="padding-top:10px;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+            <h2>What's your main goal?</h2>
+            <p class="sub">Choose what matters most — you can always change this.</p>
+            <div class="goal-option selected">
+              <div class="goal-emoji">⚡</div>
+              <div class="goal-text">More energy day-to-day</div>
+              <div class="goal-check">✓</div>
+            </div>
+            <div class="goal-option">
+              <div class="goal-emoji">😴</div>
+              <div class="goal-text">Better sleep & recovery</div>
+              <div class="goal-check"></div>
+            </div>
+            <div class="goal-option selected">
+              <div class="goal-emoji">🏃</div>
+              <div class="goal-text">Improve athletic performance</div>
+              <div class="goal-check">✓</div>
+            </div>
+            <div class="goal-option">
+              <div class="goal-emoji">🩸</div>
+              <div class="goal-text">Understand my blood results</div>
+              <div class="goal-check"></div>
+            </div>
+            <div class="goal-option">
+              <div class="goal-emoji">🛡️</div>
+              <div class="goal-text">Preventive health</div>
+              <div class="goal-check"></div>
+            </div>
+            <div class="progress-dots">
+              <div class="dot"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Set Goals</div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <!-- Screen 3: Connect devices -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="connect-screen">
+            <div class="status-bar" style="padding-top:10px;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+            <h2>Connect your devices</h2>
+            <p class="sub">Vital works with what you already have.</p>
+            <div class="connect-item">
+              <div class="connect-icon apple">🍎</div>
+              <div class="connect-info">
+                <div class="connect-name">Apple Health</div>
+                <div class="connect-desc">Sleep, HRV, steps, heart rate</div>
+              </div>
+              <button class="connect-btn linked">✓ Linked</button>
+            </div>
+            <div class="connect-item">
+              <div class="connect-icon oura">⭕</div>
+              <div class="connect-info">
+                <div class="connect-name">Oura Ring</div>
+                <div class="connect-desc">Readiness, deep sleep, body temp</div>
+              </div>
+              <button class="connect-btn linked">✓ Linked</button>
+            </div>
+            <div class="connect-item">
+              <div class="connect-icon garmin">⌚</div>
+              <div class="connect-info">
+                <div class="connect-name">Garmin Connect</div>
+                <div class="connect-desc">Training load, VO2max, workouts</div>
+              </div>
+              <button class="connect-btn link">Link</button>
+            </div>
+            <div class="connect-item">
+              <div class="connect-icon strava">🚴</div>
+              <div class="connect-info">
+                <div class="connect-name">Strava</div>
+                <div class="connect-desc">Activity history & routes</div>
+              </div>
+              <button class="connect-btn link">Link</button>
+            </div>
+            <div style="margin-top:20px;">
+              <button class="btn-primary" style="font-size:14px; padding:13px;">Continue with 2 connected →</button>
+            </div>
+            <div class="progress-dots" style="margin-top:14px;">
+              <div class="dot"></div><div class="dot"></div><div class="dot active"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Connect Devices</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION: DAILY EXPERIENCE
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Daily Experience</div>
+  <div class="section-title">30 seconds every morning</div>
+  <div class="section-desc">The morning brief tells you what your body needs today — based on last night's data and everything you've logged. Then ask the coach anything.</div>
+
+  <div class="phones">
+
+    <!-- Screen: Today/Home -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="today-screen">
+            <div class="today-header">
+              <div>
+                <div style="font-size:11px;color:#7A7A8A;font-weight:500;">FRIDAY, APRIL 11</div>
+                <div style="font-size:14px;color:#fff;font-weight:700;margin-top:2px;">Good morning, Loic</div>
+              </div>
+              <div class="avatar">L</div>
+            </div>
+            <div class="coach-card">
+              <div class="coach-header">
+                <div class="coach-avatar">✦</div>
+                <div class="coach-name">Vital Coach</div>
+                <div style="margin-left:auto;font-size:10px;color:#555;">08:07</div>
+              </div>
+              <div class="body">
+                Your <strong>HRV is 38ms</strong> — below your baseline of 52ms. Sleep was 6h42 with low deep sleep. Yesterday's session + late night likely explains this.
+              </div>
+              <div class="action-list">
+                <div class="action-item"><div class="action-dot"></div><span>Keep intensity moderate today — easy run or mobility</span></div>
+                <div class="action-item"><div class="action-dot"></div><span>Prioritize protein & hydration (>2.5L)</span></div>
+                <div class="action-item"><div class="action-dot"></div><span>Wind-down by 9pm to rebuild deep sleep</span></div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <div class="pill-btn primary-pill">💬 Ask follow-up</div>
+              <div class="pill-btn">📝 Log something</div>
+            </div>
+            <div class="metrics-row">
+              <div class="metric-cell">
+                <div class="m-val red">38</div>
+                <div class="m-unit">ms</div>
+                <div class="m-label">HRV</div>
+                <div class="m-trend red">↓ -27%</div>
+              </div>
+              <div class="metric-cell">
+                <div class="m-val amber">6h42</div>
+                <div class="m-unit"></div>
+                <div class="m-label">Sleep</div>
+                <div class="m-trend amber">↓ low</div>
+              </div>
+              <div class="metric-cell">
+                <div class="m-val green">61</div>
+                <div class="m-unit">%</div>
+                <div class="m-label">Ready</div>
+                <div class="m-trend muted">fair</div>
+              </div>
+              <div class="metric-cell">
+                <div class="m-val white">52</div>
+                <div class="m-unit">bpm</div>
+                <div class="m-label">Rest HR</div>
+                <div class="m-trend amber">+3</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab-item active"><div class="tab-icon">☀️</div>Today</div>
+              <div class="tab-item"><div class="tab-icon">💬</div>Coach</div>
+              <div class="tab-item"><div class="tab-icon">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Morning Brief</div>
+    </div>
+
+    <!-- Screen: Coach Chat -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="chat-screen">
+            <div class="chat-header">
+              <div class="status-bar" style="position:absolute;top:0;left:0;right:0;padding:14px 20px 0;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+              <div style="margin-top:32px;display:flex;align-items:center;gap:10px;padding:0;">
+                <div class="chat-header-avatar">✦</div>
+                <div class="chat-header-info">
+                  <div class="name">Vital Coach</div>
+                  <div class="status">● Active now</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-messages" style="padding-top:16px;">
+              <div class="msg coach">
+                <div class="msg-bubble">Your HRV has trended down for 4 days. Anything going on — stress, alcohol, travel?</div>
+                <div class="msg-time">10:32</div>
+              </div>
+              <div class="msg user">
+                <div class="msg-bubble">Had drinks Tue + Wed, work has been intense</div>
+                <div class="msg-time">10:33</div>
+              </div>
+              <div class="msg coach">
+                <div class="msg-bubble">That explains it perfectly. Alcohol suppresses deep sleep → lowers HRV recovery. Stress adds to the load.<br><br>Two things that help fast:<br>→ No alcohol tonight (1 drink delays rebound 48h)<br>→ 10 min breathing or meditation before sleep<br><br>Check Saturday — HRV should start climbing 🌱</div>
+                <div class="msg-time">10:33</div>
+              </div>
+            </div>
+            <div class="quick-log">
+              <div class="quick-log-label">QUICK LOG</div>
+              <div class="quick-chips">
+                <div class="chip">🍺 Alcohol</div>
+                <div class="chip">😴 Bad sleep</div>
+                <div class="chip">💪 Hard session</div>
+                <div class="chip">✈️ Travel</div>
+                <div class="chip">🤒 Feeling off</div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <div class="chat-input-field">Ask anything...</div>
+              <div class="send-btn">↑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Coach Chat</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION: DATA & LAB RESULTS
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Health Data</div>
+  <div class="section-title">All your signals in one place</div>
+  <div class="section-desc">Upload any blood test PDF. Vital extracts your biomarkers and connects them to your wearable trends — the synthesis no one else offers.</div>
+
+  <div class="phones">
+
+    <!-- Screen: Data/Trends -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="data-screen">
+            <div class="data-header">
+              <div class="status-bar" style="padding:14px 0 0 0;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+              <div style="margin-top:8px;">Your data</div>
+            </div>
+            <div class="period-tabs">
+              <div class="period-tab">7D</div>
+              <div class="period-tab active">30D</div>
+              <div class="period-tab">90D</div>
+            </div>
+            <div class="trend-card">
+              <div class="trend-card-header">
+                <div>
+                  <div class="trend-card-label">HRV</div>
+                  <div class="trend-card-value">38 <span style="font-size:13px;color:#7A7A8A;">ms</span></div>
+                  <div class="trend-card-sub">Baseline: 52ms</div>
+                </div>
+                <div class="trend-badge down">↓ -27%</div>
+              </div>
+              <div class="sparkline">
+                <div class="bar" style="height:70%"></div>
+                <div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:75%"></div>
+                <div class="bar" style="height:90%"></div>
+                <div class="bar" style="height:60%"></div>
+                <div class="bar mid" style="height:50%"></div>
+                <div class="bar low" style="height:40%"></div>
+              </div>
+            </div>
+            <div class="trend-card">
+              <div class="trend-card-header">
+                <div>
+                  <div class="trend-card-label">Sleep</div>
+                  <div class="trend-card-value">7.1 <span style="font-size:13px;color:#7A7A8A;">hrs avg</span></div>
+                  <div class="trend-card-sub">↑ +0.5h vs last month</div>
+                </div>
+                <div class="trend-badge up">↑ +7%</div>
+              </div>
+              <div class="sparkline">
+                <div class="bar" style="height:65%"></div>
+                <div class="bar" style="height:85%"></div>
+                <div class="bar" style="height:70%"></div>
+                <div class="bar" style="height:90%"></div>
+                <div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:75%"></div>
+                <div class="bar" style="height:60%"></div>
+              </div>
+            </div>
+            <div class="biomarker-section">
+              <div class="biomarker-title">
+                Blood results · Mar 18
+                <a href="#">Upload new +</a>
+              </div>
+              <div class="biomarker-row">
+                <div class="bm-name">Testosterone</div>
+                <div class="bm-val">18.2</div>
+                <div class="bm-unit">nmol/L</div>
+                <div class="bm-status green">✓</div>
+              </div>
+              <div class="biomarker-row">
+                <div class="bm-name">Cortisol</div>
+                <div class="bm-val" style="color:#E05C5C;">28.4</div>
+                <div class="bm-unit">µg/dL</div>
+                <div class="bm-status red">↑ High</div>
+              </div>
+              <div class="biomarker-row">
+                <div class="bm-name">Ferritin</div>
+                <div class="bm-val">67</div>
+                <div class="bm-unit">µg/L</div>
+                <div class="bm-status green">✓</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab-item"><div class="tab-icon">☀️</div>Today</div>
+              <div class="tab-item"><div class="tab-icon">💬</div>Coach</div>
+              <div class="tab-item active"><div class="tab-icon">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Trends & Data</div>
+    </div>
+
+    <!-- Screen: Lab Upload -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="lab-screen">
+            <div class="status-bar" style="padding:14px 20px 0;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+            <div class="lab-header">
+              <div class="back-btn">‹</div>
+              <h2>Upload lab results</h2>
+            </div>
+            <div class="upload-zone">
+              <div class="upload-icon">📄</div>
+              <h3>Add your blood test</h3>
+              <p>Works with any lab — Ares, Synlab, Unilabs, or your doctor's PDF</p>
+              <div class="upload-btns">
+                <button class="upload-btn primary">Choose PDF</button>
+                <button class="upload-btn secondary">Take photo</button>
+              </div>
+            </div>
+            <div class="extracted-title">Extracted — confirm results</div>
+            <div class="extracted-row">
+              <div class="ex-name">Testosterone</div>
+              <div class="ex-val">18.2</div>
+              <div class="ex-unit">nmol/L</div>
+              <div class="ex-check">✅</div>
+            </div>
+            <div class="extracted-row">
+              <div class="ex-name">Cortisol (morning)</div>
+              <div class="ex-val">28.4</div>
+              <div class="ex-unit">µg/dL</div>
+              <div class="ex-check">✅</div>
+            </div>
+            <div class="extracted-row">
+              <div class="ex-name">Ferritin</div>
+              <div class="ex-val">67</div>
+              <div class="ex-unit">µg/L</div>
+              <div class="ex-check">✅</div>
+            </div>
+            <div class="extracted-row">
+              <div class="ex-name">Vitamin D</div>
+              <div class="ex-val" style="color:#7A7A8A;">——</div>
+              <div class="ex-unit"></div>
+              <div class="ex-warn">⚠ Enter</div>
+            </div>
+            <button class="confirm-btn">Confirm & analyze →</button>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Lab Upload</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION: WEEKLY SUMMARY
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Weekly Summary</div>
+  <div class="section-title">What your body revealed this week</div>
+  <div class="section-desc">Every Sunday morning, Vital surfaces the patterns that matter — not just data, but what it means and what to focus on next.</div>
+
+  <div class="phones" style="justify-content:center;">
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="summary-screen">
+            <div class="status-bar" style="padding:14px 20px 0;"><span class="time">9:41</span><div class="status-icons">▲ ◆ ■</div></div>
+            <div class="summary-header">
+              <div class="week-label">Week of Apr 7 – 13</div>
+              <h2>Your weekly review</h2>
+            </div>
+            <div class="score-card">
+              <div class="score-ring">
+                <div class="score-inner">
+                  <div class="score-num">72</div>
+                </div>
+              </div>
+              <div class="score-info">
+                <div class="label">Overall Score</div>
+                <div class="title">Good week</div>
+                <div class="sub">↑ +8 points vs last week</div>
+              </div>
+            </div>
+            <div class="summary-metrics">
+              <div class="sum-metric">
+                <div class="val">7.1h</div>
+                <div class="lbl">Avg sleep</div>
+                <div class="chg green">↑ +0.5h</div>
+              </div>
+              <div class="sum-metric">
+                <div class="val" style="color:#E05C5C;">44ms</div>
+                <div class="lbl">Avg HRV</div>
+                <div class="chg red">↓ vs 52ms</div>
+              </div>
+              <div class="sum-metric">
+                <div class="val">4</div>
+                <div class="lbl">Workouts</div>
+                <div class="chg green">on target</div>
+              </div>
+            </div>
+            <div class="insights-title">What we learned</div>
+            <div class="insight-row">
+              <div class="insight-icon">🍺</div>
+              <div class="insight-text">Alcohol on Tue & Wed caused your 2 lowest HRV days. Pattern is consistent across 3 weeks.</div>
+            </div>
+            <div class="insight-row">
+              <div class="insight-icon">🚶</div>
+              <div class="insight-text">Your best sleep followed the Thursday evening walk. Sleep score was 84 vs your 71 average.</div>
+            </div>
+            <div class="insight-row">
+              <div class="insight-icon">📈</div>
+              <div class="insight-text">Recovery fastest after mobility sessions. Hard runs take 36h vs 20h for easy days.</div>
+            </div>
+            <div class="insights-title" style="margin-top:12px;">Next week focus</div>
+            <div class="insight-row">
+              <div class="insight-icon">🎯</div>
+              <div class="insight-text">Protect weekday sleep (10:30pm target) · Evening walk · Rest day mid-week</div>
+            </div>
+            <div class="tab-bar" style="margin-top:8px;">
+              <div class="tab-item"><div class="tab-icon">☀️</div>Today</div>
+              <div class="tab-item active"><div class="tab-icon">💬</div>Coach</div>
+              <div class="tab-item"><div class="tab-icon">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Weekly Summary</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TECH STACK SECTION
+════════════════════════════════════════════ -->
+<div class="biz-section">
+  <div class="section-label" style="color:#4ECDA4;">Technical Foundation</div>
+  <div class="section-title" style="color:#fff;">Built to scale, built for privacy</div>
+  <div class="biz-grid" style="margin-top:32px;">
+    <div class="biz-card">
+      <div class="biz-label">Mobile</div>
+      <div class="biz-title" style="font-size:22px;">Swift iOS</div>
+      <div class="biz-desc">Native HealthKit access (required). Terra SDK wraps Garmin, Oura, and Strava into one normalized webhook.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">Backend</div>
+      <div class="biz-title" style="font-size:22px;">FastAPI + TimescaleDB</div>
+      <div class="biz-desc">Python async API. TimescaleDB for time-series metrics. PostgreSQL compatibility for complex cross-signal queries.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">AI Coaching</div>
+      <div class="biz-title" style="font-size:22px;">Claude API</div>
+      <div class="biz-desc">200K context window. Prompt caching keeps AI cost at ~€0.50/user/month. Context = 7-day metrics + biomarkers + event log.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-label">Data & Privacy</div>
+      <div class="biz-title" style="font-size:22px;">EU Servers</div>
+      <div class="biz-desc">All health data on AWS Frankfurt or Azure Switzerland. GDPR + Swiss nDSG compliant from day one. Encrypted at rest and in transit.</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>vital</strong> — Confidential product mockups · April 2026
+</div>
+
+</body>
+</html>

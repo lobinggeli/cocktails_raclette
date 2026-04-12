@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vital — App Mockups (PDF)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    @page {
+      size: 1122px 794px;
+      margin: 0;
+    }
+
+    body {
+      width: 1122px;
+      margin: 0 auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ── Each slide is exactly one page ── */
+    .slide {
+      width: 1122px;
+      height: 794px;
+      overflow: hidden;
+      page-break-after: always;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide:last-child { page-break-after: avoid; }
+
+    /* ════════════ COLORS ════════════ */
+    :root {
+      --green: #4ECDA4;
+      --dark: #0D1117;
+      --card: #1A1A28;
+      --muted: #7A7A8A;
+      --border: #2A2A3A;
+      --red: #E05C5C;
+      --amber: #F5A623;
+    }
+
+    /* ════════════════════════════════
+       SLIDE 1 — COVER
+    ════════════════════════════════ */
+    .slide-cover {
+      background: var(--dark);
+      padding: 56px 72px;
+      justify-content: space-between;
+    }
+    .slide-cover::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,164,0.08);
+    }
+    .slide-cover::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,164,0.13);
+    }
+    .cover-ring3 {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,164,0.18);
+    }
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .cover-wordmark {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.5px; color: var(--green);
+    }
+    .cover-pill {
+      font-size: 11px; color: #444;
+      font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid #222;
+      border-radius: 20px;
+    }
+    .cover-middle {
+      position: relative; z-index: 1;
+    }
+    .cover-eyebrow {
+      font-size: 12px; font-weight: 700;
+      color: var(--green); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .cover-headline {
+      font-size: 72px; font-weight: 900;
+      line-height: 0.93; letter-spacing: -4px;
+      color: #fff; margin-bottom: 24px;
+    }
+    .cover-headline span { color: var(--green); }
+    .cover-sub {
+      font-size: 17px; color: #6A6A7A;
+      max-width: 520px; line-height: 1.6;
+    }
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative; z-index: 1;
+    }
+    .cover-stats { display: flex; gap: 52px; }
+    .c-stat-val {
+      font-size: 30px; font-weight: 800;
+      color: #fff; letter-spacing: -1px;
+    }
+    .c-stat-val sup { font-size: 14px; }
+    .c-stat-lbl {
+      font-size: 11px; color: #444;
+      margin-top: 3px; font-weight: 500;
+    }
+    .cover-sources {
+      text-align: right;
+      font-size: 11px; color: #333;
+      line-height: 2.0; letter-spacing: 0.3px;
+    }
+
+    /* ════════════════════════════════
+       SLIDE LAYOUT — HEADER + BODY
+    ════════════════════════════════ */
+    .slide-light {
+      background: #F7F7F3;
+    }
+    .slide-dark {
+      background: var(--dark);
+    }
+    .slide-header {
+      padding: 36px 56px 0;
+      flex-shrink: 0;
+    }
+    .slide-eyebrow {
+      font-size: 11px; font-weight: 700;
+      color: var(--green); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .slide-title {
+      font-size: 30px; font-weight: 800;
+      color: #0D1117; letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+    .slide-title.white { color: #fff; }
+    .slide-desc {
+      font-size: 13px; color: #888;
+      max-width: 560px; line-height: 1.5;
+    }
+    .slide-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 56px;
+      gap: 28px;
+    }
+
+    /* ════════════════════════════════
+       PHONE FRAME
+    ════════════════════════════════ */
+    .phone-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .phone-lbl {
+      font-size: 11px; font-weight: 600;
+      color: #888; letter-spacing: 0.3px;
+      order: 2;
+    }
+    .phone {
+      width: 210px;
+      background: #0D1117;
+      border-radius: 38px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1.5px #2A2A3A,
+        0 0 0 3px #1A1A2A,
+        0 24px 48px rgba(0,0,0,0.4),
+        0 6px 16px rgba(0,0,0,0.25);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 76px; height: 22px;
+      background: #0D1117;
+      border-radius: 0 0 14px 14px;
+      z-index: 10;
+    }
+    .phone-screen {
+      background: #111318;
+      border-radius: 28px;
+      overflow: hidden;
+      height: 430px;
+      position: relative;
+    }
+
+    /* ════════════ STATUS BAR ════════════ */
+    .sb {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 36px 14px 5px;
+      font-size: 9px; font-weight: 600;
+      color: #fff; letter-spacing: 0.2px;
+    }
+    .sb .t { font-size: 12px; font-weight: 700; letter-spacing: -0.3px; }
+
+    /* ════════════ SHARED UTILS ════════════ */
+    .px { padding-left: 14px; padding-right: 14px; }
+    .g { color: var(--green); }
+    .r { color: var(--red); }
+    .a { color: var(--amber); }
+    .w { color: #fff; }
+    .mu { color: var(--muted); }
+
+    /* ════════════════════════════════
+       ONBOARDING SCREENS
+    ════════════════════════════════ */
+    /* Welcome */
+    .ob-welcome {
+      height: 100%; display: flex;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 18px 20px;
+      text-align: center;
+      background: linear-gradient(160deg, #0D1117 0%, #0F2027 100%);
+    }
+    .ob-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 18px;
+    }
+    .ob-welcome h1 {
+      font-size: 20px; font-weight: 800;
+      color: #fff; letter-spacing: -0.5px;
+      margin-bottom: 10px; line-height: 1.2;
+    }
+    .ob-welcome p {
+      font-size: 11px; color: #6A6A7A;
+      line-height: 1.5; margin-bottom: 28px;
+    }
+    .btn-g {
+      background: var(--green); color: #0D1117;
+      border: none; border-radius: 12px;
+      padding: 11px 0; font-size: 12px;
+      font-weight: 700; width: 100%;
+    }
+    .btn-ghost {
+      background: transparent; color: #555;
+      border: 1px solid #2A2A3A;
+      border-radius: 12px; padding: 10px 0;
+      font-size: 11px; margin-top: 8px; width: 100%;
+    }
+
+    /* Goals */
+    .ob-goals {
+      height: 100%;
+      background: #111318;
+      padding: 0 14px 14px;
+    }
+    .ob-goals h2 {
+      font-size: 17px; font-weight: 800;
+      color: #fff; margin-bottom: 3px;
+    }
+    .ob-goals .sub { font-size: 10px; color: #666; margin-bottom: 14px; }
+    .goal-row {
+      display: flex; align-items: center;
+      gap: 10px; padding: 10px 12px;
+      border-radius: 12px; border: 1.5px solid #252535;
+      margin-bottom: 7px; background: #141420;
+    }
+    .goal-row.sel {
+      border-color: var(--green);
+      background: rgba(78,205,164,0.07);
+    }
+    .ge { width: 22px; height: 22px; border-radius: 50%; background: #252535; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+    .gt { font-size: 11px; color: #CCC; font-weight: 500; flex: 1; }
+    .gc {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid #333;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .goal-row.sel .gc {
+      background: var(--green); border-color: var(--green);
+      font-size: 9px; color: #0D1117;
+    }
+    .dots {
+      display: flex; gap: 5px;
+      justify-content: center; margin-top: 14px;
+    }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: #2A2A3A; }
+    .dot.a { background: var(--green); width: 16px; border-radius: 3px; }
+
+    /* Connect */
+    .ob-connect {
+      height: 100%;
+      background: #111318;
+      padding: 0 14px 14px;
+    }
+    .ob-connect h2 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .ob-connect .sub { font-size: 10px; color: #666; margin-bottom: 14px; }
+    .conn-row {
+      display: flex; align-items: center;
+      gap: 10px; padding: 10px 12px;
+      border-radius: 12px; background: #1A1A28;
+      margin-bottom: 7px;
+    }
+    .conn-ico {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center;
+      justify-content: center; font-size: 14px;
+      flex-shrink: 0;
+    }
+    .conn-name { font-size: 11px; font-weight: 600; color: #EEE; }
+    .conn-desc { font-size: 9px; color: #555; margin-top: 1px; }
+    .conn-info { flex: 1; }
+    .conn-btn {
+      font-size: 10px; font-weight: 700;
+      padding: 5px 10px; border-radius: 7px; border: none;
+    }
+    .linked { background: rgba(78,205,164,0.12); color: var(--green); }
+    .link-btn { background: var(--green); color: #0D1117; }
+
+    /* ════════════════════════════════
+       TODAY SCREEN
+    ════════════════════════════════ */
+    .today-s {
+      height: 100%; background: #0D1117;
+      display: flex; flex-direction: column;
+    }
+    .today-head {
+      padding: 36px 14px 10px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .today-date { font-size: 10px; color: #555; font-weight: 500; }
+    .today-name { font-size: 12px; color: #fff; font-weight: 700; margin-top: 2px; }
+    .av {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #0D1117;
+    }
+    .coach-card {
+      margin: 0 12px 10px;
+      background: linear-gradient(140deg, #141E2A, #0F1820);
+      border-radius: 14px; padding: 13px;
+      border: 1px solid #1E3040;
+    }
+    .cc-head {
+      display: flex; align-items: center;
+      gap: 8px; margin-bottom: 8px;
+    }
+    .cc-av {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+    }
+    .cc-name { font-size: 10px; font-weight: 700; color: var(--green); letter-spacing: 0.2px; }
+    .cc-time { margin-left: auto; font-size: 9px; color: #444; font-weight: 500; }
+    .cc-body {
+      font-size: 11px; color: #AAA; line-height: 1.6; margin-bottom: 10px;
+      letter-spacing: -0.1px;
+    }
+    .cc-body strong { color: #fff; font-weight: 600; }
+    .action { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 5px; }
+    .adot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); margin-top: 4px; flex-shrink: 0;
+    }
+    .action span { font-size: 11px; color: #E0E0E0; line-height: 1.4; letter-spacing: -0.1px; }
+    .pill-row {
+      display: flex; gap: 6px; margin: 0 12px 10px;
+    }
+    .pill {
+      flex: 1; padding: 9px 6px; border-radius: 10px;
+      border: 1px solid #2A2A3A; background: #1A1A28;
+      font-size: 10px; font-weight: 600; color: #CCC; text-align: center;
+    }
+    .pill.gp {
+      background: rgba(78,205,164,0.1);
+      border-color: rgba(78,205,164,0.25);
+      color: var(--green);
+    }
+    .m-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 6px; margin: 0 12px 10px;
+    }
+    .mc {
+      background: #1A1A28; border-radius: 10px;
+      padding: 8px 6px; text-align: center;
+    }
+    .mc .v { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+    .mc .u { font-size: 8px; color: #555; font-weight: 500; }
+    .mc .l { font-size: 9px; color: #666; margin-top: 1px; font-weight: 500; }
+    .mc .tr { font-size: 8px; margin-top: 2px; font-weight: 600; }
+    /* ════════════ SESSION CARD ════════════ */
+    .session-card {
+      margin: 0 12px 8px;
+      background: #1A1A28;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid #F5A623;
+    }
+    .session-card.green-border { border-left-color: #4ECDA4; }
+    .session-card.red-border { border-left-color: #E05C5C; }
+    .session-top {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 5px;
+    }
+    .session-label {
+      font-size: 8px; font-weight: 700; color: #666;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .session-badge {
+      font-size: 8px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .session-badge.easy { background: rgba(78,205,164,0.15); color: #4ECDA4; }
+    .session-badge.moderate { background: rgba(245,166,35,0.15); color: #F5A623; }
+    .session-badge.hard { background: rgba(107,143,232,0.15); color: #6B8FE8; }
+    .session-badge.rest { background: rgba(224,92,92,0.12); color: #E05C5C; }
+    .session-name {
+      font-size: 14px; font-weight: 800; color: #fff;
+      letter-spacing: -0.4px; margin-bottom: 3px;
+    }
+    .session-detail {
+      font-size: 9.5px; color: #888; font-weight: 500; line-height: 1.4;
+    }
+    .session-detail strong { color: #BBB; font-weight: 600; }
+    .session-meta {
+      display: flex; gap: 10px; margin-top: 6px;
+    }
+    .session-pill {
+      font-size: 9px; font-weight: 600; color: #666;
+      background: #252535; padding: 3px 9px;
+      border-radius: 8px;
+    }
+
+    .tab-bar {
+      margin-top: auto;
+      display: flex;
+      border-top: 1px solid #1A1A28;
+      padding: 8px 0 14px;
+    }
+    .tb {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      font-size: 9px; font-weight: 500; color: #444;
+    }
+    .tb.on { color: var(--green); }
+    .tb-ic { display: none; }
+
+    /* ════════════════════════════════
+       COACH CHAT
+    ════════════════════════════════ */
+    .chat-s {
+      height: 100%; background: #0D1117;
+      display: flex; flex-direction: column;
+    }
+    .chat-head {
+      padding: 36px 14px 10px;
+      border-bottom: 1px solid #1A1A28;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ch-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #4ECDA4, #2EA88A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+    .ch-name { font-size: 12px; font-weight: 700; color: #fff; }
+    .ch-status { font-size: 9px; color: var(--green); }
+    .msgs {
+      flex: 1; padding: 12px; display: flex;
+      flex-direction: column; gap: 9px; overflow: hidden;
+    }
+    .msg { display: flex; flex-direction: column; max-width: 90%; }
+    .msg.co { align-self: flex-start; }
+    .msg.me { align-self: flex-end; }
+    .bubble {
+      padding: 9px 12px; border-radius: 14px;
+      font-size: 11px; line-height: 1.6; letter-spacing: -0.1px;
+    }
+    .msg.co .bubble {
+      background: #1A1A28; color: #C8C8D8;
+      border-radius: 4px 14px 14px 14px;
+    }
+    .msg.me .bubble {
+      background: var(--green); color: #0D1117;
+      font-weight: 600; border-radius: 14px 14px 4px 14px;
+    }
+    .msg-t { font-size: 8px; color: #444; font-weight: 500; margin-top: 3px; padding: 0 3px; }
+    .msg.me .msg-t { text-align: right; }
+    .qlog {
+      margin: 0 12px 8px;
+      background: #1A1A28; border-radius: 12px; padding: 10px;
+    }
+    .qlog-lbl { font-size: 9px; color: #555; font-weight: 700; margin-bottom: 7px; letter-spacing: 0.5px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .chip {
+      padding: 5px 9px; background: #252535;
+      border-radius: 16px; font-size: 10px; color: #BBB;
+    }
+    .chat-inp {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 12px 16px;
+      border-top: 1px solid #1A1A28;
+    }
+    .inp-field {
+      flex: 1; background: #1A1A28; border: 1px solid #252535;
+      border-radius: 16px; padding: 8px 12px;
+      font-size: 10px; color: #555;
+    }
+    .send {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #0D1117; font-weight: 700;
+    }
+
+    /* ════════════════════════════════
+       DATA / TRENDS
+    ════════════════════════════════ */
+    .data-s {
+      height: 100%; background: #0D1117;
+      display: flex; flex-direction: column;
+    }
+    .data-h {
+      padding: 36px 14px 12px;
+      font-size: 18px; font-weight: 800; color: #fff;
+    }
+    .period-row {
+      display: flex; gap: 4px; margin: 0 14px 12px;
+    }
+    .pt {
+      padding: 5px 12px; border-radius: 16px;
+      font-size: 10px; font-weight: 700;
+    }
+    .pt.on { background: var(--green); color: #0D1117; }
+    .pt:not(.on) { background: #1A1A28; color: #555; }
+    .tc {
+      margin: 0 12px 10px;
+      background: #1A1A28; border-radius: 14px; padding: 13px;
+    }
+    .tc-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 10px;
+    }
+    .tc-lbl { font-size: 9px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .tc-val { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+    .tc-sub { font-size: 9px; color: #555; margin-top: 2px; font-weight: 500; }
+    .tc-badge {
+      font-size: 9px; font-weight: 700;
+      padding: 3px 9px; border-radius: 16px; letter-spacing: 0.2px;
+    }
+    .tc-badge.dn { background: rgba(224,92,92,0.15); color: var(--red); }
+    .tc-badge.up { background: rgba(78,205,164,0.15); color: var(--green); }
+    .sparkline {
+      display: flex; align-items: flex-end;
+      gap: 3px; height: 28px;
+    }
+    .bar {
+      flex: 1; border-radius: 2px 2px 0 0;
+      background: linear-gradient(180deg, #4ECDA4 0%, rgba(78,205,164,0.2) 100%);
+    }
+    .bar.lo { background: linear-gradient(180deg, #E05C5C 0%, rgba(224,92,92,0.2) 100%); }
+    .bar.mi { background: linear-gradient(180deg, #F5A623 0%, rgba(245,166,35,0.2) 100%); }
+    .bm-sec { margin: 0 12px 10px; }
+    .bm-title {
+      font-size: 9px; color: #555; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 7px;
+      display: flex; justify-content: space-between;
+    }
+    .bm-title a { color: var(--green); text-transform: none; letter-spacing: 0; }
+    .bm-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; background: #1A1A28;
+      border-radius: 10px; margin-bottom: 6px;
+    }
+    .bm-n { flex: 1; font-size: 10.5px; color: #DDD; font-weight: 500; }
+    .bm-v { font-size: 10.5px; font-weight: 700; color: #fff; }
+    .bm-u { font-size: 9px; color: #555; width: 40px; }
+    .bm-s { font-size: 10px; font-weight: 700; }
+
+    /* ════════════════════════════════
+       LAB UPLOAD
+    ════════════════════════════════ */
+    .lab-s {
+      height: 100%; background: #0D1117;
+      display: flex; flex-direction: column;
+    }
+    .lab-h {
+      padding: 36px 14px 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .back { color: var(--green); font-size: 18px; }
+    .lab-h h2 { font-size: 16px; font-weight: 800; color: #fff; }
+    .upload-z {
+      margin: 0 12px 12px;
+      border: 1.5px dashed #252535; border-radius: 16px;
+      padding: 20px 14px; text-align: center;
+      background: #0F1520;
+    }
+    .up-ico { font-size: 28px; margin-bottom: 8px; }
+    .upload-z h3 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .upload-z p { font-size: 10px; color: #555; margin-bottom: 14px; }
+    .up-btns { display: flex; gap: 8px; justify-content: center; }
+    .up-btn {
+      padding: 8px 16px; border-radius: 10px;
+      font-size: 11px; font-weight: 700;
+    }
+    .up-btn.p { background: var(--green); color: #0D1117; }
+    .up-btn.s { background: #1A1A28; color: #BBB; border: 1px solid #2A2A3A; }
+    .ex-title {
+      margin: 0 12px 8px;
+      font-size: 9px; font-weight: 700; color: #555;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .ex-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; margin: 0 12px 6px;
+      background: #1A1A28; border-radius: 10px;
+    }
+    .ex-n { flex: 1; font-size: 10.5px; color: #EEE; }
+    .ex-v { font-size: 10.5px; font-weight: 700; color: #fff; }
+    .ex-u { font-size: 9px; color: #555; width: 38px; }
+    .ex-ck { font-size: 12px; }
+    .ex-wn { font-size: 10px; color: var(--amber); }
+    .conf-btn {
+      margin: 10px 12px 0;
+      background: var(--green); color: #0D1117;
+      border: none; border-radius: 12px; padding: 12px;
+      font-size: 13px; font-weight: 700; width: calc(100% - 24px);
+    }
+
+    /* ════════════════════════════════
+       WEEKLY SUMMARY
+    ════════════════════════════════ */
+    .sum-s {
+      height: 100%; background: #0D1117;
+      display: flex; flex-direction: column;
+    }
+    .sum-h {
+      padding: 36px 14px 12px;
+    }
+    .sum-ey { font-size: 9px; color: var(--green); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .sum-h h2 { font-size: 17px; font-weight: 800; color: #fff; }
+    .score-card {
+      margin: 0 12px 10px;
+      background: linear-gradient(140deg, #0F2027, #141E2A);
+      border-radius: 14px; padding: 14px;
+      border: 1px solid #1E3040;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: conic-gradient(#4ECDA4 0% 72%, #1A1A28 72% 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ring-inner {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #0D1117;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--green);
+    }
+    .sc-lbl { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .sc-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .sc-sub { font-size: 9px; color: #555; margin-top: 2px; }
+    .sum-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 6px; margin: 0 12px 10px;
+    }
+    .sg {
+      background: #1A1A28; border-radius: 12px;
+      padding: 10px 8px; text-align: center;
+    }
+    .sg .v { font-size: 16px; font-weight: 800; color: #fff; }
+    .sg .l { font-size: 9px; color: #555; margin-top: 1px; }
+    .sg .c { font-size: 9px; margin-top: 3px; }
+    .in-title {
+      margin: 0 12px 7px;
+      font-size: 9px; font-weight: 700; color: #555;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .in-row {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 12px; margin: 0 12px 6px;
+      background: #1A1A28; border-radius: 10px;
+    }
+    .in-ic { font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .in-tx { font-size: 10px; color: #BBB; line-height: 1.5; }
+
+    /* ════════════════════════════════
+       METRICS SLIDE
+    ════════════════════════════════ */
+    .metrics-slide {
+      background: #0D1117;
+      padding: 0 56px;
+    }
+    .metrics-slide .slide-title { color: #fff; }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 0 0 10px;
+    }
+    .met-card {
+      background: #1A1A28;
+      border: 1px solid #2A2A3A;
+      border-radius: 20px;
+      padding: 28px 22px;
+    }
+    .met-card .mk {
+      font-size: 10px; font-weight: 700;
+      color: var(--green); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .met-card .mv {
+      font-size: 38px; font-weight: 800;
+      color: #fff; letter-spacing: -2px; line-height: 1;
+      margin-bottom: 10px;
+    }
+    .met-card .md { font-size: 12px; color: #555; line-height: 1.5; }
+
+    /* ════════════════════════════════
+       ARROW DIVIDER
+    ════════════════════════════════ */
+    .arr {
+      font-size: 20px; color: #333;
+      flex-shrink: 0; align-self: center;
+      margin-bottom: 34px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     SLIDE 1 — COVER
+═══════════════════════════════════ -->
+<div class="slide slide-cover">
+  <div class="cover-ring3"></div>
+  <div class="cover-top">
+    <div class="cover-wordmark">vital</div>
+    <div class="cover-pill">Confidential · April 2026</div>
+  </div>
+  <div class="cover-middle">
+    <div class="cover-eyebrow">Product Mockups</div>
+    <div class="cover-headline">Your health data,<br><span>finally understood.</span></div>
+    <div class="cover-sub">An AI health coach that combines wearables, blood results, and daily life into one conversation — every morning in 30 seconds.</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-stats">
+      <div>
+        <div class="c-stat-val">€69<sup>/mo</sup></div>
+        <div class="c-stat-lbl">Core subscription</div>
+      </div>
+      <div>
+        <div class="c-stat-val">93%</div>
+        <div class="c-stat-lbl">Gross margin</div>
+      </div>
+      <div>
+        <div class="c-stat-val">€1.4M</div>
+        <div class="c-stat-lbl">Year 1 ARR target</div>
+      </div>
+    </div>
+    <div class="cover-sources">
+      Apple Health · Oura Ring · Garmin · Strava<br>
+      Swiss lab integration · Claude AI
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 2 — MARKET METRICS
+═══════════════════════════════════ -->
+<div class="slide slide-dark metrics-slide" style="justify-content:center; gap:32px;">
+  <div class="slide-header" style="padding:0;">
+    <div class="slide-eyebrow">The Opportunity</div>
+    <div class="slide-title white">People track everything. No one connects the dots.</div>
+  </div>
+  <div class="metrics-grid">
+    <div class="met-card">
+      <div class="mk">Market</div>
+      <div class="mv">$152B</div>
+      <div class="md">Wearable health market by 2029. Growing 27.5% per year.</div>
+    </div>
+    <div class="met-card">
+      <div class="mk">Pricing</div>
+      <div class="mv">€69<span style="font-size:20px;">/mo</span></div>
+      <div class="md">Users already spend €1,000+ on hardware with no software synthesis.</div>
+    </div>
+    <div class="met-card">
+      <div class="mk">AI Cost</div>
+      <div class="mv">€0.50<span style="font-size:20px;">/mo</span></div>
+      <div class="md">Claude API with prompt caching. Less than 1% of revenue per user.</div>
+    </div>
+    <div class="met-card">
+      <div class="mk">Year 1 ARR</div>
+      <div class="mv">€1.4M</div>
+      <div class="md">2,000 paying users at €69/month. Breakeven at Month 6.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 3 — ONBOARDING
+═══════════════════════════════════ -->
+<div class="slide slide-light">
+  <div class="slide-header">
+    <div class="slide-eyebrow">Onboarding</div>
+    <div class="slide-title">Up and running in 5 minutes</div>
+    <div class="slide-desc">Users connect devices they already own — no new hardware required. Vital reads 30 days of history on first launch.</div>
+  </div>
+  <div class="slide-body">
+
+    <!-- Welcome -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ob-welcome">
+            <div class="ob-icon">V</div>
+            <h1>Your health data finally makes sense</h1>
+            <p>Vital combines your wearables, workouts, and blood results into one daily health conversation.</p>
+            <button class="btn-g">Get started</button>
+            <button class="btn-ghost">I already have an account</button>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Welcome</div>
+    </div>
+
+    <div class="arr">&gt;</div>
+
+    <!-- Goals -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ob-goals">
+            <div class="sb"><span class="t">9:41</span><span><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+            <h2>What's your goal?</h2>
+            <p class="sub">Choose what matters most — you can always change this.</p>
+            <div class="goal-row sel">
+              <div class="ge" style="background:#1A3A2A;color:#4ECDA4;">E</div><div class="gt">More energy day-to-day</div><div class="gc" style="color:#4ECDA4;font-weight:900;font-size:11px;">+</div>
+            </div>
+            <div class="goal-row">
+              <div class="ge" style="color:#8B8B9A;">S</div><div class="gt">Better sleep & recovery</div><div class="gc"></div>
+            </div>
+            <div class="goal-row sel">
+              <div class="ge" style="background:#1A3A2A;color:#4ECDA4;">P</div><div class="gt">Improve athletic performance</div><div class="gc" style="color:#4ECDA4;font-weight:900;font-size:11px;">+</div>
+            </div>
+            <div class="goal-row">
+              <div class="ge" style="color:#8B8B9A;">B</div><div class="gt">Understand my blood results</div><div class="gc"></div>
+            </div>
+            <div class="goal-row">
+              <div class="ge" style="color:#8B8B9A;">H</div><div class="gt">Preventive health</div><div class="gc"></div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot a"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Set Goals</div>
+    </div>
+
+    <div class="arr">&gt;</div>
+
+    <!-- Connect -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ob-connect">
+            <div class="sb"><span class="t">9:41</span><span><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+            <h2>Connect your devices</h2>
+            <p class="sub">Vital works with what you already have.</p>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#1C1C1E;color:#fff;font-size:12px;font-weight:700;">A</div>
+              <div class="conn-info"><div class="conn-name">Apple Health</div><div class="conn-desc">Sleep, HRV, steps, heart rate</div></div>
+              <button class="conn-btn linked">Linked</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#1A1A3A;color:#6B8FE8;font-size:12px;font-weight:700;">O</div>
+              <div class="conn-info"><div class="conn-name">Oura Ring</div><div class="conn-desc">Readiness, deep sleep, temp</div></div>
+              <button class="conn-btn linked">Linked</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#0A2A0A;color:#4ECDA4;font-size:12px;font-weight:700;">G</div>
+              <div class="conn-info"><div class="conn-name">Garmin Connect</div><div class="conn-desc">Training load, VO2max</div></div>
+              <button class="conn-btn link-btn">Link</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#2A1500;color:#F5A623;font-size:12px;font-weight:700;">S</div>
+              <div class="conn-info"><div class="conn-name">Strava</div><div class="conn-desc">Activity history & routes</div></div>
+              <button class="conn-btn link-btn">Link</button>
+            </div>
+            <div style="margin-top:14px;">
+              <button class="btn-g" style="font-size:11px; padding:11px 0;">Continue with 2 connected &gt;</button>
+            </div>
+            <div class="dots" style="margin-top:12px;">
+              <div class="dot"></div><div class="dot"></div><div class="dot a"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Connect Devices</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 4 — TODAY + CHAT
+═══════════════════════════════════ -->
+<div class="slide slide-light">
+  <div class="slide-header">
+    <div class="slide-eyebrow">Daily Experience</div>
+    <div class="slide-title">30 seconds every morning</div>
+    <div class="slide-desc">The morning brief tells you what your body needs today. Then ask the coach anything, or log a quick event.</div>
+  </div>
+  <div class="slide-body">
+
+    <!-- Today -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="today-s">
+            <div class="today-head">
+              <div>
+                <div class="today-date">FRIDAY, APRIL 11</div>
+                <div class="today-name">Good morning, Loic</div>
+              </div>
+              <div class="av">L</div>
+            </div>
+            <div class="coach-card">
+              <div class="cc-head">
+                <div class="cc-av">V</div>
+                <div class="cc-name">Vital Coach</div>
+                <div class="cc-time">08:07</div>
+              </div>
+              <div class="cc-body">
+                <strong>HRV 38ms</strong> — below your 52ms baseline. Sleep 6h42, low deep sleep. Yesterday's hard session + late dinner likely explain this.
+              </div>
+              <div class="action"><div class="adot"></div><span>Prioritize protein & hydration today</span></div>
+              <div class="action"><div class="adot"></div><span>Wind-down by 9pm to rebuild deep sleep</span></div>
+            </div>
+
+            <!-- Session recommendation -->
+            <div class="session-card">
+              <div class="session-top">
+                <div class="session-label">Today's session</div>
+                <div class="session-badge easy">Easy</div>
+              </div>
+              <div class="session-name">Zone 2 Run</div>
+              <div class="session-detail">
+                <strong>35-40 min · HR &lt; 145 bpm</strong><br>
+                Readiness 61% — aerobic base work only. No intervals.
+              </div>
+              <div class="session-meta">
+                <div class="session-pill">Cardio</div>
+                <div class="session-pill">Low load</div>
+                <div class="session-pill">Outdoors</div>
+              </div>
+            </div>
+
+            <div class="m-grid">
+              <div class="mc"><div class="v r">38</div><div class="u">ms</div><div class="l">HRV</div><div class="tr r">-27%</div></div>
+              <div class="mc"><div class="v a">6h42</div><div class="u"></div><div class="l">Sleep</div><div class="tr a">low</div></div>
+              <div class="mc"><div class="v g">61</div><div class="u">%</div><div class="l">Readiness</div><div class="tr mu">fair</div></div>
+              <div class="mc"><div class="v w">52</div><div class="u">bpm</div><div class="l">Rest HR</div><div class="tr a">+3</div></div>
+            </div>
+            <div class="tab-bar">
+              <div class="tb on"><div class="tb-ic">☀️</div>Today</div>
+              <div class="tb"><div class="tb-ic">💬</div>Coach</div>
+              <div class="tb"><div class="tb-ic">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Morning Brief</div>
+    </div>
+
+    <!-- Chat -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="chat-s">
+            <div class="chat-head">
+              <div style="position:absolute;top:0;left:0;right:0;" class="sb" style="padding:10px 14px 0;"><span class="t">9:41</span><span><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+              <div style="margin-top:28px;display:flex;align-items:center;gap:8px;">
+                <div class="ch-av">V</div>
+                <div><div class="ch-name">Vital Coach</div><div class="ch-status">Active</div></div>
+              </div>
+            </div>
+            <div class="msgs">
+              <div class="msg co">
+                <div class="bubble">Your HRV has trended down 4 days in a row. Anything going on — stress, alcohol, travel?</div>
+                <div class="msg-t">10:32</div>
+              </div>
+              <div class="msg me">
+                <div class="bubble">Had drinks Tue + Wed, work has been intense</div>
+                <div class="msg-t">10:33</div>
+              </div>
+              <div class="msg co">
+                <div class="bubble">That explains it. Alcohol suppresses deep sleep -&gt; lowers HRV. Stress adds load on top.<br><br>&gt; No alcohol tonight (delays rebound 48h)<br>&gt; 10 min breathing before sleep<br><br>Check Saturday — HRV should start climbing.</div>
+                <div class="msg-t">10:33</div>
+              </div>
+            </div>
+            <div class="qlog">
+              <div class="qlog-lbl">QUICK LOG</div>
+              <div class="chips">
+                <div class="chip">Alcohol</div>
+                <div class="chip">Bad sleep</div>
+                <div class="chip">Hard session</div>
+                <div class="chip">Travel</div>
+              </div>
+            </div>
+            <div class="chat-inp">
+              <div class="inp-field">Ask anything...</div>
+              <div class="send">^</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Coach Chat</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 5 — DATA + LAB
+═══════════════════════════════════ -->
+<div class="slide slide-light">
+  <div class="slide-header">
+    <div class="slide-eyebrow">Health Data</div>
+    <div class="slide-title">All your signals in one place</div>
+    <div class="slide-desc">Upload any lab PDF — Vital extracts biomarkers and cross-references them with your wearable trends. The synthesis no competitor offers.</div>
+  </div>
+  <div class="slide-body">
+
+    <!-- Data Trends -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="data-s">
+            <div class="data-h">
+              <div class="sb" style="padding:0 0 8px 0; padding-top:34px;"><span class="t">9:41</span><span style="font-size:8px;"><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+              Your data
+            </div>
+            <div class="period-row">
+              <div class="pt">7D</div><div class="pt on">30D</div><div class="pt">90D</div>
+            </div>
+            <div class="tc">
+              <div class="tc-top">
+                <div>
+                  <div class="tc-lbl">HRV</div>
+                  <div class="tc-val">38 <span style="font-size:11px;color:#555;">ms</span></div>
+                  <div class="tc-sub">Baseline: 52ms</div>
+                </div>
+                <div class="tc-badge dn">-27%</div>
+              </div>
+              <div class="sparkline">
+                <div class="bar" style="height:70%"></div><div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:75%"></div><div class="bar" style="height:90%"></div>
+                <div class="bar mi" style="height:55%"></div><div class="bar lo" style="height:42%"></div>
+                <div class="bar lo" style="height:38%"></div>
+              </div>
+            </div>
+            <div class="tc">
+              <div class="tc-top">
+                <div>
+                  <div class="tc-lbl">Sleep</div>
+                  <div class="tc-val">7.1 <span style="font-size:11px;color:#555;">hrs avg</span></div>
+                  <div class="tc-sub">+0.5h vs last month</div>
+                </div>
+                <div class="tc-badge up">+7%</div>
+              </div>
+              <div class="sparkline">
+                <div class="bar" style="height:65%"></div><div class="bar" style="height:85%"></div>
+                <div class="bar" style="height:70%"></div><div class="bar" style="height:90%"></div>
+                <div class="bar" style="height:80%"></div><div class="bar" style="height:75%"></div>
+                <div class="bar" style="height:60%"></div>
+              </div>
+            </div>
+            <div class="bm-sec">
+              <div class="bm-title">Blood results · Mar 18 <a>Upload new +</a></div>
+              <div class="bm-row">
+                <div class="bm-n">Testosterone</div><div class="bm-v">18.2</div>
+                <div class="bm-u">nmol/L</div><div class="bm-s g">OK</div>
+              </div>
+              <div class="bm-row">
+                <div class="bm-n">Cortisol</div><div class="bm-v r">28.4</div>
+                <div class="bm-u">µg/dL</div><div class="bm-s r">^ High</div>
+              </div>
+              <div class="bm-row">
+                <div class="bm-n">Ferritin</div><div class="bm-v">67</div>
+                <div class="bm-u">µg/L</div><div class="bm-s g">OK</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tb"><div class="tb-ic">☀️</div>Today</div>
+              <div class="tb"><div class="tb-ic">💬</div>Coach</div>
+              <div class="tb on"><div class="tb-ic">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Trends & Data</div>
+    </div>
+
+    <!-- Lab Upload -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="lab-s">
+            <div class="sb" style="padding:36px 14px 0;"><span class="t">9:41</span><span style="font-size:8px;"><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+            <div class="lab-h">
+              <div class="back">&lt;</div>
+              <h2>Upload lab results</h2>
+            </div>
+            <div class="upload-z">
+              <div class="up-ico" style="font-size:28px;color:#4ECDA4;font-weight:300;">^</div>
+              <h3>Add your blood test</h3>
+              <p>Works with any lab — Ares, Synlab, Unilabs, or your doctor's PDF</p>
+              <div class="up-btns">
+                <button class="up-btn p">Choose PDF</button>
+                <button class="up-btn s">Take photo</button>
+              </div>
+            </div>
+            <div class="ex-title">Extracted — please confirm</div>
+            <div class="ex-row">
+              <div class="ex-n">Testosterone</div><div class="ex-v">18.2</div>
+              <div class="ex-u">nmol/L</div><div class="ex-ck" style="color:#4ECDA4;font-weight:700;">ok</div>
+            </div>
+            <div class="ex-row">
+              <div class="ex-n">Cortisol (morning)</div><div class="ex-v">28.4</div>
+              <div class="ex-u">µg/dL</div><div class="ex-ck" style="color:#4ECDA4;font-weight:700;">ok</div>
+            </div>
+            <div class="ex-row">
+              <div class="ex-n">Ferritin</div><div class="ex-v">67</div>
+              <div class="ex-u">µg/L</div><div class="ex-ck" style="color:#4ECDA4;font-weight:700;">ok</div>
+            </div>
+            <div class="ex-row">
+              <div class="ex-n">Vitamin D</div>
+              <div class="ex-v mu">——</div>
+              <div class="ex-u"></div>
+              <div class="ex-wn">! Enter</div>
+            </div>
+            <button class="conf-btn">Confirm & analyze &gt;</button>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Lab Upload</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 6 — WEEKLY SUMMARY
+═══════════════════════════════════ -->
+<div class="slide slide-light">
+  <div class="slide-header">
+    <div class="slide-eyebrow">Weekly Summary</div>
+    <div class="slide-title">What your body revealed this week</div>
+    <div class="slide-desc">Every Sunday, Vital surfaces the patterns that matter — not just data, but what it means and what to focus on next.</div>
+  </div>
+  <div class="slide-body" style="justify-content: center;">
+
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="sum-s">
+            <div class="sb" style="padding:36px 14px 0;"><span class="t">9:41</span><span style="font-size:8px;"><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+            <div class="sum-h">
+              <div class="sum-ey">Week of Apr 7 – 13</div>
+              <h2>Your weekly review</h2>
+            </div>
+            <div class="score-card">
+              <div class="ring"><div class="ring-inner">72</div></div>
+              <div>
+                <div class="sc-lbl">Overall Score</div>
+                <div class="sc-title">Good week</div>
+                <div class="sc-sub">+8 pts vs last week</div>
+              </div>
+            </div>
+            <div class="sum-grid">
+              <div class="sg"><div class="v">7.1h</div><div class="l">Avg sleep</div><div class="c g">+ +0.5h</div></div>
+              <div class="sg"><div class="v r">44ms</div><div class="l">Avg HRV</div><div class="c r">- vs 52ms</div></div>
+              <div class="sg"><div class="v">4</div><div class="l">Workouts</div><div class="c g">on target</div></div>
+            </div>
+            <div class="in-title">What we learned</div>
+            <div class="in-row">
+              <div class="in-ic" style="width:8px;height:8px;border-radius:50%;background:#E05C5C;margin-top:4px;flex-shrink:0;"></div>
+              <div class="in-tx">Alcohol on Tue & Wed caused your 2 lowest HRV days. Consistent across 3 weeks.</div>
+            </div>
+            <div class="in-row">
+              <div class="in-ic" style="width:8px;height:8px;border-radius:50%;background:#4ECDA4;margin-top:4px;flex-shrink:0;"></div>
+              <div class="in-tx">Best sleep followed the Thursday evening walk — sleep score 84 vs 71 average.</div>
+            </div>
+            <div class="in-row">
+              <div class="in-ic" style="width:8px;height:8px;border-radius:50%;background:#6B8FE8;margin-top:4px;flex-shrink:0;"></div>
+              <div class="in-tx">Next week: protect sleep by 10:30pm · evening walk · rest day mid-week.</div>
+            </div>
+            <div class="tab-bar" style="margin-top:auto;">
+              <div class="tb"><div class="tb-ic">☀️</div>Today</div>
+              <div class="tb on"><div class="tb-ic">💬</div>Coach</div>
+              <div class="tb"><div class="tb-ic">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Weekly Summary</div>
+    </div>
+
+    <!-- Side panel -->
+    <div style="max-width:340px; display:flex; flex-direction:column; gap:16px; margin-bottom:34px;">
+      <div style="background:#1A1A28; border-radius:18px; padding:24px; border:1px solid #2A2A3A;">
+        <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Why this matters</div>
+        <div style="font-size:13px;color:#AAA;line-height:1.7;">
+          Generic apps show you data.<br>
+          Vital explains what it <em style="color:#fff;">means</em> — and tells you the <em style="color:#fff;">one or two things</em> that will actually move the needle this week.
+        </div>
+      </div>
+      <div style="background:#1A1A28; border-radius:18px; padding:24px; border:1px solid #2A2A3A;">
+        <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Retention Driver</div>
+        <div style="font-size:13px;color:#AAA;line-height:1.7;">
+          The weekly summary is the moment users see their <em style="color:#fff;">progress over time</em> — the primary driver of long-term retention and habit formation.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 6B — NUTRITION (LIFESUM)
+═══════════════════════════════════ -->
+<div class="slide slide-light">
+  <div class="slide-header">
+    <div class="slide-eyebrow">Nutrition — Lifesum Integration</div>
+    <div class="slide-title">Users log in Lifesum. Vital reads the data.</div>
+    <div class="slide-desc">No in-app food logging. Vital imports nutrition from Lifesum — the same way it imports sleep from Oura. Connect once, your coach knows what you ate.</div>
+  </div>
+  <div class="slide-body" style="gap:24px;">
+
+    <!-- Connect screen with Lifesum -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ob-connect">
+            <div class="sb"><span class="t">9:41</span><span><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+            <h2>Connect your apps</h2>
+            <p class="sub">Vital reads your data — you keep using the apps you already love.</p>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#1C1C1E;color:#fff;font-size:12px;font-weight:700;">A</div>
+              <div class="conn-info"><div class="conn-name">Apple Health</div><div class="conn-desc">Sleep, HRV, steps, heart rate</div></div>
+              <button class="conn-btn linked">Linked</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#1A1A3A;color:#6B8FE8;font-size:12px;font-weight:700;">O</div>
+              <div class="conn-info"><div class="conn-name">Oura Ring</div><div class="conn-desc">Readiness, deep sleep, temp</div></div>
+              <button class="conn-btn linked">Linked</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#0A2A0A;color:#4ECDA4;font-size:12px;font-weight:700;">G</div>
+              <div class="conn-info"><div class="conn-name">Garmin Connect</div><div class="conn-desc">Training load, VO2max</div></div>
+              <button class="conn-btn linked">Linked</button>
+            </div>
+            <!-- Lifesum highlighted -->
+            <div class="conn-row" style="border:1.5px solid #4ECDA4;background:rgba(78,205,164,0.05);">
+              <div class="conn-ico" style="background:#1A2A1A;color:#4ECDA4;font-size:12px;font-weight:700;">L</div>
+              <div class="conn-info">
+                <div class="conn-name" style="color:#4ECDA4;">Lifesum</div>
+                <div class="conn-desc">Meals, calories, macros</div>
+              </div>
+              <button class="conn-btn link-btn">Link</button>
+            </div>
+            <div class="conn-row">
+              <div class="conn-ico" style="background:#2A1500;color:#F5A623;font-size:12px;font-weight:700;">S</div>
+              <div class="conn-info"><div class="conn-name">Strava</div><div class="conn-desc">Activity history & routes</div></div>
+              <button class="conn-btn link-btn">Link</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Connect Lifesum</div>
+    </div>
+
+    <!-- Data tab showing nutrition from Lifesum -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="data-s">
+            <div class="data-h">
+              <div class="sb" style="padding:0 0 8px 0;padding-top:34px;"><span class="t">9:41</span><span style="font-size:8px;"><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+              Your data
+            </div>
+            <div class="period-row">
+              <div class="pt on">7D</div><div class="pt">30D</div><div class="pt">90D</div>
+            </div>
+            <!-- Nutrition card from Lifesum -->
+            <div class="tc">
+              <div class="tc-top">
+                <div>
+                  <div class="tc-lbl" style="display:flex;align-items:center;gap:5px;">NUTRITION <span style="background:rgba(78,205,164,0.15);color:#4ECDA4;padding:1px 6px;border-radius:6px;font-size:8px;font-weight:700;">via Lifesum</span></div>
+                  <div class="tc-val">1,820 <span style="font-size:11px;color:#555;">kcal avg</span></div>
+                  <div class="tc-sub">Target: 2,100 kcal</div>
+                </div>
+                <div class="tc-badge dn">-13%</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px;">
+                <div style="background:#252535;border-radius:8px;padding:6px;text-align:center;">
+                  <div style="font-size:12px;font-weight:700;color:#4ECDA4;">138g</div>
+                  <div style="font-size:8px;color:#555;">Protein</div>
+                </div>
+                <div style="background:#252535;border-radius:8px;padding:6px;text-align:center;">
+                  <div style="font-size:12px;font-weight:700;color:#F5A623;">192g</div>
+                  <div style="font-size:8px;color:#555;">Carbs</div>
+                </div>
+                <div style="background:#252535;border-radius:8px;padding:6px;text-align:center;">
+                  <div style="font-size:12px;font-weight:700;color:#6B8FE8;">62g</div>
+                  <div style="font-size:8px;color:#555;">Fat</div>
+                </div>
+              </div>
+            </div>
+            <!-- Yesterday meals from Lifesum -->
+            <div class="bm-sec">
+              <div class="bm-title">Yesterday's meals <span style="color:#555;font-weight:400;font-size:8px;letter-spacing:0;">from Lifesum</span></div>
+              <div class="bm-row">
+                <div class="bm-n">Breakfast · 07:15</div>
+                <div class="bm-v">420</div>
+                <div class="bm-u">kcal</div>
+                <div class="bm-s g">OK</div>
+              </div>
+              <div class="bm-row">
+                <div class="bm-n">Lunch · 12:50</div>
+                <div class="bm-v">560</div>
+                <div class="bm-u">kcal</div>
+                <div class="bm-s g">OK</div>
+              </div>
+              <div class="bm-row">
+                <div class="bm-n">Dinner · 21:47</div>
+                <div class="bm-v" style="color:#E05C5C;">840</div>
+                <div class="bm-u">kcal</div>
+                <div class="bm-s" style="color:#F5A623;">! Late</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tb"><div class="tb-ic">☀️</div>Today</div>
+              <div class="tb"><div class="tb-ic">💬</div>Coach</div>
+              <div class="tb on"><div class="tb-ic">📊</div>Data</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Nutrition in Data Tab</div>
+    </div>
+
+    <!-- Coach using Lifesum data -->
+    <div class="phone-col">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="chat-s">
+            <div class="chat-head">
+              <div style="position:absolute;top:0;left:0;right:0;" class="sb" style="padding:10px 14px 0;"><span class="t">9:41</span><span><span style="letter-spacing:2px;font-size:8px;">lll</span></span></div>
+              <div style="margin-top:28px;display:flex;align-items:center;gap:8px;">
+                <div class="ch-av">V</div>
+                <div><div class="ch-name">Vital Coach</div><div class="ch-status">Active</div></div>
+              </div>
+            </div>
+            <div class="msgs">
+              <div class="msg co">
+                <div class="bubble">Good morning. A few things from last night worth flagging:<br><br>Your <strong style="color:#fff;">dinner was at 9:47pm</strong> — fairly late — and was your biggest meal of the day (840 kcal, high carb).<br><br>This likely explains why your <strong style="color:#fff;">deep sleep was 1h08</strong>, vs your 1h44 average. Late high-carb meals raise body temperature when it should be dropping for sleep.<br><br>&gt; Try finishing dinner by <strong style="color:#fff;">7:30pm tonight</strong><br>&gt; If eating late, keep it protein-focused</div>
+                <div class="msg-t">08:07</div>
+              </div>
+              <div class="msg me">
+                <div class="bubble">Makes sense — had a work dinner</div>
+                <div class="msg-t">08:09</div>
+              </div>
+              <div class="msg co">
+                <div class="bubble">Noted — happens. Log it as "late dinner" next time and I'll factor it in upfront. For tonight, a lighter recovery meal will help.</div>
+                <div class="msg-t">08:09</div>
+              </div>
+            </div>
+            <div class="chat-inp">
+              <div class="inp-field">Ask anything...</div>
+              <div class="send">^</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-lbl">Coach Using Lifesum Data</div>
+    </div>
+
+    <!-- Integration logic panel -->
+    <div style="max-width:220px;display:flex;flex-direction:column;gap:12px;margin-bottom:34px;">
+      <div style="background:#1A1A28;border-radius:16px;padding:18px;border:1px solid #2A2A3A;">
+        <div style="font-size:9px;font-weight:700;color:#4ECDA4;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">How it works</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#4ECDA4;color:#0D1117;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+            <div style="font-size:10px;color:#888;line-height:1.5;">User logs meals in <strong style="color:#EEE;">Lifesum</strong> as usual</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#4ECDA4;color:#0D1117;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+            <div style="font-size:10px;color:#888;line-height:1.5;">Vital connects via <strong style="color:#EEE;">Lifesum OAuth</strong> or HealthKit bridge</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#4ECDA4;color:#0D1117;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+            <div style="font-size:10px;color:#888;line-height:1.5;">Calories, macros & <strong style="color:#EEE;">meal timing</strong> enter the coaching context</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#4ECDA4;color:#0D1117;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+            <div style="font-size:10px;color:#888;line-height:1.5;">Coach connects food -&gt; sleep &gt; recovery &gt; performance</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#1A1A28;border-radius:16px;padding:18px;border:1px solid #2A2A3A;">
+        <div style="font-size:9px;font-weight:700;color:#4ECDA4;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">MVP Path</div>
+        <div style="font-size:10px;color:#888;line-height:1.8;">
+          <span style="color:#4ECDA4;font-weight:700;">Now:</span> HealthKit bridge<br>
+          <span style="color:#555;font-size:9px;">Lifesum -&gt; Apple Health -&gt; Vital. Free, ships in days.</span><br><br>
+          <span style="color:#F5A623;font-weight:700;">Phase 2:</span> Direct API deal<br>
+          <span style="color:#555;font-size:9px;">B2B partnership — unlocks meal timing & item names</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 7 — TECH & BUILD PLAN
+═══════════════════════════════════ -->
+<div class="slide slide-dark metrics-slide" style="justify-content:center; gap:28px;">
+  <div class="slide-header" style="padding:0;">
+    <div class="slide-eyebrow">Technology & Build Plan</div>
+    <div class="slide-title white">MVP in 2 months, profitable by Month 6</div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div class="met-card" style="padding:22px;">
+      <div class="mk">Mobile</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">Swift iOS</div>
+      <div class="md">Native HealthKit (required — no backend access). Terra SDK wraps Garmin, Oura & Strava into one webhook.</div>
+    </div>
+    <div class="met-card" style="padding:22px;">
+      <div class="mk">Backend</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">FastAPI + TimescaleDB</div>
+      <div class="md">Python async API. TimescaleDB for time-series metrics + relational joins across all health signals.</div>
+    </div>
+    <div class="met-card" style="padding:22px;">
+      <div class="mk">AI Coaching</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">Claude API</div>
+      <div class="md">200K context window. Prompt caching at ~€0.50/user/month. Context = 7-day metrics + biomarkers + event log.</div>
+    </div>
+    <div class="met-card" style="padding:22px;">
+      <div class="mk">Build Milestones</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.4;">M1–2 &gt; M3 &gt; M4–5</div>
+      <div class="md" style="line-height:2.0;">
+        <span style="color:var(--green);">Month 1–2:</span> iOS + HealthKit + Oura + Coach<br>
+        <span style="color:var(--green);">Month 3:</span> Garmin + Lab PDF + Lifesum (HealthKit bridge)<br>
+        <span style="color:var(--green);">Month 4–5:</span> Lifesum direct API + B2B pilot
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
