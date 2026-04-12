@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan d'entraînement post-partum</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #5c6bc0;
+            --primary-dark: #3949ab;
+            --primary-light: #e8eaf6;
+            --accent: #ec407a;
+            --accent-light: #fce4ec;
+            --green: #43a047;
+            --green-light: #e8f5e9;
+            --orange: #fb8c00;
+            --orange-light: #fff3e0;
+            --red: #e53935;
+            --red-light: #ffebee;
+            --text: #263238;
+            --text-light: #546e7a;
+            --border: #e0e0e0;
+            --bg: #f5f6fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ── */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #7986cb 100%);
+            color: white;
+            padding: 40px 24px 32px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .hero p { opacity: 0.85; font-size: 14px; }
+        .hero .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 18px; }
+        .badge {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* ── NAV TABS ── */
+        .tab-nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tab-btn {
+            flex: 0 0 auto;
+            padding: 14px 20px;
+            border: none;
+            background: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        /* ── CONTENT ── */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+
+        /* ── CARDS ── */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title .dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── PHASE OVERVIEW ── */
+        .phase-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .phase-pill {
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: center;
+        }
+        .phase-pill.active-phase { background: var(--primary-light); border: 2px solid var(--primary); }
+        .phase-pill.inactive-phase { background: var(--bg); border: 2px solid var(--border); }
+        .phase-pill .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+        .phase-pill .weeks { font-size: 18px; font-weight: 800; color: var(--primary); margin: 4px 0; }
+        .phase-pill .desc { font-size: 11px; color: var(--text-light); }
+
+        /* ── WEEKLY SCHEDULE ── */
+        .schedule-grid { display: flex; flex-direction: column; gap: 6px; }
+        .schedule-row {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+        .day-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .session-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .chip-lower-a { background: var(--primary-light); color: var(--primary-dark); }
+        .chip-lower-b { background: var(--accent-light); color: #c2185b; }
+        .chip-upper  { background: var(--orange-light); color: #e65100; }
+        .chip-cardio { background: var(--green-light); color: #2e7d32; }
+        .chip-rest   { background: var(--bg); color: var(--text-light); }
+        .chip-walk   { background: #e0f7fa; color: #00695c; }
+
+        .duration-tag {
+            margin-left: auto;
+            font-size: 11px;
+            color: var(--text-light);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ── EXERCISE TABLE ── */
+        .session-block { margin-bottom: 20px; }
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .session-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .session-tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .tag-lower-a { background: var(--primary-light); color: var(--primary-dark); }
+        .tag-lower-b { background: var(--accent-light); color: #c2185b; }
+        .tag-upper   { background: var(--orange-light); color: #e65100; }
+
+        .warmup-note {
+            font-size: 12px;
+            color: var(--text-light);
+            background: var(--bg);
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        thead tr { background: var(--bg); }
+        th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-light);
+            padding: 8px 10px;
+        }
+        td {
+            padding: 9px 10px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg); }
+
+        .ex-name { font-weight: 600; color: var(--text); }
+        .ex-sets {
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+        .ex-note { font-size: 12px; color: var(--text-light); }
+        .ex-tempo { font-size: 12px; color: var(--text-light); font-family: monospace; }
+
+        /* ── PROGRESSION BOX ── */
+        .progression-box {
+            border-left: 4px solid var(--primary);
+            background: var(--primary-light);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+        }
+        .progression-box h4 { font-size: 12px; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; text-transform: uppercase; }
+        .progression-box ul { padding-left: 16px; }
+        .progression-box li { font-size: 12px; color: var(--text); margin-bottom: 3px; }
+
+        /* ── RUN/WALK TABLE ── */
+        .run-table th { background: var(--green-light); }
+        .run-prereq {
+            background: var(--green-light);
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        .run-prereq h4 { font-size: 12px; font-weight: 700; color: #2e7d32; margin-bottom: 8px; text-transform: uppercase; }
+        .run-prereq ul { padding-left: 16px; }
+        .run-prereq li { font-size: 12px; color: var(--text); margin-bottom: 4px; }
+        .checklist li::marker { content: "☐  "; }
+
+        /* ── NUTRITION ── */
+        .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+        .macro-card {
+            text-align: center;
+            padding: 16px;
+            border-radius: 10px;
+            border: 2px solid var(--border);
+        }
+        .macro-card.protein { border-color: var(--primary); background: var(--primary-light); }
+        .macro-card.carbs   { border-color: var(--orange); background: var(--orange-light); }
+        .macro-card.fat     { border-color: var(--green); background: var(--green-light); }
+        .macro-card .value  { font-size: 22px; font-weight: 800; }
+        .macro-card.protein .value { color: var(--primary-dark); }
+        .macro-card.carbs .value   { color: #e65100; }
+        .macro-card.fat .value     { color: #2e7d32; }
+        .macro-card .label  { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-top: 2px; }
+        .macro-card .why    { font-size: 11px; color: var(--text-light); margin-top: 6px; }
+
+        .calorie-banner {
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .calorie-banner .big { font-size: 22px; font-weight: 800; }
+        .calorie-banner .sub { font-size: 12px; opacity: 0.85; }
+        .calorie-banner .note { font-size: 12px; opacity: 0.85; text-align: right; }
+
+        /* ── ALERTS ── */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+        .alert.warning { background: var(--red-light); border-left: 4px solid var(--red); }
+        .alert.info    { background: var(--primary-light); border-left: 4px solid var(--primary); }
+        .alert.success { background: var(--green-light); border-left: 4px solid var(--green); }
+        .alert strong  { display: block; margin-bottom: 3px; }
+
+        /* ── PARTNER SECTION ── */
+        .action-list { list-style: none; padding: 0; }
+        .action-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+        .action-list li:last-child { border-bottom: none; }
+        .action-num {
+            background: var(--primary);
+            color: white;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .avoid-list { list-style: none; padding: 0; }
+        .avoid-list li {
+            padding: 7px 0 7px 24px;
+            position: relative;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+        }
+        .avoid-list li:last-child { border-bottom: none; }
+        .avoid-list li::before { content: "✕"; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+        /* ── QUICK REF ── */
+        .qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .qr-item { background: var(--bg); border-radius: 8px; padding: 14px; }
+        .qr-item .key { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+        .qr-item .val { font-size: 14px; font-weight: 700; color: var(--primary-dark); }
+
+        /* ── MILESTONES ── */
+        .milestone-timeline { position: relative; padding-left: 24px; }
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px; top: 8px; bottom: 8px;
+            width: 2px;
+            background: var(--border);
+        }
+        .milestone {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .milestone::before {
+            content: '';
+            position: absolute;
+            left: -21px; top: 6px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .milestone .week-label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+        .milestone .desc { font-size: 13px; color: var(--text); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .phase-bar { grid-template-columns: 1fr; }
+            .macro-grid { grid-template-columns: 1fr; }
+            .qr-grid { grid-template-columns: 1fr; }
+            .calorie-banner { flex-direction: column; gap: 6px; }
+            .calorie-banner .note { text-align: left; }
+            .hero h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Plan d'entraînement post-partum</h1>
+    <p>Programme progressif 12 semaines · Renforcement &amp; recomposition corporelle</p>
+    <div class="badges">
+        <span class="badge">15 semaines post-partum</span>
+        <span class="badge">Accouchement voie basse</span>
+        <span class="badge">Plancher pelvien validé</span>
+        <span class="badge">3 séances/semaine</span>
+        <span class="badge">Focus bas du corps</span>
+    </div>
+</div>
+
+<!-- TABS -->
+<nav class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('overview')">Vue d'ensemble</button>
+    <button class="tab-btn" onclick="showTab('phase1')">Phase 1 — Fondation</button>
+    <button class="tab-btn" onclick="showTab('phase2')">Phase 2 — Construction</button>
+    <button class="tab-btn" onclick="showTab('phase3')">Phase 3 — Intensification</button>
+    <button class="tab-btn" onclick="showTab('nutrition')">Nutrition</button>
+    <button class="tab-btn" onclick="showTab('partner')">Guide du partenaire</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : VUE D'ENSEMBLE
+══════════════════════════════════════════════ -->
+<div id="tab-overview" class="tab-content active">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Structure du programme — 12 semaines</div>
+        <div class="phase-bar">
+            <div class="phase-pill active-phase">
+                <div class="label">Phase 1</div>
+                <div class="weeks">Sem. 1–4</div>
+                <div class="desc">Fondation<br>Qualité du mouvement</div>
+            </div>
+            <div class="phase-pill inactive-phase">
+                <div class="label">Phase 2</div>
+                <div class="weeks">Sem. 5–8</div>
+                <div class="desc">Construction<br>Surcharge progressive</div>
+            </div>
+            <div class="phase-pill inactive-phase">
+                <div class="label">Phase 3</div>
+                <div class="weeks">Sem. 9–12</div>
+                <div class="desc">Intensification<br>Charges lourdes</div>
+            </div>
+        </div>
+
+        <div class="alert info">
+            <span class="alert-icon">ℹ️</span>
+            <div>
+                <strong>Répartition des séances chaque semaine</strong>
+                2 séances bas du corps + 1 séance haut du corps. Le bas du corps est prioritaire — 2 fois par semaine pour développer force et galbe efficacement.
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>Bilan de la situation</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+                <p style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--green); margin-bottom:8px;">Points favorables</p>
+                <ul style="padding-left:16px; font-size:13px;">
+                    <li style="margin-bottom:4px;">Plancher pelvien validé — aucune restriction de charge</li>
+                    <li style="margin-bottom:4px;">Pas d'allaitement — déficit calorique possible sans risque</li>
+                    <li style="margin-bottom:4px;">Accouchement voie basse — pas de cicatrice abdominale à gérer</li>
+                    <li style="margin-bottom:4px;">15 semaines post-partum — fenêtre idéale pour reprendre</li>
+                </ul>
+            </div>
+            <div>
+                <p style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--orange); margin-bottom:8px;">À surveiller</p>
+                <ul style="padding-left:16px; font-size:13px;">
+                    <li style="margin-bottom:4px;">Relaxine encore présente — stabilité articulaire importante</li>
+                    <li style="margin-bottom:4px;">Sommeil perturbé — capacité de récupération réduite</li>
+                    <li style="margin-bottom:4px;">Diastasis possible — surveiller le bombement de la ligne blanche</li>
+                    <li style="margin-bottom:4px;">Timeline réaliste : changements visibles sem. 8–12, nets à 6 mois</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Jalons sur 12 semaines</div>
+        <div class="milestone-timeline">
+            <div class="milestone">
+                <div class="week-label">Semaine 4</div>
+                <div class="desc">3 séances/semaine régulières · Qualité du mouvement établie · Énergie en hausse</div>
+            </div>
+            <div class="milestone">
+                <div class="week-label">Semaine 8</div>
+                <div class="desc">Course 20 min en continu · Force +15–20% vs semaine 1 · Vêtements qui changent</div>
+            </div>
+            <div class="milestone">
+                <div class="week-label">Semaine 12</div>
+                <div class="desc">Course 30 min facile · Tonus musculaire visible · Centimètres perdus mesurables</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert warning">
+        <span class="alert-icon">🚨</span>
+        <div>
+            <strong>Arrêter et contacter la kiné si :</strong>
+            Fuites urinaires pendant l'effort · Pression ou lourdeur pelvienne · Bombement de la ligne blanche lors des exercices de gainage · Douleur pelvienne ou lombaire persistante après les séances
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : PHASE 1
+══════════════════════════════════════════════ -->
+<div id="tab-phase1" class="tab-content">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Phase 1 — Semaines 1–4 · Fondation</div>
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:16px;">Réapprendre les mouvements de base, installer l'habitude, amorcer le métabolisme. <strong>Poids du corps uniquement</strong> — zéro haltère, zéro barre. La priorité est la qualité du mouvement et la connexion musculaire.</p>
+
+        <div class="schedule-grid">
+            <div class="schedule-row">
+                <span class="day-label">Lundi</span>
+                <span class="session-chip chip-lower-a">Bas du corps A — Quadriceps &amp; Fessiers <span class="duration-tag">50 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mardi</span>
+                <span class="session-chip chip-walk">Marche 30 min</span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mercredi</span>
+                <span class="session-chip chip-upper">Haut du corps <span class="duration-tag">45 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Jeudi</span>
+                <span class="session-chip chip-rest">Repos ou marche</span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Vendredi</span>
+                <span class="session-chip chip-lower-b">Bas du corps B — Ischio-jambiers &amp; Moyen fessier <span class="duration-tag">50 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Samedi</span>
+                <span class="session-chip chip-rest">Repos ou marche</span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Dimanche</span>
+                <span class="session-chip chip-rest">Repos</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bas du corps A -->
+    <div class="card">
+        <div class="session-block">
+            <div class="session-header">
+                <span class="session-label">Bas du corps A</span>
+                <span class="session-tag tag-lower-a">Quadriceps &amp; Fessiers · Lundi · 45 min</span>
+            </div>
+            <div class="warmup-note">Échauffement (5 min) : rotations de hanches, leg swings, 10 squats lents</div>
+            <table>
+                <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Tempo</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td class="ex-name">Squat poids du corps</td><td class="ex-sets">3 × 20</td><td class="ex-tempo">Contrôlé</td><td class="ex-note">Descendre bien bas · genoux dans l'axe des orteils</td></tr>
+                    <tr><td class="ex-name">Pont fessier</td><td class="ex-sets">3 × 15</td><td class="ex-tempo">2s montée / 2s tenue / 2s descente</td><td class="ex-note">Pieds à plat · bien serrer en haut · respiration naturelle</td></tr>
+                    <tr><td class="ex-name">Good morning poids du corps</td><td class="ex-sets">3 × 15</td><td class="ex-tempo">Descente lente</td><td class="ex-note">Mains derrière la nuque · charnière aux hanches · sentir l'étirement</td></tr>
+                    <tr><td class="ex-name">Fente arrière poids du corps</td><td class="ex-sets">3 × 12 par jambe</td><td class="ex-tempo">Contrôlé</td><td class="ex-note">Genou arrière proche du sol · pousser sur le talon avant</td></tr>
+                    <tr><td class="ex-name">Pont fessier unilatéral</td><td class="ex-sets">3 × 10 par jambe</td><td class="ex-tempo">1s tenue en haut</td><td class="ex-note">Progression depuis le pont bilatéral</td></tr>
+                    <tr><td class="ex-name">Dead bug</td><td class="ex-sets">3 × 8 par côté</td><td class="ex-tempo">Lent</td><td class="ex-note">Arrêter si la ligne blanche bombe</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Haut du corps -->
+    <div class="card">
+        <div class="session-block">
+            <div class="session-header">
+                <span class="session-label">Haut du corps</span>
+                <span class="session-tag tag-upper">Poussé · Tiré · Épaules · Mercredi · 40 min</span>
+            </div>
+            <div class="warmup-note">Échauffement (5 min) : rotations des bras, cat-cow, 10 pompes lentes sur les genoux</div>
+            <table>
+                <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td class="ex-name">Pompe inclinée ou sur les genoux</td><td class="ex-sets">3 × 10–12</td><td class="ex-note">Inclinaison sur un banc si besoin · progresser vers pompe complète</td></tr>
+                    <tr><td class="ex-name">Rowing inversé sous table</td><td class="ex-sets">3 × 10</td><td class="ex-note">Corps rigide · tirer la poitrine vers la table</td></tr>
+                    <tr><td class="ex-name">Pike push-up</td><td class="ex-sets">3 × 10</td><td class="ex-note">En V renversé · cible les épaules</td></tr>
+                    <tr><td class="ex-name">Dips sur banc</td><td class="ex-sets">2 × 12</td><td class="ex-note">Mains sur le bord du banc · coudes proches du corps</td></tr>
+                    <tr><td class="ex-name">Superman</td><td class="ex-sets">3 × 12</td><td class="ex-note">À plat ventre · lever bras et jambes simultanément · 1s tenue</td></tr>
+                    <tr><td class="ex-name">Bird-dog</td><td class="ex-sets">3 × 8 par côté</td><td class="ex-note">Gainage et stabilité · lent · dos plat</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bas du corps B -->
+    <div class="card">
+        <div class="session-block">
+            <div class="session-header">
+                <span class="session-label">Bas du corps B</span>
+                <span class="session-tag tag-lower-b">Ischio-jambiers &amp; Moyen fessier · Vendredi · 45 min</span>
+            </div>
+            <div class="warmup-note">Échauffement (5 min) : balancements de jambes, cercles de hanches, squat sumo lent</div>
+            <table>
+                <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Tempo</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td class="ex-name">Squat sumo poids du corps</td><td class="ex-sets">3 × 20</td><td class="ex-tempo">Contrôlé</td><td class="ex-note">Écartement large · pointes de pieds à ~45°</td></tr>
+                    <tr><td class="ex-name">Fente latérale poids du corps</td><td class="ex-sets">3 × 10 par jambe</td><td class="ex-tempo">Lent</td><td class="ex-note">Pousser la hanche vers l'arrière · talon à plat</td></tr>
+                    <tr><td class="ex-name">Good morning poids du corps</td><td class="ex-sets">3 × 15</td><td class="ex-tempo">Descente lente</td><td class="ex-note">Cibler les ischio-jambiers · dos plat</td></tr>
+                    <tr><td class="ex-name">Marche latérale avec élastique</td><td class="ex-sets">3 × 15 par direction</td><td class="ex-tempo">Contrôlé</td><td class="ex-note">Élastique au-dessus des genoux · rester bas · pas de bruit des genoux</td></tr>
+                    <tr><td class="ex-name">Donkey kick poids du corps</td><td class="ex-sets">3 × 15 par jambe</td><td class="ex-tempo">Serrer en haut</td><td class="ex-note">À quatre pattes · isolation grand fessier · éviter de cambrer</td></tr>
+                    <tr><td class="ex-name">Élévations de mollets</td><td class="ex-sets">2 × 25</td><td class="ex-tempo">1s tenue en haut</td><td class="ex-note">—</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : PHASE 2
+══════════════════════════════════════════════ -->
+<div id="tab-phase2" class="tab-content">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Phase 2 — Semaines 5–8 · Construction</div>
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:16px;"><strong>Introduction des poids.</strong> Les mêmes mouvements qu'en Phase 1, mais avec haltères et machines. Le hip thrust remplace le pont fessier — principale upgrade de la phase 2. Le protocole course/marche démarre également cette phase.</p>
+
+        <div class="schedule-grid">
+            <div class="schedule-row">
+                <span class="day-label">Lundi</span>
+                <span class="session-chip chip-lower-a">Bas du corps A — charges plus lourdes <span class="duration-tag">55 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mardi</span>
+                <span class="session-chip chip-cardio">Cardio — protocole course/marche <span class="duration-tag">30 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mercredi</span>
+                <span class="session-chip chip-upper">Haut du corps — charges plus lourdes <span class="duration-tag">50 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Jeudi</span>
+                <span class="session-chip chip-rest">Repos ou marche</span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Vendredi</span>
+                <span class="session-chip chip-lower-b">Bas du corps B — charges plus lourdes <span class="duration-tag">55 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Samedi</span>
+                <span class="session-chip chip-cardio">Cardio (elliptique, vélo ou course/marche) <span class="duration-tag">30 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Dimanche</span>
+                <span class="session-chip chip-rest">Repos</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Progressions clés vs Phase 1</div>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Bas du corps A</span>
+            <span class="session-tag tag-lower-a">Quadriceps &amp; Fessiers</span>
+        </div>
+        <table style="margin-bottom:16px;">
+            <thead><tr><th>Exercice</th><th>Phase 1 (poids du corps)</th><th>Phase 2 (avec poids)</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Squat</td><td>Squat PDC · 3×20</td><td class="ex-note" style="color:var(--primary-dark); font-weight:600;">Squat goblet haltère · 3×12</td></tr>
+                <tr><td class="ex-name">Pont fessier</td><td>Pont PDC · 3×15</td><td class="ex-note" style="color:var(--primary-dark); font-weight:600;">Hip thrust (barre ou Smith) · 3×12 ← principale upgrade</td></tr>
+                <tr><td class="ex-name">Ischio-jambiers / fessiers</td><td>Good morning PDC · 3×15</td><td class="ex-note" style="color:var(--primary-dark); font-weight:600;">Soulevé de terre roumain haltères · 3×12</td></tr>
+                <tr><td class="ex-name">Fente</td><td>Fente arrière PDC · 3×12</td><td class="ex-note" style="color:var(--primary-dark); font-weight:600;">Fente arrière haltères · 3×10 par jambe</td></tr>
+                <tr><td class="ex-name">Ajout</td><td>—</td><td class="ex-note" style="color:var(--primary-dark); font-weight:600;">Leg press · 3×15 · Curl jambes machine · 3×12</td></tr>
+            </tbody>
+        </table>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Bas du corps B</span>
+            <span class="session-tag tag-lower-b">Ischio-jambiers &amp; Moyen fessier</span>
+        </div>
+        <table style="margin-bottom:16px;">
+            <thead><tr><th>Exercice</th><th>Phase 1 (poids du corps)</th><th>Phase 2 (avec poids)</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Squat</td><td>Squat sumo PDC · 3×20</td><td class="ex-note" style="color:#c2185b; font-weight:600;">Squat sumo haltère · 3×12</td></tr>
+                <tr><td class="ex-name">Fessier</td><td>Donkey kick PDC · 3×15</td><td class="ex-note" style="color:#c2185b; font-weight:600;">Kickback à la poulie (cheville lestée) · 3×15</td></tr>
+                <tr><td class="ex-name">Marche latérale</td><td>Élastique · 3×15</td><td class="ex-note" style="color:#c2185b; font-weight:600;">Élastique plus résistant · 3×15</td></tr>
+                <tr><td class="ex-name">Ajout</td><td>—</td><td class="ex-note" style="color:#c2185b; font-weight:600;">Squat bulgare (PDC d'abord) · 3×8 par jambe</td></tr>
+                <tr><td class="ex-name">Ajout</td><td>—</td><td class="ex-note" style="color:#c2185b; font-weight:600;">Leg press (pieds hauts et écartés = fessiers) · 3×15</td></tr>
+            </tbody>
+        </table>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Haut du corps</span>
+            <span class="session-tag tag-upper">Progressions</span>
+        </div>
+        <table>
+            <thead><tr><th>Exercice</th><th>Phase 1 (poids du corps)</th><th>Phase 2 (avec poids)</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Poussé</td><td>Pompe inclinée / genoux</td><td class="ex-note" style="color:#e65100; font-weight:600;">Pompe complète ou développé couché haltères · 3×10</td></tr>
+                <tr><td class="ex-name">Tiré</td><td>Rowing inversé sous table</td><td class="ex-note" style="color:#e65100; font-weight:600;">Rowing haltère unilatéral · 3×12 par côté</td></tr>
+                <tr><td class="ex-name">Épaules</td><td>Pike push-up</td><td class="ex-note" style="color:#e65100; font-weight:600;">Développé épaules haltères · 3×12</td></tr>
+                <tr><td class="ex-name">Dos / biceps</td><td>Superman · Bird-dog</td><td class="ex-note" style="color:#e65100; font-weight:600;">Tirage vertical poulie · 3×12 · Curl biceps · 2×12</td></tr>
+                <tr><td class="ex-name">Gainage</td><td>Dead bug</td><td class="ex-note" style="color:#e65100; font-weight:600;">Planche 30–45s → planche latérale</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Course/Marche -->
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>Protocole course/marche — Démarre semaine 5</div>
+
+        <div class="run-prereq">
+            <h4>Prérequis — valider tous les points avant de commencer</h4>
+            <ul class="checklist">
+                <li>Marcher 30 min à bonne allure sans fuite, douleur ni pression</li>
+                <li>Équilibre unipodal 10 sec de chaque côté sans vaciller</li>
+                <li>Élévation de mollet unilatérale × 15 de chaque côté sans symptôme</li>
+                <li>Pas de lourdeur pelvienne après les marches</li>
+            </ul>
+        </div>
+
+        <table class="run-table">
+            <thead><tr><th>Semaine</th><th>Protocole (répéter 6×)</th><th>Temps de course total</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-sets">Semaine 5</td><td>1 min course / 4 min marche</td><td>6 min</td></tr>
+                <tr><td class="ex-sets">Semaine 6</td><td>2 min course / 3 min marche</td><td>12 min</td></tr>
+                <tr><td class="ex-sets">Semaine 7</td><td>3 min course / 2 min marche × 5</td><td>15 min</td></tr>
+                <tr><td class="ex-sets">Semaine 8</td><td>4 min course / 1 min marche × 5</td><td>20 min</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert warning" style="margin-top:12px; margin-bottom:0;">
+            <span class="alert-icon">⚠️</span>
+            <div>Si un symptôme apparaît (fuite, pression pelvienne, douleur) → revenir à la semaine précédente et y rester.</div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : PHASE 3
+══════════════════════════════════════════════ -->
+<div id="tab-phase3" class="tab-content">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Phase 3 — Semaines 9–12 · Intensification</div>
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:16px;">Charges lourdes sur les exercices composés. Course en continu. Les résultats de recomposition commencent à être clairement visibles — c'est là que la fondation porte ses fruits.</p>
+
+        <div class="schedule-grid">
+            <div class="schedule-row">
+                <span class="day-label">Lundi</span>
+                <span class="session-chip chip-lower-a">Bas du corps A — lourd <span class="duration-tag">60 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mardi</span>
+                <span class="session-chip chip-cardio">Course — continu <span class="duration-tag">25–30 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Mercredi</span>
+                <span class="session-chip chip-upper">Haut du corps — lourd <span class="duration-tag">55 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Jeudi</span>
+                <span class="session-chip chip-cardio">Cardio faible impact (elliptique/vélo) <span class="duration-tag">30 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Vendredi</span>
+                <span class="session-chip chip-lower-b">Bas du corps B — lourd <span class="duration-tag">60 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Samedi</span>
+                <span class="session-chip chip-cardio">Course ou activité libre <span class="duration-tag">30–40 min</span></span>
+            </div>
+            <div class="schedule-row">
+                <span class="day-label">Dimanche</span>
+                <span class="session-chip chip-rest">Repos</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Séances Phase 3</div>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Bas du corps A</span>
+            <span class="session-tag tag-lower-a">Quadriceps &amp; Fessiers · Lourd</span>
+        </div>
+        <table style="margin-bottom:16px;">
+            <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Squat barre ou soulevé de terre hex bar</td><td class="ex-sets">4 × 8</td><td class="ex-note">Charge de travail · pousser le poids</td></tr>
+                <tr><td class="ex-name">Hip thrust (barre)</td><td class="ex-sets">4 × 10</td><td class="ex-note">Lourd · 1s tenue en contraction haute</td></tr>
+                <tr><td class="ex-name">Leg press</td><td class="ex-sets">4 × 12</td><td class="ex-note">Augmenter la charge significativement</td></tr>
+                <tr><td class="ex-name">Fente arrière (haltères)</td><td class="ex-sets">3 × 10 par jambe</td><td class="ex-note">—</td></tr>
+                <tr><td class="ex-name">Curl jambes (machine)</td><td class="ex-sets">3 × 12</td><td class="ex-note">—</td></tr>
+            </tbody>
+        </table>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Bas du corps B</span>
+            <span class="session-tag tag-lower-b">Ischio-jambiers &amp; Moyen fessier · Lourd</span>
+        </div>
+        <table style="margin-bottom:16px;">
+            <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Squat bulgare (haltères)</td><td class="ex-sets">3 × 10 par jambe</td><td class="ex-note">Exercice clé pour le galbe fessier · contrôlé</td></tr>
+                <tr><td class="ex-name">Soulevé de terre sumo (barre)</td><td class="ex-sets">3 × 10</td><td class="ex-note">Passer à la barre · écartement large</td></tr>
+                <tr><td class="ex-name">Soulevé de terre roumain (lourd)</td><td class="ex-sets">4 × 10</td><td class="ex-note">Charge importante · excentrique lent</td></tr>
+                <tr><td class="ex-name">Kickback à la poulie (lourd)</td><td class="ex-sets">3 × 15 par jambe</td><td class="ex-note">—</td></tr>
+                <tr><td class="ex-name">Nordic curl (excentrique)</td><td class="ex-sets">3 × 5 lent</td><td class="ex-note">Avancé · descendre le plus lentement possible</td></tr>
+                <tr><td class="ex-name">Pallof press ou marche valise</td><td class="ex-sets">3 × 12 par côté</td><td class="ex-note">Gainage anti-rotation</td></tr>
+            </tbody>
+        </table>
+
+        <div class="session-header" style="margin-bottom:8px;">
+            <span class="session-label" style="font-size:13px;">Haut du corps</span>
+            <span class="session-tag tag-upper">Lourd</span>
+        </div>
+        <table>
+            <thead><tr><th>Exercice</th><th>Séries × Reps</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Développé couché haltères ou barre</td><td class="ex-sets">4 × 10</td><td class="ex-note">—</td></tr>
+                <tr><td class="ex-name">Traction assistée ou tirage vertical lourd</td><td class="ex-sets">4 × 8</td><td class="ex-note">—</td></tr>
+                <tr><td class="ex-name">Écarté à la poulie</td><td class="ex-sets">3 × 12</td><td class="ex-note">Nouvel ajout</td></tr>
+                <tr><td class="ex-name">Développé épaules</td><td class="ex-sets">3 × 10</td><td class="ex-note">Assis ou debout</td></tr>
+                <tr><td class="ex-name">Planche + planche latérale</td><td class="ex-sets">3 × 45s chaque</td><td class="ex-note">—</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>Course en continu — Semaines 9–12</div>
+        <table class="run-table">
+            <thead><tr><th>Semaine</th><th>Objectif</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-sets">Semaine 9</td><td>20 min en continu, allure facile</td><td class="ex-note">FC &lt; 145 · pouvoir parler</td></tr>
+                <tr><td class="ex-sets">Semaine 10</td><td>25 min facile</td><td class="ex-note">Idem</td></tr>
+                <tr><td class="ex-sets">Semaine 11</td><td>30 min facile OU 20 min + 2 × 2 min accélérations</td><td class="ex-note">—</td></tr>
+                <tr><td class="ex-sets">Semaine 12</td><td>30 min facile + une sortie 25 min dans la semaine</td><td class="ex-note">—</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert info" style="margin-top:12px; margin-bottom:0;">
+            <span class="alert-icon">💡</span>
+            <div>Le HIIT peut être introduit à raison d'une séance par semaine à partir de la semaine 10 — uniquement si le plancher pelvien reste totalement asymptomatique à l'impact.</div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : NUTRITION
+══════════════════════════════════════════════ -->
+<div id="tab-nutrition" class="tab-content">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Objectif calorique journalier</div>
+        <div class="calorie-banner">
+            <div>
+                <div class="big">1 600–1 750 kcal</div>
+                <div class="sub">Déficit de −300 à −400 kcal · jamais en dessous de 1 500 kcal</div>
+            </div>
+            <div class="note">Ajouter 100–150 kcal<br>les jours d'entraînement</div>
+        </div>
+        <div class="alert success" style="margin-bottom:0;">
+            <span class="alert-icon">✅</span>
+            <div>Pas d'allaitement = déficit modéré possible en toute sécurité. Ne pas restreindre agressivement — le corps récupère encore et les hormones ont besoin de carburant. Sous-manger ralentit le métabolisme et détruit le muscle.</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Macros journalières</div>
+        <div class="macro-grid">
+            <div class="macro-card protein">
+                <div class="value">100–120g</div>
+                <div class="label">Protéines</div>
+                <div class="why">Maintien musculaire + satiété. Non négociable pour la recomposition.</div>
+            </div>
+            <div class="macro-card carbs">
+                <div class="value">130–160g</div>
+                <div class="label">Glucides</div>
+                <div class="why">Énergie pour l'entraînement, stabilité de l'humeur, fonction thyroïdienne.</div>
+            </div>
+            <div class="macro-card fat">
+                <div class="value">50–65g</div>
+                <div class="label">Lipides</div>
+                <div class="why">Hormones, santé articulaire. Ne pas descendre en dessous de 45g.</div>
+            </div>
+        </div>
+        <p style="font-size:12px; color:var(--text-light);">Viser 25–35g de protéines par repas. Bonnes sources : œufs, yaourt grec, poulet, poisson, légumineuses, fromage blanc, shake protéiné si besoin.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>À privilégier</div>
+        <ul style="padding-left:16px; font-size:13px;">
+            <li style="margin-bottom:8px;"><strong>Manger suffisamment</strong> — sous-manger ralentit le métabolisme et la récupération musculaire</li>
+            <li style="margin-bottom:8px;"><strong>Des protéines à chaque repas</strong> — indispensable pour la recomposition corporelle</li>
+            <li style="margin-bottom:8px;"><strong>Hydratation</strong> — minimum 2–2,5L d'eau par jour</li>
+            <li style="margin-bottom:8px;"><strong>Ne pas descendre sous 45g de lipides</strong> — la production hormonale en dépend</li>
+            <li><strong>Limiter l'alcool</strong> — perturbe le sommeil, augmente le cortisol et freine la perte de graisse</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--red)"></span>À éviter</div>
+        <ul class="avoid-list">
+            <li>Sauter des repas — provoque un pic de cortisol et la dégradation musculaire</li>
+            <li>Restriction sévère (&lt; 1 400 kcal) — contre-productif</li>
+            <li>Couper drastiquement les glucides en période d'entraînement — crash d'énergie et d'humeur</li>
+            <li>Se peser tous les jours — la rétention d'eau fluctue fortement en post-partum</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Suivi des progrès</div>
+        <table>
+            <thead><tr><th>Indicateur</th><th>Fréquence</th><th>Ce qu'on mesure</th></tr></thead>
+            <tbody>
+                <tr><td class="ex-name">Mensurations</td><td>Toutes les 2 semaines</td><td class="ex-note">Tour de taille, hanches, cuisses, bras</td></tr>
+                <tr><td class="ex-name">Photos de progression</td><td>Mensuel</td><td class="ex-note">Même éclairage et même angle à chaque fois</td></tr>
+                <tr><td class="ex-name">Journal de force</td><td>Chaque séance</td><td class="ex-note">Charges soulevées — indicateur le plus objectif</td></tr>
+                <tr><td class="ex-name">Niveau d'énergie</td><td>Hebdomadaire</td><td class="ex-note">Échelle de 1 à 10</td></tr>
+                <tr><td class="ex-name">Balance (optionnel)</td><td>1×/semaine max</td><td class="ex-note">Même moment de la journée · faire la moyenne sur 4 semaines avant de conclure</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ONGLET : GUIDE DU PARTENAIRE
+══════════════════════════════════════════════ -->
+<div id="tab-partner" class="tab-content">
+<div class="container">
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>Actions à fort impact</div>
+        <ul class="action-list">
+            <li>
+                <span class="action-num">1</span>
+                <div><strong>Protéger ses créneaux d'entraînement</strong> — s'occuper du bébé 60 min pour qu'elle puisse s'entraîner sans interruption 3×/semaine. C'est la chose la plus utile que tu puisses faire.</div>
+            </li>
+            <li>
+                <span class="action-num">2</span>
+                <div><strong>Cuisiner ou préparer des repas riches en protéines</strong> — atteindre 100g+ de protéines par jour est difficile quand on est fatiguée. Avoir de la nourriture prête supprime la friction.</div>
+            </li>
+            <li>
+                <span class="action-num">3</span>
+                <div><strong>Marcher ensemble</strong> — activité à faible impact adaptée à la récupération, et bonne pour la connexion.</div>
+            </li>
+            <li>
+                <span class="action-num">4</span>
+                <div><strong>Suivre avec elle</strong> — ne pas en faire son projet à elle seule. La responsabilité partagée est plus efficace que la motivation solitaire.</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--red)"></span>Ce qu'il ne faut pas faire</div>
+        <ul class="avoid-list">
+            <li>Commenter son corps — même positivement. Ça crée de la pression. La laisser mener cette conversation.</li>
+            <li>La pousser à s'entraîner les jours d'épuisement — manque de sommeil = jour de repos, pas un problème de volonté.</li>
+            <li>Comparer sa récupération à celle d'autres femmes ou à son corps d'avant.</li>
+            <li>Suggérer des entraînements plus durs quand les résultats tardent — faire confiance au processus.</li>
+            <li>Faire des commentaires sur la nourriture ou le régime — tout cadrer autour de l'énergie et de la force, pas du poids.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--orange)"></span>Signaux d'alerte — Pause et consultation</div>
+        <div class="alert warning">
+            <span class="alert-icon">🚨</span>
+            <div>Si elle signale l'un des éléments suivants, interrompre l'entraînement et contacter la kiné spécialisée ou le médecin avant de reprendre.</div>
+        </div>
+        <ul style="padding-left:16px; font-size:13px; margin-top:12px;">
+            <li style="margin-bottom:8px;">Fuites urinaires pendant l'effort (pas juste une envie pressante — de vraies fuites)</li>
+            <li style="margin-bottom:8px;">Pression ou lourdeur pelvienne après les séances</li>
+            <li style="margin-bottom:8px;">Douleurs lombaires ou de hanches persistantes après l'entraînement</li>
+            <li style="margin-bottom:8px;">Fatigue extrême ne s'améliorant pas avec le repos (vérifier la thyroïde)</li>
+            <li>Humeur basse persistant plus de 2 semaines — très fréquent en post-partum, nécessite un suivi approprié</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Référence rapide</div>
+        <div class="qr-grid">
+            <div class="qr-item">
+                <div class="key">Séances par semaine</div>
+                <div class="val">3 en salle (2 bas + 1 haut du corps)</div>
+            </div>
+            <div class="qr-item">
+                <div class="key">Objectif protéines</div>
+                <div class="val">100–120g/jour</div>
+            </div>
+            <div class="qr-item">
+                <div class="key">Apport calorique</div>
+                <div class="val">1 600–1 750 kcal</div>
+            </div>
+            <div class="qr-item">
+                <div class="key">Reprise de la course</div>
+                <div class="val">Semaine 5 (checklist d'abord)</div>
+            </div>
+            <div class="qr-item">
+                <div class="key">Pesée</div>
+                <div class="val">1×/semaine · moyenne sur 4 sem.</div>
+            </div>
+            <div class="qr-item">
+                <div class="key">Timeline</div>
+                <div class="val">Changements sem. 8–12 · nets à 6 mois</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script>
+    function showTab(id) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + id).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // ── STICK FIGURE ILLUSTRATIONS ──────────────────────────────────────
+    // Each pose: h=[cx,cy,r] for head, s=[[x1,y1,x2,y2],...] for limb segments
+    // ViewBox: 0 0 65 68
+
+    const POSES = {
+      // Standing / squat family
+      'squat':          { h:[32,8,6],  s:[[32,20,30,38],[32,22,18,30],[32,22,46,30],[30,38,16,52],[16,52,12,65],[30,38,46,52],[46,52,52,65]] },
+      'sumo-squat':     { h:[32,7,6],  s:[[32,19,32,37],[32,24,14,30],[32,24,50,30],[32,37,10,52],[10,52,8,65],[32,37,54,52],[54,52,56,65]] },
+      'lunge-back':     { h:[28,7,6],  s:[[28,19,28,38],[28,25,18,33],[28,25,38,33],[28,38,34,54],[34,54,38,65],[28,38,14,52],[14,52,10,65]] },
+      'lateral-lunge':  { h:[32,7,6],  s:[[32,19,32,38],[32,25,20,33],[32,25,44,33],[32,38,30,55],[30,55,28,65],[32,38,52,52],[52,52,58,65]] },
+      'good-morning':   { h:[20,10,6], s:[[22,20,38,38],[16,16,22,20],[26,14,22,20],[38,38,35,55],[35,55,32,65],[38,38,42,55],[42,55,45,65]] },
+      'lateral-walk':   { h:[32,7,6],  s:[[32,19,32,38],[32,27,20,33],[32,27,44,33],[32,38,22,55],[22,55,20,65],[32,38,42,55],[42,55,44,65],[18,52,46,52]] },
+      'calf-raise':     { h:[32,6,6],  s:[[32,18,32,42],[32,26,25,38],[32,26,39,38],[32,42,28,58],[28,58,24,65],[32,42,36,58],[36,58,40,65],[24,65,20,68],[40,65,44,68]] },
+      'bulgarian-split':{ h:[28,7,6],  s:[[28,19,28,38],[28,25,18,33],[28,25,38,33],[28,38,20,54],[20,54,16,65],[28,38,38,52],[38,52,50,52]] },
+      'nordic-curl':    { h:[32,8,6],  s:[[32,20,32,42],[32,28,20,36],[32,28,44,36],[32,42,25,56],[32,42,39,56],[25,56,22,65],[39,56,42,65]] },
+      'pallof-press':   { h:[32,7,6],  s:[[32,19,32,42],[32,28,52,34],[52,34,58,34],[32,42,24,58],[32,42,40,58]] },
+      // Supine (on back)
+      'glute-bridge':   { h:[8,50,5],  s:[[13,48,28,42],[28,42,45,28],[45,28,56,40],[56,40,61,50],[16,48,22,58]] },
+      'single-bridge':  { h:[8,50,5],  s:[[13,48,28,42],[28,42,45,28],[45,28,56,40],[56,40,61,50],[45,28,48,12]] },
+      'dead-bug':       { h:[8,35,5],  s:[[14,40,38,43],[20,40,16,22],[16,22,12,12],[20,40,26,52],[38,43,55,43],[38,43,42,55],[42,55,38,65]] },
+      'bench-press':    { h:[8,35,5],  s:[[13,40,45,42],[24,40,20,28],[20,28,18,20],[45,40,42,30],[42,30,40,22],[13,40,16,53],[45,42,48,53]] },
+      'hip-thrust':     { h:[8,50,5],  s:[[13,48,28,42],[28,42,45,26],[45,26,58,38],[58,38,63,46],[16,48,22,58],[8,44,62,40]] },
+      'leg-curl':       { h:[8,38,5],  s:[[13,42,42,43],[42,43,56,40],[56,40,50,30],[13,42,16,55]] },
+      // Prone (face down)
+      'superman':       { h:[8,40,5],  s:[[13,43,50,43],[18,43,8,33],[8,33,4,25],[50,43,58,35],[58,35,62,28]] },
+      // Quadruped
+      'bird-dog':       { h:[10,28,5], s:[[16,33,46,38],[16,33,5,26],[46,38,58,30],[46,38,50,50],[16,33,20,45]] },
+      'donkey-kick':    { h:[10,28,5], s:[[16,33,46,38],[16,33,18,45],[20,33,22,45],[46,38,58,28],[58,28,63,20],[46,38,50,50]] },
+      // Push / pull
+      'pushup':         { h:[8,28,6],  s:[[14,33,50,36],[22,33,20,44],[20,44,22,52],[50,36,58,44],[58,44,60,52]] },
+      'plank':          { h:[8,28,6],  s:[[14,32,54,36],[20,32,20,44],[54,36,58,44],[58,44,60,52]] },
+      'table-row':      { h:[32,58,5], s:[[32,53,32,32],[32,40,18,30],[18,30,14,22],[32,40,46,30],[46,30,50,22],[32,53,24,63],[32,53,40,63]] },
+      'pike-pushup':    { h:[15,55,6], s:[[20,52,38,36],[38,36,52,20],[20,52,25,62],[38,36,30,62]] },
+      'dips':           { h:[32,18,6], s:[[32,24,32,44],[26,34,20,44],[38,34,44,44],[20,44,16,50],[44,44,48,50],[32,44,24,60],[24,60,20,68],[32,44,40,60],[40,60,44,68]] },
+      'pullup':         { h:[32,12,6], s:[[32,18,32,40],[32,25,20,22],[20,22,16,16],[32,25,44,22],[44,22,48,16],[32,40,24,54],[32,40,40,54]] },
+      'shoulder-press': { h:[32,7,6],  s:[[32,19,32,42],[32,26,18,20],[18,20,14,12],[32,26,46,20],[46,20,50,12],[32,42,24,58],[32,42,40,58]] },
+      'cable-fly':      { h:[32,7,6],  s:[[32,19,32,42],[32,26,14,22],[14,22,8,30],[32,26,50,22],[50,22,56,30],[32,42,24,58],[32,42,40,58]] },
+      // Machine
+      'leg-press':      { h:[8,32,6],  s:[[14,36,28,42],[28,42,42,56],[42,56,54,52],[28,22,42,20]] },
+    };
+
+    // Map French exercise names → pose keys
+    const NAME_TO_POSE = {
+      'Squat poids du corps':                   'squat',
+      'Squat sumo poids du corps':              'sumo-squat',
+      'Squat barre ou soulevé de terre hex bar':'squat',
+      'Squat bulgare (haltères)':               'bulgarian-split',
+      'Soulevé de terre sumo (barre)':          'sumo-squat',
+      'Pont fessier':                           'glute-bridge',
+      'Pont fessier unilatéral':                'single-bridge',
+      'Hip thrust (barre)':                     'hip-thrust',
+      'Good morning poids du corps':            'good-morning',
+      'Soulevé de terre roumain (lourd)':       'good-morning',
+      'Fente arrière poids du corps':           'lunge-back',
+      'Fente arrière (haltères)':               'lunge-back',
+      'Fente latérale poids du corps':          'lateral-lunge',
+      'Dead bug':                               'dead-bug',
+      'Pompe inclinée ou sur les genoux':       'pushup',
+      'Rowing inversé sous table':              'table-row',
+      'Pike push-up':                           'pike-pushup',
+      'Dips sur banc':                          'dips',
+      'Superman':                               'superman',
+      'Bird-dog':                               'bird-dog',
+      'Marche latérale avec élastique':         'lateral-walk',
+      'Donkey kick poids du corps':             'donkey-kick',
+      'Kickback à la poulie (lourd)':           'donkey-kick',
+      'Élévations de mollets':                  'calf-raise',
+      'Leg press':                              'leg-press',
+      'Curl jambes (machine)':                  'leg-curl',
+      'Nordic curl (excentrique)':              'nordic-curl',
+      'Pallof press ou marche valise':          'pallof-press',
+      'Développé couché haltères ou barre':     'bench-press',
+      'Traction assistée ou tirage vertical lourd':'pullup',
+      'Écarté à la poulie':                     'cable-fly',
+      'Développé épaules':                      'shoulder-press',
+      'Planche + planche latérale':             'plank',
+    };
+
+    function makeSVG(key) {
+      const p = POSES[key];
+      if (!p) return '';
+      const c = '#5c6bc0', bg = '#f0f2ff';
+      let s = `<svg viewBox="0 0 65 68" width="62" height="65" style="display:block;border-radius:8px" xmlns="http://www.w3.org/2000/svg">`;
+      s += `<rect width="65" height="68" fill="${bg}" rx="8"/>`;
+      s += `<circle cx="${p.h[0]}" cy="${p.h[1]}" r="${p.h[2]}" fill="${c}"/>`;
+      for (const [x1,y1,x2,y2] of p.s)
+        s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="3" stroke-linecap="round"/>`;
+      return s + '</svg>';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tablesUpdated = new Set();
+      document.querySelectorAll('td.ex-name').forEach(td => {
+        const pose = NAME_TO_POSE[td.textContent.trim()];
+        if (!pose) return;
+        const row = td.parentElement;
+        if (!row.querySelector('.ex-sets')) return; // skip progression tables
+        tablesUpdated.add(row.closest('table'));
+        const imgTd = document.createElement('td');
+        imgTd.style.cssText = 'padding:4px 6px;vertical-align:middle;width:70px;';
+        imgTd.innerHTML = makeSVG(pose);
+        row.insertBefore(imgTd, row.firstChild);
+      });
+      tablesUpdated.forEach(table => {
+        const headRow = table.querySelector('thead tr');
+        if (headRow) {
+          const th = document.createElement('th');
+          th.style.cssText = 'width:70px;padding:6px;';
+          headRow.insertBefore(th, headRow.firstChild);
+        }
+      });
+    });
+</script>
+
+</body>
+</html>
