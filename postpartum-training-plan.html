@@ -573,6 +573,10 @@
                     <tr><td class="ex-name">Dips sur banc</td><td class="ex-sets">2 × 12</td><td class="ex-note">Mains sur le bord du banc · coudes proches du corps</td></tr>
                     <tr><td class="ex-name">Superman</td><td class="ex-sets">3 × 12</td><td class="ex-note">À plat ventre · lever bras et jambes simultanément · 1s tenue</td></tr>
                     <tr><td class="ex-name">Bird-dog</td><td class="ex-sets">3 × 8 par côté</td><td class="ex-note">Gainage et stabilité · lent · dos plat</td></tr>
+                    <tr style="background:var(--accent-light)"><td colspan="3" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#c2185b;padding:8px 10px;">Abdominaux &amp; Gainage latéral</td></tr>
+                    <tr><td class="ex-name">Planche latérale sur genoux</td><td class="ex-sets">3 × 20s par côté</td><td class="ex-note">Sur le genou · hanche relevée · corps aligné tête-pieds · respiration régulière</td></tr>
+                    <tr><td class="ex-name">Rotation du tronc</td><td class="ex-sets">3 × 10 par côté</td><td class="ex-note">Assis · genoux fléchis · tourner lentement · sans rebondir</td></tr>
+                    <tr><td class="ex-name">Dead bug</td><td class="ex-sets">3 × 8 par côté</td><td class="ex-note">Sur le dos · bras et jambe opposée · bas du dos collé au sol · arrêter si ligne blanche bombe</td></tr>
                 </tbody>
             </table>
         </div>
@@ -689,7 +693,9 @@
                 <tr><td class="ex-name">Tiré</td><td>Rowing inversé sous table</td><td class="ex-note" style="color:#e65100; font-weight:600;">Rowing haltère unilatéral · 3×12 par côté</td></tr>
                 <tr><td class="ex-name">Épaules</td><td>Pike push-up</td><td class="ex-note" style="color:#e65100; font-weight:600;">Développé épaules haltères · 3×12</td></tr>
                 <tr><td class="ex-name">Dos / biceps</td><td>Superman · Bird-dog</td><td class="ex-note" style="color:#e65100; font-weight:600;">Tirage vertical poulie · 3×12 · Curl biceps · 2×12</td></tr>
-                <tr><td class="ex-name">Gainage</td><td>Dead bug</td><td class="ex-note" style="color:#e65100; font-weight:600;">Planche 30–45s → planche latérale</td></tr>
+                <tr><td class="ex-name">Gainage latéral</td><td>Planche lat. genoux · 3×20s</td><td class="ex-note" style="color:#e65100; font-weight:600;">Planche latérale complète 30–45s par côté</td></tr>
+                <tr><td class="ex-name">Obliques</td><td>Rotation du tronc · 3×10</td><td class="ex-note" style="color:#e65100; font-weight:600;">Russian twist avec haltère léger · 3×15 par côté</td></tr>
+                <tr><td class="ex-name">Anti-rotation</td><td>Dead bug · 3×8</td><td class="ex-note" style="color:#e65100; font-weight:600;">Pallof press à la poulie · 3×12 par côté</td></tr>
             </tbody>
         </table>
     </div>
@@ -814,7 +820,10 @@
                 <tr><td class="ex-name">Traction assistée ou tirage vertical lourd</td><td class="ex-sets">4 × 8</td><td class="ex-note">—</td></tr>
                 <tr><td class="ex-name">Écarté à la poulie</td><td class="ex-sets">3 × 12</td><td class="ex-note">Nouvel ajout</td></tr>
                 <tr><td class="ex-name">Développé épaules</td><td class="ex-sets">3 × 10</td><td class="ex-note">Assis ou debout</td></tr>
-                <tr><td class="ex-name">Planche + planche latérale</td><td class="ex-sets">3 × 45s chaque</td><td class="ex-note">—</td></tr>
+                    <tr style="background:var(--accent-light)"><td colspan="3" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#c2185b;padding:8px 10px;">Abdominaux &amp; Gainage latéral</td></tr>
+                <tr><td class="ex-name">Planche latérale complète</td><td class="ex-sets">3 × 45s par côté</td><td class="ex-note">Corps rigide · hanche haute · peut poser un haltère sur la hanche</td></tr>
+                <tr><td class="ex-name">Russian twist</td><td class="ex-sets">3 × 15 par côté</td><td class="ex-note">Avec haltère ou medicine ball · rotation complète · pieds décollés</td></tr>
+                <tr><td class="ex-name">Cable woodchop</td><td class="ex-sets">3 × 12 par côté</td><td class="ex-note">Rotation diagonale haut-bas à la poulie · gainage latéral fonctionnel</td></tr>
             </tbody>
         </table>
     </div>
@@ -1055,6 +1064,10 @@
       'cable-fly':      { h:[32,7,6],  s:[[32,19,32,42],[32,26,14,22],[14,22,8,30],[32,26,50,22],[50,22,56,30],[32,42,24,58],[32,42,40,58]] },
       // Machine
       'leg-press':      { h:[8,32,6],  s:[[14,36,28,42],[28,42,42,56],[42,56,54,52],[28,22,42,20]] },
+      // Abs & lateral core
+      'side-plank':     { h:[8,32,5],  s:[[14,35,52,22],[22,34,24,46],[30,28,28,16],[52,22,58,34],[58,34,60,44]] },
+      'russian-twist':  { h:[32,10,6], s:[[32,22,26,38],[30,26,50,20],[26,38,16,50],[16,50,20,60],[26,38,38,50],[38,50,34,60]] },
+      'woodchop':       { h:[32,7,6],  s:[[32,19,32,42],[32,26,54,12],[32,42,20,58],[20,58,18,65],[32,42,44,58],[44,58,46,65]] },
     };
 
     // Map French exercise names → pose keys
@@ -1092,6 +1105,11 @@
       'Écarté à la poulie':                     'cable-fly',
       'Développé épaules':                      'shoulder-press',
       'Planche + planche latérale':             'plank',
+      'Planche latérale sur genoux':            'side-plank',
+      'Planche latérale complète':              'side-plank',
+      'Rotation du tronc':                      'russian-twist',
+      'Russian twist':                          'russian-twist',
+      'Cable woodchop':                         'woodchop',
     };
 
     function makeSVG(key) {
