@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Scénarios Galatry 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F3F5F4; --sheet:#FBFCFB; --ink:#1B2530; --ink-2:#56626E; --rule:#C9D1D4;
+  --room:#E6ECEE; --accent:#2F6690;
+  --good:#0C7A3D; --good-soft:rgba(12,122,61,.12); --critical:#B3402A; --critical-soft:rgba(179,64,42,.12); --warning:#B8860B; --warning-soft:rgba(184,134,11,.16);
+  --f-draw:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10161B; --sheet:#151D23; --ink:#DCE4E9; --ink-2:#93A1AB; --rule:#2B3740;
+    --room:#1C262E; --accent:#7DB4E0;
+    --good:#3FBE72; --good-soft:rgba(63,190,114,.16); --critical:#E2725B; --critical-soft:rgba(226,114,91,.16); --warning:#E0B93D; --warning-soft:rgba(224,185,61,.18);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10161B; --sheet:#151D23; --ink:#DCE4E9; --ink-2:#93A1AB; --rule:#2B3740;
+  --room:#1C262E; --accent:#7DB4E0;
+  --good:#3FBE72; --good-soft:rgba(63,190,114,.16); --critical:#E2725B; --critical-soft:rgba(226,114,91,.16); --warning:#E0B93D; --warning-soft:rgba(224,185,61,.18);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body);padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{font-family:var(--f-draw);font-weight:600;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.5vw,40px);line-height:1.08}
+h2{font-size:21px;text-transform:uppercase;letter-spacing:.06em}
+h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+p{margin:0;max-width:68ch}
+.muted{color:var(--ink-2)}
+.mono{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums}
+
+header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:20px}
+.kicker{font-family:var(--f-draw);text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--accent);margin-bottom:6px}
+.cartouche{display:grid;grid-template-columns:auto auto;border:1.5px solid var(--ink);font-family:var(--f-draw);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.cartouche div{padding:5px 12px;border-bottom:1px solid var(--rule)}
+.cartouche div:nth-child(odd){color:var(--ink-2);border-right:1px solid var(--rule)}
+.cartouche div:nth-last-child(-n+2){border-bottom:0}
+.lede{display:flex;flex-direction:column;gap:10px}
+nav{display:flex;flex-wrap:wrap;gap:8px}
+nav a{font-family:var(--f-draw);text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--rule);padding:6px 12px;border-radius:2px;background:var(--sheet)}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+
+section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+.sec-head{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:8px}
+
+.verdict{background:var(--sheet);border:1px solid var(--rule);padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+.verdict p{font-size:.98rem;color:var(--ink);max-width:68ch}
+.verdict .flag{font-size:.86rem;color:var(--critical)}
+.callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.callout{background:var(--room);padding:10px 14px;display:flex;flex-direction:column;gap:2px}
+.callout .k{font-family:var(--f-draw);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.callout .n{font-family:var(--f-mono);font-size:1.1rem;font-weight:600;font-variant-numeric:tabular-nums}
+.callout .s{font-size:.82rem;color:var(--ink-2)}
+
+.rank-list{display:flex;flex-direction:column;gap:10px}
+.rank-row{background:var(--sheet);border:1px solid var(--rule);padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.rank-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rank-name{font-family:var(--f-draw);font-weight:600;font-size:1rem;text-transform:uppercase;letter-spacing:.02em}
+.rank-value-block{display:flex;flex-direction:column;align-items:flex-end;gap:0}
+.rank-value{font-family:var(--f-mono);font-size:1rem;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rank-value.good{color:var(--good)}
+.rank-value.bad{color:var(--critical)}
+.rank-value-sub{font-size:.76rem;color:var(--ink-2);font-variant-numeric:tabular-nums;font-family:var(--f-mono)}
+.bar-track{position:relative;height:18px;background:var(--room);overflow:visible}
+.bar-track::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--rule)}
+.bar-fill{position:absolute;top:2px;bottom:2px}
+.bar-fill.good{background:var(--good)}
+.bar-fill.bad{background:var(--critical)}
+.rank-meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.78rem;color:var(--ink-2);font-family:var(--f-mono)}
+.rank-meta .warn-flag{font-family:var(--f-body);color:color-mix(in srgb, var(--warning) 70%, var(--ink) 30%)}
+.rank-meta .aff-fail{color:var(--critical);font-weight:600}
+.rank-edit{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.78rem;font-family:var(--f-body)}
+.rank-edit label{color:var(--ink-2);margin-right:4px}
+.mini-select{border:none;background:transparent;color:var(--accent);font:inherit;font-size:.78rem;text-decoration:underline;text-decoration-style:dotted;cursor:pointer;padding:0}
+.rank-edit input[type="number"].mini-number{width:92px;border:none;border-bottom:1px dotted var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:.78rem;font-variant-numeric:tabular-nums;padding:0 0 1px;display:inline-block;vertical-align:baseline}
+
+details.breakdown summary{cursor:pointer;font-size:.78rem;font-family:var(--f-body);color:var(--accent);list-style:none}
+details.breakdown summary::-webkit-details-marker{display:none}
+details.breakdown summary::before{content:"\25B8 Voir le détail mensuel"}
+details.breakdown[open] summary::before{content:"\25BE Masquer le détail mensuel"}
+.breakdown-list{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--ink-2);padding-top:8px;margin-top:6px;border-top:1px dashed var(--rule)}
+.breakdown-list .b-group{font-family:var(--f-draw);color:var(--ink-2);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.breakdown-list .b-row{display:flex;justify-content:space-between;gap:12px}
+.breakdown-list .b-row.total{font-weight:600;color:var(--ink);border-top:1px solid var(--rule);padding-top:5px;margin-top:3px}
+.breakdown-list .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+details.assumptions{background:var(--sheet);border:1px solid var(--rule);padding:4px 20px}
+details.assumptions summary{cursor:pointer;padding:14px 0;font-family:var(--f-draw);font-weight:600;font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)}
+details.assumptions[open] summary{border-bottom:1px solid var(--rule);margin-bottom:16px}
+.assumption-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;padding-bottom:18px}
+.assumption-group h3{color:var(--accent);margin-bottom:8px}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.field:last-child{margin-bottom:0}
+.field-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.field label{font-size:.8rem;color:var(--ink-2)}
+.field .val{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--ink);font-weight:600}
+input[type="range"]{width:100%;accent-color:var(--accent)}
+input[type="number"]{width:100%;border:1px solid var(--rule);padding:6px 9px;background:var(--room);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.toggle-row{display:flex;gap:6px}
+.toggle-btn{flex:1;border:1px solid var(--rule);background:var(--room);color:var(--ink-2);padding:6px 10px;font:inherit;font-size:.82rem;cursor:pointer}
+.toggle-btn.active{background:var(--accent);border-color:var(--accent);color:var(--sheet);font-weight:600}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.note{background:var(--sheet);border:1px solid var(--rule);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.note ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink-2);font-size:.88rem}
+
+footer{border-top:1px solid var(--rule);padding-top:14px;font-size:.78rem;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="lede">
+    <div class="kicker">Chemin de Galatry 3 · Corseaux VD</div>
+    <h1>Scénarios d'achat &amp; de rénovation</h1>
+    <p class="muted">Quatre options possibles : rénover et y habiter, rénover et louer l'appartement du bas, la louer telle quelle sans travaux, ou tout miser sur une rénovation de luxe. Classées selon ce que chacune coûte réellement par mois.</p>
+    <nav aria-label="Sections">
+      <a href="index.html">&#8617; Plans &amp; modèle 3D</a><a href="#bottom-line">En résumé</a><a href="#scenarios">Scénarios</a><a href="#assumptions">Hypothèses</a><a href="#notes">Notes</a><a href="scenarios.html">EN</a>
+    </nav>
+  </div>
+  <div class="cartouche" aria-label="Données clés">
+    <div>Prix demandé</div><div>CHF 2'050'000</div>
+    <div>Surface</div><div>192 m² · parcelle 1'053 m²</div>
+    <div>Pièces</div><div>7.5 · 5 ch · 3 sdb</div>
+    <div>CECB</div><div>E · D · G</div>
+    <div>Vente</div><div>Succession</div>
+  </div>
+</header>
+
+<section id="bottom-line">
+  <div class="sec-head"><h2>En résumé</h2></div>
+  <div class="verdict">
+    <p id="verdictText"></p>
+    <p class="flag" id="verdictFlag" hidden></p>
+    <div class="callouts">
+      <div class="callout"><span class="k">Le moins cher au total</span><span class="n" id="co-best"></span><span class="s" id="co-best-sub"></span></div>
+      <div class="callout"><span class="k">Le mieux pour y habiter</span><span class="n" id="co-live"></span><span class="s" id="co-live-sub"></span></div>
+      <div class="callout"><span class="k">Le mieux pour louer</span><span class="n" id="co-rent"></span><span class="s" id="co-rent-sub"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="scenarios">
+  <div class="sec-head"><h2>Vos quatre scénarios, classés</h2><span class="muted">Classés du meilleur au moins bon coût mensuel · chaque ligne reste modifiable</span></div>
+  <div class="rank-list" id="rankList"></div>
+</section>
+
+<section id="assumptions">
+  <div class="sec-head"><h2>Hypothèses</h2></div>
+  <details class="assumptions" id="assumptionsDetails">
+    <summary>Ajuster les hypothèses communes</summary>
+    <div class="assumption-groups">
+      <div class="assumption-group">
+        <h3>Financement</h3>
+        <div class="field">
+          <div class="field-row"><label for="in-equity">Fonds propres totaux (% du prix)</label><span class="val" id="val-equity">20%</span></div>
+          <input type="range" id="in-equity" min="20" max="40" step="1" value="20">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-pension">…dont financés par la prévoyance (pts %)</label><span class="val" id="val-pension">10 pts</span></div>
+          <input type="range" id="in-pension" min="0" max="10" step="1" value="10">
+        </div>
+        <div class="field">
+          <div class="field-row"><label>Taux hypothécaire</label><span class="val" id="val-rate"></span></div>
+          <div class="toggle-row">
+            <button type="button" class="toggle-btn active" id="btn-fixed">Fixe</button>
+            <button type="button" class="toggle-btn" id="btn-saron">SARON</button>
+          </div>
+        </div>
+        <div class="field" id="wrap-fixed">
+          <input type="range" id="in-fixed" min="1.55" max="2.15" step="0.05" value="1.85">
+        </div>
+        <div class="field" id="wrap-saron" hidden>
+          <input type="range" id="in-saron" min="0.70" max="1.20" step="0.05" value="0.95">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-tx">Frais de transaction (% du prix)</label><span class="val" id="val-tx">4.5%</span></div>
+          <input type="range" id="in-tx" min="4.0" max="5.0" step="0.1" value="4.5">
+        </div>
+      </div>
+
+      <div class="assumption-group">
+        <h3>Rénovation &amp; loyers</h3>
+        <div class="field"><label for="in-fullreno">Coût rénovation complète (CHF)</label><input type="number" id="in-fullreno" min="0" step="10000" value="400000"></div>
+        <div class="field"><label for="in-luxreno">Coût rénovation de luxe (CHF)</label><input type="number" id="in-luxreno" min="0" step="10000" value="700000"></div>
+        <div class="field"><label for="in-ceilrent">Loyer comparable, maison rénovée (CHF/mois)</label><input type="number" id="in-ceilrent" min="0" step="50" value="6100"></div>
+        <div class="field"><label for="in-studiorent">Loyer comparable, appartement du bas (CHF/mois)</label><input type="number" id="in-studiorent" min="0" step="25" value="900"></div>
+        <div class="field">
+          <div class="field-row"><label for="in-discount">Décote de loyer en l'état vs. rénové</label><span class="val" id="val-discount">30%</span></div>
+          <input type="range" id="in-discount" min="0" max="40" step="5" value="30">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-luxpremium">Prime de loyer luxe vs. rénové</label><span class="val" id="val-luxpremium">15%</span></div>
+          <input type="range" id="in-luxpremium" min="0" max="40" step="5" value="15">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-vacancy">Vacance &amp; gestion (% du loyer)</label><span class="val" id="val-vacancy">8%</span></div>
+          <input type="range" id="in-vacancy" min="0" max="15" step="1" value="8">
+        </div>
+      </div>
+
+      <div class="assumption-group">
+        <h3>Fiscalité &amp; horizon</h3>
+        <div class="field"><label for="in-income">Revenu brut du ménage (CHF/an)</label><input type="number" id="in-income" min="0" step="10000" value="250000"></div>
+        <div class="field">
+          <div class="field-row"><label for="in-taxrate">Taux marginal d'imposition</label><span class="val" id="val-taxrate">30%</span></div>
+          <input type="range" id="in-taxrate" min="15" max="40" step="1" value="30">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-vl">Valeur locative (% du loyer du marché)</label><span class="val" id="val-vl">65%</span></div>
+          <input type="range" id="in-vl" min="40" max="80" step="5" value="65">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="in-horizon">Horizon de projection</label><span class="val" id="val-horizon">10 ans</span></div>
+          <input type="range" id="in-horizon" min="5" max="15" step="1" value="10">
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section id="notes">
+  <div class="sec-head"><h2>Notes</h2></div>
+  <div class="notes">
+    <div class="note"><h3>Non confirmé</h3>
+      <ul>
+        <li>Diviser la maison en deux appartements indépendants — aucune entrée séparée ni compteur distinct ne sont documentés pour le studio du bas ; à vérifier auprès de la commune/du notaire.</li>
+        <li>Ce bien est déjà proposé environ 16% sous le prix moyen au m² des maisons à Corseaux, ce qui limite probablement la marge de négociation réelle d'une vente de succession.</li>
+        <li>Les loyers et les montants de rénovation sont des comparables et des fourchettes indicatives, pas des devis pour cette maison précise.</li>
+      </ul></div>
+    <div class="note"><h3>Calendrier</h3>
+      <ul>
+        <li>La valeur locative disparaît le 1er janvier 2029 — elle est incluse pour les années en occupation propre avant cette date, puis ramenée à zéro.</li>
+        <li>Les taux hypothécaires reflètent une photographie de septembre 2026 ; le taux de test de solvabilité de 5% est théorique et distinct du taux contractuel utilisé pour le calcul des intérêts réels.</li>
+      </ul></div>
+    <div class="note"><h3>Sources</h3>
+      <ul>
+        <li>Annonce Riviera Properties n°5926947, certificat CECB (12.03.2025), registre foncier — voir la page Plans &amp; modèle 3D pour les relevés d'origine.</li>
+        <li>Cet outil est un outil de planification, pas un conseil financier ou juridique.</li>
+      </ul></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var BASE_PRICE = 2050000;
+
+  var SCENARIOS = [
+    { id:'s1', name:'Rénovation complète, y habiter', rationale:'Rénover toute la maison, puis y habiter vous-même.', price:BASE_PRICE, reno:'full', occ:'owner-whole' },
+    { id:'s2', name:'Rénovation complète, louer l’appartement', rationale:'Rénover toute la maison, la diviser en deux appartements, habiter à l’étage et louer l’appartement du bas.', price:BASE_PRICE, reno:'full', occ:'owner-plus-studio' },
+    { id:'s3', name:'Louer en l’état', rationale:'Ne faire aucun travaux et louer la maison telle qu’elle est aujourd’hui.', price:BASE_PRICE, reno:'none', occ:'rent-whole' },
+    { id:'s4', name:'Rénovation de luxe, y habiter', rationale:'Une rénovation haut de gamme sur toute la maison, puis y habiter vous-même.', price:BASE_PRICE, reno:'luxury', occ:'owner-whole' }
+  ];
+
+  var RENO_LABELS = { none:'Aucune rénovation', full:'Rénovation complète', luxury:'Rénovation de luxe' };
+  var OCC_LABELS = { 'owner-whole':'Habiter toute la maison', 'owner-plus-studio':'Habiter + louer l’appartement du bas', 'rent-whole':'Louer toute la maison' };
+
+  var G = {
+    equityPct: 20, pensionPct: 10, rateMode: 'fixed', fixedRate: 1.85, saronRate: 0.95,
+    txCostPct: 4.5, vacancyPct: 8, discountPct: 30, luxPremiumPct: 15, fullReno: 400000, luxReno: 700000,
+    ceilRent: 6100, studioRent: 900, income: 250000, taxRate: 30, vlPct: 65, horizon: 10,
+    startYear: 2026
+  };
+
+  var state = {};
+  SCENARIOS.forEach(function(sc){ state[sc.id] = { price: sc.price, reno: sc.reno, occ: sc.occ }; });
+
+  function fmtCHF(n){
+    var sign = n < 0 ? '-' : '';
+    var v = Math.round(Math.abs(n));
+    return sign + 'CHF ' + v.toLocaleString('fr-CH');
+  }
+  function fmtCHFk(n){
+    var sign = n < 0 ? '-' : '';
+    var abs = Math.abs(n);
+    if (abs >= 1000000) return sign + (abs / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M';
+    return sign + Math.round(abs / 1000) + 'k';
+  }
+  function fmtPct(n){ return (n*100).toFixed(1) + '%'; }
+  function byId(id){ return document.getElementById(id); }
+
+  function topRiskFlag(st){
+    if (st.occ === 'owner-plus-studio') return 'division en deux appartements non confirmée';
+    if (st.price < BASE_PRICE - 1) return 'marge de négociation incertaine';
+    if (st.reno === 'none') return 'CECB E/D/G non traité';
+    if (st.reno === 'full' || st.reno === 'luxury') return 'coût de rénovation estimatif';
+    return null;
+  }
+
+  function computeScenario(st){
+    var price = st.price;
+    var renoCost = st.reno === 'none' ? 0 : (st.reno === 'full' ? G.fullReno : G.luxReno);
+    var equityAmount = price * G.equityPct / 100;
+    var pensionPct = Math.min(G.pensionPct, G.equityPct);
+    var pensionAmount = price * pensionPct / 100;
+    var hardEquity = equityAmount - pensionAmount;
+    var txCost = price * G.txCostPct / 100;
+    var upfrontCash = hardEquity + txCost + renoCost;
+    var mortgage = price - equityAmount;
+    var tranche1 = Math.min(mortgage, price * 0.65);
+    var tranche2 = Math.max(0, mortgage - tranche1);
+    var isRentalOnly = st.occ === 'rent-whole';
+    var amortYears = isRentalOnly ? 10 : 15;
+    var annualAmort = tranche2 / amortYears;
+    var rate = (G.rateMode === 'fixed' ? G.fixedRate : G.saronRate) / 100;
+    var annualMaintenance = price * 0.01;
+
+    var wholeRentMonthly = st.reno === 'none' ? G.ceilRent * (1 - G.discountPct / 100)
+      : st.reno === 'luxury' ? G.ceilRent * (1 + G.luxPremiumPct / 100)
+      : G.ceilRent;
+    var studioRentMonthly = G.studioRent;
+
+    var grossRentAnnual = 0, vlBaseMonthly = 0;
+    if (st.occ === 'rent-whole') {
+      grossRentAnnual = wholeRentMonthly * 12;
+      vlBaseMonthly = 0;
+    } else if (st.occ === 'owner-plus-studio') {
+      grossRentAnnual = studioRentMonthly * 12;
+      vlBaseMonthly = Math.max(0, wholeRentMonthly - studioRentMonthly);
+    } else {
+      grossRentAnnual = 0;
+      vlBaseMonthly = wholeRentMonthly;
+    }
+    var netRentAnnual = grossRentAnnual * (1 - G.vacancyPct / 100);
+
+    var imputedCost = mortgage * 0.05 + price * 0.01 + annualAmort;
+    var affordabilityRatio = G.income > 0 ? imputedCost / G.income : null;
+    var affordabilityPass = affordabilityRatio !== null && affordabilityRatio <= 0.33;
+
+    var cumulative = -upfrontCash;
+    var tranche2Balance = tranche2;
+    var netCashY1 = null;
+    var interestY1 = null, taxCostY1 = null, energyShieldY1 = 0;
+
+    for (var y = 1; y <= G.horizon; y++) {
+      var calendarYear = G.startYear + y;
+      var interestAnnual = tranche1 * rate + tranche2Balance * rate;
+      tranche2Balance = Math.max(0, tranche2Balance - annualAmort);
+      var vlActive = calendarYear < 2029;
+      var taxCost = 0;
+
+      if (st.occ !== 'rent-whole') {
+        var vlAnnual = vlActive ? (vlBaseMonthly * 12 * G.vlPct / 100) : 0;
+        var flatMaintDeduction = vlAnnual * 0.30;
+        var taxableDelta = vlAnnual - interestAnnual - flatMaintDeduction;
+        taxCost += taxableDelta * G.taxRate / 100;
+      }
+      if (grossRentAnnual > 0) {
+        var taxableRental = netRentAnnual * (1 - 0.20);
+        taxCost += taxableRental * G.taxRate / 100;
+      }
+
+      var netCashRecurring = netRentAnnual - interestAnnual - annualAmort - annualMaintenance - taxCost;
+      var netCashActual = netCashRecurring;
+      if (y === 1 && (st.reno === 'full' || st.reno === 'luxury')) { energyShieldY1 = renoCost * G.taxRate / 100; netCashActual += energyShieldY1; }
+      if (y === 1) { netCashY1 = netCashRecurring; interestY1 = interestAnnual; taxCostY1 = taxCost; }
+      cumulative += netCashActual;
+    }
+
+    return {
+      price: price, upfrontCash: upfrontCash, equityAmount: equityAmount, pensionAmount: pensionAmount,
+      hardEquity: hardEquity, txCost: txCost, renoCost: renoCost,
+      mortgage: mortgage, tranche1: tranche1, tranche2: tranche2, amortYears: amortYears, rate: rate,
+      annualMaintenance: annualMaintenance, netRentAnnual: netRentAnnual, grossRentAnnual: grossRentAnnual,
+      interestY1: interestY1, taxCostY1: taxCostY1, annualAmort: annualAmort, energyShieldY1: energyShieldY1,
+      affordabilityRatio: affordabilityRatio, affordabilityPass: affordabilityPass,
+      netCashY1: netCashY1, finalCumulative: cumulative
+    };
+  }
+
+  function readGlobals(){
+    G.equityPct = +byId('in-equity').value;
+    G.pensionPct = +byId('in-pension').value;
+    G.fixedRate = +byId('in-fixed').value;
+    G.saronRate = +byId('in-saron').value;
+    G.txCostPct = +byId('in-tx').value;
+    G.fullReno = +byId('in-fullreno').value || 0;
+    G.luxReno = +byId('in-luxreno').value || 0;
+    G.ceilRent = +byId('in-ceilrent').value || 0;
+    G.studioRent = +byId('in-studiorent').value || 0;
+    G.discountPct = +byId('in-discount').value;
+    G.luxPremiumPct = +byId('in-luxpremium').value;
+    G.vacancyPct = +byId('in-vacancy').value;
+    G.income = +byId('in-income').value || 0;
+    G.taxRate = +byId('in-taxrate').value;
+    G.vlPct = +byId('in-vl').value;
+    G.horizon = +byId('in-horizon').value;
+  }
+
+  function updateReadouts(){
+    byId('val-equity').textContent = G.equityPct + '%';
+    byId('val-pension').textContent = G.pensionPct + ' pts';
+    byId('val-tx').textContent = G.txCostPct.toFixed(1) + '%';
+    byId('val-discount').textContent = G.discountPct + '%';
+    byId('val-luxpremium').textContent = G.luxPremiumPct + '%';
+    byId('val-vacancy').textContent = G.vacancyPct + '%';
+    byId('val-taxrate').textContent = G.taxRate + '%';
+    byId('val-vl').textContent = G.vlPct + '%';
+    byId('val-horizon').textContent = G.horizon + ' ans';
+    byId('val-rate').textContent = (G.rateMode === 'fixed' ? G.fixedRate.toFixed(2) : G.saronRate.toFixed(2)) + '%';
+  }
+
+  function select(id, field, labels, current){
+    var opts = Object.keys(labels).map(function(k){
+      return '<option value="' + k + '"' + (k === current ? ' selected' : '') + '>' + labels[k] + '</option>';
+    }).join('');
+    return '<select class="mini-select" data-id="' + id + '" data-field="' + field + '">' + opts + '</select>';
+  }
+
+  function numberInput(id, field, value){
+    return 'CHF <input class="mini-number" type="number" min="0" step="10000" data-id="' + id + '" data-field="' + field + '" value="' + Math.round(value) + '">';
+  }
+
+  var results = {};
+
+  function recomputeAll(){
+    readGlobals();
+    updateReadouts();
+    SCENARIOS.forEach(function(sc){ results[sc.id] = computeScenario(state[sc.id]); });
+    renderVerdict();
+    renderRankList();
+  }
+
+  function renderVerdict(){
+    var ranked = SCENARIOS.slice().sort(function(a,b){ return results[b.id].netCashY1 - results[a.id].netCashY1; });
+    var best = ranked[0];
+    var liveIns = SCENARIOS.filter(function(sc){ return state[sc.id].occ !== 'rent-whole'; });
+    var rentals = SCENARIOS.filter(function(sc){ return state[sc.id].occ === 'rent-whole'; });
+    var bestLive = liveIns.length ? liveIns.reduce(function(a,b){ return results[a.id].netCashY1 > results[b.id].netCashY1 ? a : b; }) : null;
+    var bestRent = rentals.length ? rentals.reduce(function(a,b){ return results[a.id].netCashY1 > results[b.id].netCashY1 ? a : b; }) : null;
+
+    var bestR = results[best.id];
+    var verb = bestR.netCashY1 >= 0 ? 'de revenu net' : 'de votre poche';
+    byId('verdictText').textContent =
+      'Actuellement, « ' + best.name + ' » ressort comme le moins cher : environ ' + fmtCHF(Math.abs(bestR.netCashY1) / 12) + '/mois (' + fmtCHF(Math.abs(bestR.netCashY1)) + '/an) ' + verb + '. ' +
+      (bestLive ? 'Si vous voulez habiter la maison, « ' + bestLive.name + ' » est la solution la moins coûteuse. ' : '') +
+      (bestRent ? 'Si vous préférez la louer entièrement, « ' + bestRent.name + ' » est la meilleure option.' : '');
+
+    var flagEl = byId('verdictFlag');
+    if (!bestR.affordabilityPass && bestR.affordabilityRatio !== null) {
+      flagEl.hidden = false;
+      flagEl.textContent = '⚠ « ' + best.name + ' » exige ' + fmtPct(bestR.affordabilityRatio) + ' de votre revenu pour le logement — au-dessus du plafond de 33% utilisé par les banques. Vous pourriez ne pas obtenir de financement à ces conditions.';
+    } else {
+      flagEl.hidden = true;
+    }
+
+    byId('co-best').textContent = (bestR.netCashY1 >= 0 ? '+' : '-') + fmtCHF(Math.abs(bestR.netCashY1) / 12) + '/mois';
+    byId('co-best-sub').textContent = best.name;
+    if (bestLive) {
+      byId('co-live').textContent = (results[bestLive.id].netCashY1 >= 0 ? '+' : '-') + fmtCHF(Math.abs(results[bestLive.id].netCashY1) / 12) + '/mois';
+      byId('co-live-sub').textContent = bestLive.name;
+    }
+    if (bestRent) {
+      byId('co-rent').textContent = (results[bestRent.id].netCashY1 >= 0 ? '+' : '-') + fmtCHF(Math.abs(results[bestRent.id].netCashY1) / 12) + '/mois';
+      byId('co-rent-sub').textContent = bestRent.name;
+    } else {
+      byId('co-rent').textContent = '—';
+      byId('co-rent-sub').textContent = 'aucun scénario en location totale';
+    }
+  }
+
+  function bRow(label, value, isTotal){
+    return '<div class="b-row' + (isTotal ? ' total' : '') + '"><span>' + label + '</span><span class="num">' + value + '</span></div>';
+  }
+
+  function breakdownHTML(r, st){
+    var mortgageRateLabel = (G.rateMode === 'fixed' ? 'fixe' : 'SARON') + ' ' + fmtPct(r.rate);
+    var rentMonthly = r.netRentAnnual / 12;
+    var out = '';
+    out += '<div class="b-group">Une fois, à l’achat</div>';
+    out += bRow('Prix d’achat', fmtCHF(r.price));
+    out += bRow('Fonds propres (' + fmtCHF(r.hardEquity) + ' cash + ' + fmtCHF(r.pensionAmount) + ' prévoyance)', fmtCHF(r.equityAmount));
+    out += bRow('Frais de transaction (' + G.txCostPct.toFixed(1) + '% du prix)', fmtCHF(r.txCost));
+    if (r.renoCost > 0) out += bRow('Rénovation (' + RENO_LABELS[st.reno].toLowerCase() + ')', fmtCHF(r.renoCost));
+    out += bRow('= Cash nécessaire au départ', fmtCHF(r.upfrontCash), true);
+
+    out += '<div class="b-group">Hypothèque</div>';
+    out += bRow('Emprunté (' + mortgageRateLabel + ')', fmtCHF(r.mortgage));
+    out += bRow('Tranche 1 — intérêts seuls, jusqu’à 65% du prix', fmtCHF(r.tranche1));
+    out += bRow('Tranche 2 — amortie sur ' + r.amortYears + ' ans', fmtCHF(r.tranche2));
+
+    out += '<div class="b-group">Chaque mois (année 1)</div>';
+    out += bRow('Intérêts', fmtCHF(r.interestY1 / 12) + '/mois');
+    out += bRow('Amortissement', fmtCHF(r.annualAmort / 12) + '/mois');
+    out += bRow('Entretien (1% du prix/an)', fmtCHF(r.annualMaintenance / 12) + '/mois');
+    if (r.grossRentAnnual > 0) out += bRow('Revenu locatif (net de ' + G.vacancyPct + '% de vacance)', '-' + fmtCHF(rentMonthly) + '/mois');
+    out += bRow('Effet fiscal (' + (r.taxCostY1 >= 0 ? 'coût supplémentaire' : 'économie') + ')', (r.taxCostY1 >= 0 ? '' : '-') + fmtCHF(Math.abs(r.taxCostY1) / 12) + '/mois');
+    if (r.energyShieldY1 > 0) out += bRow('Crédit d’impôt travaux énergétiques (année 1 uniquement)', '-' + fmtCHF(r.energyShieldY1));
+    out += bRow('= Coût mensuel net', (r.netCashY1 >= 0 ? '-' : '') + fmtCHF(Math.abs(r.netCashY1) / 12) + '/mois', true);
+
+    if (r.affordabilityRatio !== null) {
+      out += '<div class="b-group">Test de solvabilité bancaire</div>';
+      out += bRow('Coût de test (hypothèque×5% théorique + prix×1% + amortissement)', fmtCHF((r.mortgage * 0.05 + r.price * 0.01 + r.annualAmort) / 12) + '/mois');
+      out += bRow('En % de votre revenu mensuel (limite bancaire : 33%)', fmtPct(r.affordabilityRatio));
+    }
+    return out;
+  }
+
+  function renderRankList(){
+    var list = byId('rankList');
+    var ranked = SCENARIOS.slice().sort(function(a,b){ return results[b.id].netCashY1 - results[a.id].netCashY1; });
+    var maxAbs = Math.max.apply(null, SCENARIOS.map(function(sc){ return Math.abs(results[sc.id].netCashY1); })) || 1;
+
+    list.innerHTML = ranked.map(function(sc){
+      var r = results[sc.id];
+      var st = state[sc.id];
+      var isGood = r.netCashY1 >= 0;
+      var pct = Math.min(100, (Math.abs(r.netCashY1) / maxAbs) * 50);
+      var barStyle = isGood
+        ? 'left:50%; width:' + pct + '%;'
+        : 'right:50%; width:' + pct + '%;';
+      var flag = topRiskFlag(st);
+      var affText = r.affordabilityRatio === null
+        ? ''
+        : (r.affordabilityPass ? 'Solvabilité ' + fmtPct(r.affordabilityRatio) : '<span class="aff-fail">Solvabilité ' + fmtPct(r.affordabilityRatio) + ' — au-delà de 33%</span>');
+
+      return '<div class="rank-row">' +
+        '<div class="rank-top">' +
+          '<span class="rank-name">' + sc.name + '</span>' +
+          '<span class="rank-value-block">' +
+            '<span class="rank-value ' + (isGood ? 'good' : 'bad') + '">' + (isGood ? '+' : '-') + fmtCHF(Math.abs(r.netCashY1) / 12) + '/mois</span>' +
+            '<span class="rank-value-sub">' + (isGood ? '+' : '-') + fmtCHF(Math.abs(r.netCashY1)) + '/an</span>' +
+          '</span>' +
+        '</div>' +
+        '<div class="bar-track"><div class="bar-fill ' + (isGood ? 'good' : 'bad') + '" style="' + barStyle + '"></div></div>' +
+        '<div class="rank-meta">' +
+          '<span>Prix ' + fmtCHF(r.price) + '</span>' +
+          '<span>Mensualité hypothécaire ' + fmtCHF((r.interestY1 + r.annualAmort) / 12) + '/mois</span>' +
+          (r.grossRentAnnual > 0 ? '<span>Revenu locatif ' + fmtCHF(r.grossRentAnnual / 12) + '/mois</span>' : '') +
+          '<span>Apport initial ' + fmtCHF(r.upfrontCash) + '</span>' +
+          '<span>Cumul 10 ans ' + (r.finalCumulative >= 0 ? '+' : '') + fmtCHFk(r.finalCumulative) + '</span>' +
+          (affText ? '<span>' + affText + '</span>' : '') +
+          (flag ? '<span class="warn-flag">' + flag + '</span>' : '') +
+        '</div>' +
+        '<div class="rank-edit">' +
+          '<span><label>Prix négocié</label>' + numberInput(sc.id, 'price', st.price) + '</span>' +
+          '<span><label>Rénovation</label>' + select(sc.id, 'reno', RENO_LABELS, st.reno) + '</span>' +
+          '<span><label>Occupation</label>' + select(sc.id, 'occ', OCC_LABELS, st.occ) + '</span>' +
+        '</div>' +
+        '<details class="breakdown"><summary></summary><div class="breakdown-list">' + breakdownHTML(r, st) + '</div></details>' +
+      '</div>';
+    }).join('');
+
+    list.querySelectorAll('select').forEach(function(sel){
+      sel.addEventListener('change', function(){
+        var id = sel.dataset.id, field = sel.dataset.field;
+        state[id][field] = sel.value;
+        recomputeAll();
+      });
+    });
+    list.querySelectorAll('input.mini-number').forEach(function(inp){
+      inp.addEventListener('change', function(){
+        var id = inp.dataset.id, field = inp.dataset.field;
+        var val = +inp.value;
+        if (!isFinite(val) || val <= 0) val = BASE_PRICE;
+        state[id][field] = val;
+        recomputeAll();
+      });
+    });
+  }
+
+  function wireGlobalInputs(){
+    ['in-equity','in-pension','in-tx','in-fullreno','in-luxreno','in-ceilrent','in-studiorent',
+     'in-discount','in-luxpremium','in-vacancy','in-income','in-taxrate','in-vl','in-horizon','in-fixed','in-saron']
+      .forEach(function(id){ byId(id).addEventListener('input', recomputeAll); });
+
+    byId('btn-fixed').addEventListener('click', function(){
+      G.rateMode = 'fixed';
+      byId('btn-fixed').classList.add('active'); byId('btn-saron').classList.remove('active');
+      byId('wrap-fixed').hidden = false; byId('wrap-saron').hidden = true;
+      recomputeAll();
+    });
+    byId('btn-saron').addEventListener('click', function(){
+      G.rateMode = 'saron';
+      byId('btn-saron').classList.add('active'); byId('btn-fixed').classList.remove('active');
+      byId('wrap-saron').hidden = false; byId('wrap-fixed').hidden = true;
+      recomputeAll();
+    });
+  }
+
+  wireGlobalInputs();
+  recomputeAll();
+})();
+</script>
+</body>
+</html>
