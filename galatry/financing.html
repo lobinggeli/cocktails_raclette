@@ -376,8 +376,8 @@ document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('clic
   const p = b.dataset.preset;
   if (p === 'credit') { const fees = PP()*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - PP() - fees + S.E + +S.N)/1000)*1000); S.ded = 75; }
   if (p === 'energy') { S.R = 500000; S.ded = 65; }
-  if (p === 'a') { S.R = 758000; S.ded = 30; }    // costs.py mid, simple variant; deductible = heat pump, glazing, half the lower-floor refit
-  if (p === 'b') { S.R = 1539300; S.ded = 15; }   // costs.py mid, luxury variant
+  if (p === 'a') { S.R = 1036400; S.ded = 40; }   // costs.py mid, simple variant, envelope incl.; deductible = roof, insulation, windows, heat pump, PV, glazing, half the lower-floor refit
+  if (p === 'b') { S.R = 1818700; S.ded = 23; }   // costs.py mid, luxury variant
   save(); syncInputs(); update();
 }));
 document.getElementById('reset').addEventListener('click', () => { S = Object.assign({}, DEF); save(); syncInputs(); update(); });
