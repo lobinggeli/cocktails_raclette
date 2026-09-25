@@ -138,6 +138,7 @@ fr: {
   price:'Prix d’achat', pAsk:'Prix demandé · 2’050’000', pNeg:'Prix négocié', pHint:'Vente de succession, déjà ~16 % sous la moyenne au m² de Corseaux : la marge de négociation est sans doute limitée.', disc:'{x} % vs prix demandé',
   eq:'Fonds propres apportés', eqHint:'Cash + titres vendus + 3a + 2e pilier. Les frais d’achat en sortent d’abord.',
   reno:'Budget de rénovation (2027–2028)', renoHint:'Travaux + honoraires + réserve, TTC.',
+  nk:'Travaux en nature (prestations propres)', nkHint:'Ce qu’on fait nous-mêmes (ex. électricité), compté au prix du marché et inclus dans le budget de rénovation. Réduit le cash et le crédit ; ne compte pas dans les 10 % de fonds propres « durs » ; notre main-d’œuvre n’est pas déductible.',
   ded:'Part fiscalement déductible', dedHint:'Entretien + énergie (PAC, isolation, PV, salles de bain refaites). Garage, piscine, agrandissement : 0 %.',
   split:'Part payée en 2027', splitHint:'Le reste est payé en 2028. Tout doit être payé avant le 31.12.2028.',
   presets:'Préréglages :',
@@ -162,9 +163,10 @@ fr: {
   asm:'Hypothèses',
   g:{buy:'Achat', bank:'Banque', tax:'Impôts', own:'Coûts de propriétaire'},
   a:{price:'Prix d’achat (CHF)', mutC:'Droit de mutation cantonal (%)', mutCH:'Fixé par la loi.', mutCom:'Droit de mutation communal (%)', mutComH:'Au plus 1,1 % ; le taux exact de Corseaux est à confirmer.', rf:'Registre foncier (% du prix)', notary:'Notaire, acte de vente (% du prix)', notaryH:'Négociable : c’est l’acheteur qui choisit le notaire.', cedule:'Cédule hypothécaire (% du crédit)', ceduleH:'Nouvelle cédule nécessaire : aucune n’est inscrite sur la parcelle.', misc:'Divers (CHF)', p2:'dont 2e pilier dans les fonds propres (CHF)',
-     rate:'Taux hypothécaire effectif (%)', rateH:'Sept. 2026 : SARON ~1,2 %, fixe 10 ans ~2,0 %.', bankPct:'Part des travaux reconnue dans la valeur (%)', bankPctH:'La banque ajoute à la valeur la part des travaux qui crée de la valeur.', income:'Revenu brut du ménage (CHF / an)', incomeH:'Vide = test de revenu ignoré.',
+     rate:'Taux hypothécaire effectif (%)', rateH:'Sept. 2026 : SARON ~1,2 %, fixe 10 ans ~2,0 %.', bankPct:'Part des travaux reconnue dans la valeur (%)', bankPctH:'La banque ajoute à la valeur la part des travaux qui crée de la valeur.', nkBank:'Travaux en nature comptés dans la valeur (%)', nkBankH:'100 % si la banque les reconnaît comme des travaux facturés ; 0 % sinon. À confirmer avec la banque.', income:'Revenu brut du ménage (CHF / an)', incomeH:'Vide = test de revenu ignoré.',
      marg:'Taux marginal d’imposition (%)', margH:'Fédéral + canton + commune. ~36 % supposé pour ~80k d’impôts.', curTax:'Impôts actuels (CHF / an)', vl:'Valeur locative (CHF / an)', vlH:'~65–70 % du loyer du marché tel quel. Le chiffre réel vient de l’estimation fiscale.',
      upkeep:'Entretien courant dès 2029 (% de la valeur / an)', charges:'Charges annuelles (CHF)', ref:'Loyer de comparaison (CHF / mois)', refH:'Villa rénovée comparable à Corseaux : 5 350 net.', opp:'Rendement alternatif des fonds propres (%)'},
+  nkF:'Travaux en nature de {x} : la banque demande en général un devis et la preuve d’une qualification (ex. électricien). Ils réduisent le crédit mais ne comptent pas dans les fonds propres « durs ».', nkU:'dont travaux en nature', nkE:'Travaux en nature',
   reset:'Revenir aux valeurs par défaut',
   notesH:'Notes',
   notes:[['Règles bancaires',['Avance max 80 % de la valeur ; 1er rang jusqu’à 66,7 %, le 2e rang s’amortit en 15 ans.','Au moins 10 % de fonds propres « durs » (pas du 2e pilier). Les frais d’achat se paient en cash, hors avance.','Charges théoriques = 5 % d’intérêt + 1 % d’entretien + amortissement, au plus 33 % du revenu brut. Les banques comptent partiellement bonus et RSU.','La valeur retenue ici = prix + part reconnue des travaux. La banque peut estimer le bien sous le prix demandé.']],
@@ -216,7 +218,7 @@ en: {
 }}[LANG];
 
 const ASK = 2050000;
-const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, rMode:'mix', per:'y', bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, N:0, nkBank:100, rate:1.6, rMode:'mix', per:'y', bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
 const KEY = 'galatry-financement-v1';
 let S = Object.assign({}, DEF);
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
@@ -235,9 +237,10 @@ function model(E, R){
   const P = PP(), r = S.rate/100, c = S.cedule/100;
   const fx = {mutC: P*S.mutC/100, mutCom: P*S.mutCom/100, rf: P*S.rf/100, notary: P*S.notary/100, misc: +S.misc};
   const base = fx.mutC + fx.mutCom + fx.rf + fx.notary + fx.misc;
-  const V = P + R * S.bankPct/100;
+  const N = Math.min(+S.N, R), Rc = R - N;   // work in kind: part of the renovation value, not paid in cash
+  const V = P + (Rc + N * S.nkBank/100) * S.bankPct/100;
   // The mortgage-note fee depends on the mortgage, which depends on the fees: solve M = P + base + c·M + R − E.
-  const M = Math.max(0, (P + base + R - E) / (1 - c));
+  const M = Math.max(0, (P + base + Rc - E) / (1 - c));
   fx.ced = M * c;
   const fees = base + fx.ced;
   const ltv = M / V;
@@ -247,7 +250,7 @@ function model(E, R){
   const hard = E - S.p2 - fees;
   const interest = M * r;
   const yrs = [S.split/100, 1 - S.split/100].map(sh => {
-    const works = R * sh, dedW = works * S.ded/100;
+    const works = Rc * sh, dedW = works * S.ded/100;
     const maint = Math.max(0.3 * S.vl, dedW);
     let dTax = S.marg/100 * (S.vl - interest - maint);
     dTax = Math.max(dTax, -S.curTax);
@@ -256,7 +259,7 @@ function model(E, R){
   });
   const up = V * S.upkeep/100;
   const cost29 = interest + amort + up + +S.charges;
-  return {P, fx, fees, V, M, ltv, amort, theo, reqInc, hard, interest, yrs, up, cost29, taxSaved: -(yrs[0].dTax + yrs[1].dTax), E, R};
+  return {P, fx, fees, V, M, ltv, amort, theo, reqInc, hard, interest, yrs, up, cost29, taxSaved: -(yrs[0].dTax + yrs[1].dTax), E, R, N};
 }
 function ok(m){
   if (m.ltv > 0.8 + 1e-9) return false;
@@ -305,6 +308,7 @@ app.innerHTML = `
       </div>
       ${fieldRange('E', T.eq, T.eqHint, 200000, 1500000, 10000)}
       ${fieldRange('R', T.reno, T.renoHint, 0, 2500000, 5000)}
+      ${fieldRange('N', T.nk, T.nkHint, 0, 300000, 5000)}
       ${fieldRange('ded', T.ded, T.dedHint, 0, 100, 5)}
       ${fieldRange('split', T.split, T.splitHint, 0, 100, 5)}
     </div>
@@ -330,7 +334,7 @@ app.innerHTML = `
   <summary>${T.asm}</summary>
   <div class="assumption-groups">
     <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
-    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('nkBank', A.nkBank, A.nkBankH, 10)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
     <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
     <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
   </div>
@@ -364,7 +368,7 @@ IDS.forEach(id => {
 });
 document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
   const p = b.dataset.preset;
-  if (p === 'credit') { const fees = PP()*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - PP() - fees + S.E)/1000)*1000); S.ded = 75; }
+  if (p === 'credit') { const fees = PP()*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - PP() - fees + S.E + +S.N)/1000)*1000); S.ded = 75; }
   if (p === 'energy') { S.R = 500000; S.ded = 65; }
   if (p === 'a') { S.R = 1193700; S.ded = 23; }   // costs.py mid, variant A; deductible = heat pump, glazing, half the lower-floor refit
   if (p === 'b') { S.R = 1371600; S.ded = 20; }   // costs.py mid, variant B
@@ -379,6 +383,7 @@ function update(){
   document.getElementById('rate-v').textContent = (+S.rate).toFixed(2).replace(/0$/, '') + ' %' + (m.M > 0 ? ' · CHF ' + chf(m.interest) + ' / ' + (LANG === 'en' ? 'yr' : 'an') : '');
   document.getElementById('E-v').textContent = 'CHF ' + chf(S.E);
   document.getElementById('R-v').textContent = 'CHF ' + chf(S.R);
+  document.getElementById('N-v').textContent = 'CHF ' + chf(m.N) + (+S.N > S.R ? ' (max = budget)' : '');
   document.getElementById('ded-v').textContent = S.ded + ' %';
   document.getElementById('split-v').textContent = S.split + ' / ' + (100 - S.split);
   document.getElementById('cart').innerHTML = [[T.cart[0], chf(PP())], [T.cart[1], chf(PP() + m.fees)], [T.cart[2], chf(S.E)], [T.cart[3], chf(m.M)], [T.cart[4], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
@@ -398,6 +403,7 @@ function update(){
   if (m.M === 0) fl.push(['ok', F.neg]);
   else if (m.ltv > 0.8) { const V = m.V, short = m.M - 0.8*V; fl.push(['bad', fill(F.ltv, {x: pct(m.ltv), y: 'CHF ' + chf(short), z: 'CHF ' + chf(maxR)})]); }
   else fl.push(['ok', fill(F.ltvOk, {x: pct(m.ltv)})]);
+  if (m.N > 0) fl.push(['warn', fill(T.nkF, {x: 'CHF ' + chf(m.N)})]);
   if (m.hard < 0.1*m.V) fl.push(['bad', fill(F.hard, {x: 'CHF ' + chf(m.hard), y: 'CHF ' + chf(0.1*m.V)})]);
   if (incOK === null) fl.push(['warn', F.noInc]);
   else fl.push([incOK ? 'ok' : 'bad', fill(incOK ? F.incOk : F.inc, {x: 'CHF ' + chf(m.theo), y: pct(m.theo / S.income)})]);
@@ -408,8 +414,8 @@ function update(){
   document.getElementById('uses').innerHTML = `<thead><tr>${T.usesCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
     ur(U.price, PP()) + ur(U.mutC, x.mutC, 'sub') + ur(U.mutCom, x.mutCom, 'sub') + ur(U.rf, x.rf, 'sub') + ur(U.notary, x.notary, 'sub') +
     ur(fill(U.ced, {x: 'CHF ' + chf(m.M)}), x.ced, 'sub') + ur(U.misc, x.misc, 'sub') + ur(U.fees, m.fees) +
-    ur(U.buy, PP() + m.fees, 'total') + ur(U.reno, S.R) + ur(U.tot, PP() + m.fees + S.R, 'total') +
-    `<tr class="sub"><td colspan="3">${U.fin}</td></tr>` + ur(U.eq, S.E, '', false) + ur(U.mort, m.M, '', false) + '</tbody>';
+    ur(U.buy, PP() + m.fees, 'total') + ur(U.reno, S.R) + (m.N > 0 ? ur(T.nkU, m.N, 'sub') : '') + ur(U.tot, PP() + m.fees + S.R, 'total') +
+    `<tr class="sub"><td colspan="3">${U.fin}</td></tr>` + ur(U.eq, S.E, '', false) + (m.N > 0 ? ur(T.nkE, m.N, '', false) : '') + ur(U.mort, m.M, '', false) + '</tbody>';
   const Rw = T.rows, y = m.yrs, dash = '–';
   const dv = S.per === 'm' ? 12 : 1, mo = S.per === 'm';
   document.getElementById('bd-h').textContent = mo ? T.bdM : T.bd;
