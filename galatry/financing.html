@@ -141,7 +141,7 @@ fr: {
   ded:'Part fiscalement déductible', dedHint:'Entretien + énergie (PAC, isolation, PV, salles de bain refaites). Garage, piscine, agrandissement : 0 %.',
   split:'Part payée en 2027', splitHint:'Le reste est payé en 2028. Tout doit être payé avant le 31.12.2028.',
   presets:'Préréglages :',
-  pr:[['Crédit 1,7 M','credit'],['Énergie 500k','energy'],['Variante A · mid','a'],['Variante B · mid','b']],
+  pr:[['Crédit 1,7 M','credit'],['Énergie 500k','energy'],['Variante simple · mid','a'],['Variante luxe · mid','b']],
   result:'Résultat', resultSub:'Avec les leviers ci-dessus',
   c:{mort:'Crédit hypothécaire', ltv:'avance', maxR:'Rénovation max acceptée', maxRs:'limite banque', m27:'Coût mensuel 2027–28', m27s:'moyenne, après impôts', m29:'Coût mensuel dès 2029', m29s:'sans valeur locative', tax:'Économie d’impôt 2027 + 2028', taxs:'des impôts actuels', inc:'Revenu brut requis', incs:'règle des 33 %'},
   f:{ltv:'Avance de {x} % : au-dessus des 80 % acceptés par les banques. Il manque {y} de fonds propres, ou il faut réduire la rénovation à {z}.',
@@ -166,7 +166,7 @@ fr: {
   notesH:'Notes',
   notes:[['Règles bancaires',['Avance max 80 % de la valeur ; 1er rang jusqu’à 66,7 %, le 2e rang s’amortit en 15 ans.','Au moins 10 % de fonds propres « durs » (pas du 2e pilier). Les frais d’achat se paient en cash, hors avance.','Charges théoriques = 5 % d’intérêt + 1 % d’entretien + amortissement, au plus 33 % du revenu brut. Les banques comptent partiellement bonus et RSU.','La valeur retenue ici = prix + part reconnue des travaux. La banque peut estimer le bien sous le prix demandé.']],
          ['Fiscalité',['La valeur locative est supprimée au 1.1.2029 : 2027 et 2028 sont les dernières années où intérêts et entretien se déduisent pour un logement occupé.','Entretien et énergie : déductibles. Plus-value (garage, piscine, agrandissement) : non déductible, mais réduit l’impôt sur le gain à la revente.','Les frais d’énergie en excès se reportent sur 2 ans ; leur sort après 2029 dépend du canton (à vérifier).','L’économie par année est plafonnée aux impôts actuels ; le taux marginal baisse en réalité avec de grosses déductions.','L’impôt sur la fortune (qui baisse avec la dette) n’est pas compté : quelques milliers de CHF par an.']],
-         ['Limites',['Ordres de grandeur, pas une offre de financement ni un conseil fiscal.','Les coûts des variantes A et B viennent du modèle de coûts du projet (fourchettes, pas des devis).','Valeur locative, taux marginal et revenu à remplacer par les vrais chiffres (dernière taxation, offre de banque).','Sources : <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — taux</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — propriétaire vaudois</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — fin de la valeur locative</a>']]]
+         ['Limites',['Ordres de grandeur, pas une offre de financement ni un conseil fiscal.','Les coûts des variantes simple et luxe viennent du modèle de coûts du projet (fourchettes, pas des devis).','Valeur locative, taux marginal et revenu à remplacer par les vrais chiffres (dernière taxation, offre de banque).','Sources : <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — taux</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — propriétaire vaudois</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — fin de la valeur locative</a>']]]
 },
 en: {
   kicker:'Chemin de Galatry 3 · Corseaux VD',
@@ -185,7 +185,7 @@ en: {
   ded:'Tax-deductible share', dedHint:'Maintenance + energy (heat pump, insulation, PV, redone bathrooms). Garage, pool, extension: 0%.',
   split:'Share paid in 2027', splitHint:'The rest is paid in 2028. Everything must be paid by 31.12.2028.',
   presets:'Presets:',
-  pr:[['1.7M mortgage','credit'],['Energy 500k','energy'],['Variant A · mid','a'],['Variant B · mid','b']],
+  pr:[['1.7M mortgage','credit'],['Energy 500k','energy'],['Simple variant · mid','a'],['Luxury variant · mid','b']],
   rateL:'Mortgage rate', rt:[['saron','SARON ~1.2%'],['mix','Mixed ~1.6%'],['fix10','10-yr fixed ~2.0%'],['custom','Other']],
   rateHint:'Average effective rate on the whole mortgage. Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%; “Mixed” = half SARON, half fixed.',
   per:['Annual','Monthly'], bdM:'Monthly cost breakdown', moTot:'Monthly cost', yr:'Per year', yrOnly:'full-year total',
@@ -217,7 +217,7 @@ en: {
   notesH:'Notes',
   notes:[['Bank rules',['Max loan 80% of value; 1st rank up to 66.7%, the 2nd rank is amortised within 15 years.','At least 10% “hard” equity (not pillar 2). Purchase costs are paid in cash, outside the loan.','Theoretical costs = 5% interest + 1% upkeep + amortisation, at most 33% of gross income. Banks count bonus and RSUs only partly.','Value here = price + counted share of works. The bank may value the house below the asking price.']],
          ['Tax',['Imputed rental value ends on 1.1.2029: 2027 and 2028 are the last years interest and upkeep are deductible for an owner-occupied home.','Maintenance and energy: deductible. Value-adding work (garage, pool, extension): not deductible, but lowers gains tax on resale.','Excess energy costs carry forward 2 years; what happens after 2029 depends on the canton (to check).','Yearly savings are capped at current tax; in reality the marginal rate drops with large deductions.','Wealth tax (which falls with the debt) is not counted: a few thousand CHF a year.']],
-         ['Limits',['Orders of magnitude, not a financing offer or tax advice.','Variant A and B costs come from the project cost model (ranges, not quotes).','Replace imputed rent, marginal rate and income with real figures (last tax assessment, bank offer).','Sources: <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — rates</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — Vaud owners</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — end of imputed rent</a>']]]
+         ['Limits',['Orders of magnitude, not a financing offer or tax advice.','Simple and luxury variant costs come from the project cost model (ranges, not quotes).','Replace imputed rent, marginal rate and income with real figures (last tax assessment, bank offer).','Sources: <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — rates</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — Vaud owners</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — end of imputed rent</a>']]]
 }}[LANG];
 
 const ASK = 2050000;
@@ -376,8 +376,8 @@ document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('clic
   const p = b.dataset.preset;
   if (p === 'credit') { const fees = PP()*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - PP() - fees + S.E + +S.N)/1000)*1000); S.ded = 75; }
   if (p === 'energy') { S.R = 500000; S.ded = 65; }
-  if (p === 'a') { S.R = 1193700; S.ded = 23; }   // costs.py mid, variant A; deductible = heat pump, glazing, half the lower-floor refit
-  if (p === 'b') { S.R = 1371600; S.ded = 20; }   // costs.py mid, variant B
+  if (p === 'a') { S.R = 758000; S.ded = 30; }    // costs.py mid, simple variant; deductible = heat pump, glazing, half the lower-floor refit
+  if (p === 'b') { S.R = 1539300; S.ded = 15; }   // costs.py mid, luxury variant
   save(); syncInputs(); update();
 }));
 document.getElementById('reset').addEventListener('click', () => { S = Object.assign({}, DEF); save(); syncInputs(); update(); });
