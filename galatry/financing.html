@@ -124,7 +124,10 @@ fr: {
   h1:'Financement bottom-up',
   lede:'On part de ce qu’on met : les fonds propres fixent le crédit, le crédit fixe la rénovation que la banque accepte, et le tout donne le « loyer » réel qu’on paie chaque mois, avant et après la fin de la valeur locative en 2029.',
   nav:[['index.html','&#8617; Plans &amp; modèle 3D'],['projet.html','Projet de rénovation'],['scenarios-fr.html','Scénarios'],['#levers','Leviers'],['#result','Résultat'],['#equity','Selon les fonds propres'],['#notes','Notes'],['financing.html','EN']],
-  cart:['Prix demandé','Fonds propres','Crédit','Rénovation'],
+  cart:['Prix demandé','Prix + frais','Fonds propres','Crédit','Rénovation'],
+  uses:'Coût total du projet', usesCols:['','CHF','% du prix'],
+  u:{price:'Prix d’achat', mutC:'Droit de mutation cantonal', mutCom:'Droit de mutation communal (Corseaux)', rf:'Registre foncier (transfert)', notary:'Notaire (acte de vente)', ced:'Cédule hypothécaire (notaire + RF, sur {x})', misc:'Divers (expertise, dossier bancaire)', fees:'Frais d’achat', buy:'Prix + frais', reno:'Rénovation', tot:'Coût total', fin:'Financé par', eq:'Fonds propres', mort:'Crédit hypothécaire'},
+  usesNote:'Les frais d’achat se paient avec les fonds propres : la banque ne les finance pas et ils n’augmentent pas la valeur retenue du bien.',
   levers:'Leviers', leversSub:'Tout se recalcule en direct · les valeurs restent dans ce navigateur',
   eq:'Fonds propres apportés', eqHint:'Cash + titres vendus + 3a + 2e pilier. Les frais d’achat en sortent d’abord.',
   reno:'Budget de rénovation (2027–2028)', renoHint:'Travaux + honoraires + réserve, TTC.',
@@ -148,7 +151,7 @@ fr: {
   eqCols:['Fonds propres','Crédit','Avance','Rénovation max','Coût / mois 2027–28','Coût / mois dès 2029','Économie d’impôt 27+28','Revenu requis'],
   asm:'Hypothèses',
   g:{buy:'Achat', bank:'Banque', tax:'Impôts', own:'Coûts de propriétaire'},
-  a:{price:'Prix d’achat (CHF)', fees:'Frais d’achat (% du prix)', feesH:'Droits de mutation ~3,3 % + notaire, registre foncier, cédule.', p2:'dont 2e pilier dans les fonds propres (CHF)',
+  a:{price:'Prix d’achat (CHF)', mutC:'Droit de mutation cantonal (%)', mutCH:'Fixé par la loi.', mutCom:'Droit de mutation communal (%)', mutComH:'Au plus 1,1 % ; le taux exact de Corseaux est à confirmer.', rf:'Registre foncier (% du prix)', notary:'Notaire, acte de vente (% du prix)', notaryH:'Négociable : c’est l’acheteur qui choisit le notaire.', cedule:'Cédule hypothécaire (% du crédit)', ceduleH:'Nouvelle cédule nécessaire : aucune n’est inscrite sur la parcelle.', misc:'Divers (CHF)', p2:'dont 2e pilier dans les fonds propres (CHF)',
      rate:'Taux hypothécaire effectif (%)', rateH:'Sept. 2026 : SARON ~1,2 %, fixe 10 ans ~2,0 %.', bankPct:'Part des travaux reconnue dans la valeur (%)', bankPctH:'La banque ajoute à la valeur la part des travaux qui crée de la valeur.', income:'Revenu brut du ménage (CHF / an)', incomeH:'Vide = test de revenu ignoré.',
      marg:'Taux marginal d’imposition (%)', margH:'Fédéral + canton + commune. ~36 % supposé pour ~80k d’impôts.', curTax:'Impôts actuels (CHF / an)', vl:'Valeur locative (CHF / an)', vlH:'~65–70 % du loyer du marché tel quel. Le chiffre réel vient de l’estimation fiscale.',
      upkeep:'Entretien courant dès 2029 (% de la valeur / an)', charges:'Charges annuelles (CHF)', ref:'Loyer de comparaison (CHF / mois)', refH:'Villa rénovée comparable à Corseaux : 5 350 net.', opp:'Rendement alternatif des fonds propres (%)'},
@@ -163,7 +166,10 @@ en: {
   h1:'Bottom-up financing',
   lede:'Start from what we put in: equity sets the mortgage, the mortgage sets how much renovation the bank will accept, and together they give the real monthly “rent” we pay, before and after imputed rental value ends in 2029.',
   nav:[['en.html','&#8617; Plans &amp; 3D model'],['project.html','Renovation project'],['scenarios.html','Scenarios'],['#levers','Levers'],['#result','Result'],['#equity','By equity'],['#notes','Notes'],['financement.html','FR']],
-  cart:['Asking price','Equity','Mortgage','Renovation'],
+  cart:['Asking price','Price + costs','Equity','Mortgage','Renovation'],
+  uses:'Total project cost', usesCols:['','CHF','% of price'],
+  u:{price:'Purchase price', mutC:'Cantonal transfer duty', mutCom:'Communal transfer duty (Corseaux)', rf:'Land registry (transfer)', notary:'Notary (deed of sale)', ced:'Mortgage note (notary + registry, on {x})', misc:'Other (valuation, bank file)', fees:'Purchase costs', buy:'Price + costs', reno:'Renovation', tot:'Total cost', fin:'Financed by', eq:'Equity', mort:'Mortgage'},
+  usesNote:'Purchase costs are paid from equity: the bank does not finance them and they do not add to the property’s collateral value.',
   levers:'Levers', leversSub:'Recalculates live · values stay in this browser',
   eq:'Equity put in', eqHint:'Cash + sold shares + 3a + pillar 2. Purchase costs come out of it first.',
   reno:'Renovation budget (2027–2028)', renoHint:'Works + fees + contingency, VAT incl.',
@@ -187,7 +193,7 @@ en: {
   eqCols:['Equity','Mortgage','LTV','Max renovation','Cost / month 2027–28','Cost / month from 2029','Tax saved 27+28','Income needed'],
   asm:'Assumptions',
   g:{buy:'Purchase', bank:'Bank', tax:'Tax', own:'Owner costs'},
-  a:{price:'Purchase price (CHF)', fees:'Purchase costs (% of price)', feesH:'Transfer duty ~3.3% + notary, land registry, mortgage note.', p2:'of which pillar 2 in equity (CHF)',
+  a:{price:'Purchase price (CHF)', mutC:'Cantonal transfer duty (%)', mutCH:'Set by law.', mutCom:'Communal transfer duty (%)', mutComH:'At most 1.1%; Corseaux’s exact rate to be confirmed.', rf:'Land registry (% of price)', notary:'Notary, deed of sale (% of price)', notaryH:'Negotiable: the buyer chooses the notary.', cedule:'Mortgage note (% of mortgage)', ceduleH:'A new note is needed: none is registered on the parcel.', misc:'Other (CHF)', p2:'of which pillar 2 in equity (CHF)',
      rate:'Effective mortgage rate (%)', rateH:'Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%.', bankPct:'Share of works counted in value (%)', bankPctH:'The bank adds the value-creating part of the works to the collateral value.', income:'Gross household income (CHF / yr)', incomeH:'Empty = affordability test skipped.',
      marg:'Marginal tax rate (%)', margH:'Federal + canton + commune. ~36% assumed for ~80k tax.', curTax:'Current tax (CHF / yr)', vl:'Imputed rental value (CHF / yr)', vlH:'~65–70% of market rent as-is. The real figure comes from the tax valuation.',
      upkeep:'Ongoing upkeep from 2029 (% of value / yr)', charges:'Annual charges (CHF)', ref:'Comparison rent (CHF / month)', refH:'Comparable renovated villa in Corseaux: 5,350 net.', opp:'Alternative return on equity (%)'},
@@ -198,7 +204,7 @@ en: {
          ['Limits',['Orders of magnitude, not a financing offer or tax advice.','Variant A and B costs come from the project cost model (ranges, not quotes).','Replace imputed rent, marginal rate and income with real figures (last tax assessment, bank offer).','Sources: <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — rates</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — Vaud owners</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — end of imputed rent</a>']]]
 }}[LANG];
 
-const DEF = {E:600000, R:158000, ded:75, split:50, P:2050000, fees:4.5, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const DEF = {E:600000, R:154000, ded:75, split:50, P:2050000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
 const KEY = 'galatry-financement-v1';
 let S = Object.assign({}, DEF);
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
@@ -211,9 +217,14 @@ const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, x) => o[x]);
 
 // Core model. E = equity, R = renovation budget.
 function model(E, R){
-  const P = +S.P, fees = P * S.fees/100, r = S.rate/100;
+  const P = +S.P, r = S.rate/100, c = S.cedule/100;
+  const fx = {mutC: P*S.mutC/100, mutCom: P*S.mutCom/100, rf: P*S.rf/100, notary: P*S.notary/100, misc: +S.misc};
+  const base = fx.mutC + fx.mutCom + fx.rf + fx.notary + fx.misc;
   const V = P + R * S.bankPct/100;
-  const M = Math.max(0, P + fees + R - E);
+  // The mortgage-note fee depends on the mortgage, which depends on the fees: solve M = P + base + c·M + R − E.
+  const M = Math.max(0, (P + base + R - E) / (1 - c));
+  fx.ced = M * c;
+  const fees = base + fx.ced;
   const ltv = M / V;
   const amort = Math.max(0, M - V*2/3) / 15;
   const theo = M*0.05 + V*0.01 + amort;
@@ -230,7 +241,7 @@ function model(E, R){
   });
   const up = V * S.upkeep/100;
   const cost29 = interest + amort + up + +S.charges;
-  return {P, fees, V, M, ltv, amort, theo, reqInc, hard, interest, yrs, up, cost29, taxSaved: -(yrs[0].dTax + yrs[1].dTax), E, R};
+  return {P, fx, fees, V, M, ltv, amort, theo, reqInc, hard, interest, yrs, up, cost29, taxSaved: -(yrs[0].dTax + yrs[1].dTax), E, R};
 }
 function ok(m){
   if (m.ltv > 0.8 + 1e-9) return false;
@@ -277,6 +288,9 @@ app.innerHTML = `
   <div class="sec-head"><h2>${T.result}</h2><span class="muted" style="font-size:.84rem">${T.resultSub}</span></div>
   <div class="callouts" id="callouts"></div>
   <div class="flags" id="flags"></div>
+  <h3>${T.uses}</h3>
+  <div class="tbl-wrap"><table id="uses"></table></div>
+  <p class="muted" style="font-size:.8rem">${T.usesNote}</p>
   <h3>${T.bd}</h3>
   <div class="tbl-wrap"><table id="bd"></table></div>
   <p class="muted" style="font-size:.8rem">${T.bdNote}</p>
@@ -288,7 +302,7 @@ app.innerHTML = `
 <details class="assumptions" id="assumptions">
   <summary>${T.asm}</summary>
   <div class="assumption-groups">
-    <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('P', A.price, '', 10000)}${fieldNum('fees', A.fees, A.feesH, 0.1)}${fieldNum('p2', A.p2, '', 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('P', A.price, '', 10000)}${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
     <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('rate', A.rate, A.rateH, 0.05)}${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
     <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
     <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
@@ -307,8 +321,8 @@ IDS.forEach(id => {
   el.addEventListener('input', () => { S[id] = id === 'income' && el.value === '' ? '' : +el.value; save(); update(); });
 });
 document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
-  const p = b.dataset.preset, fees = S.P * S.fees/100;
-  if (p === 'credit') { S.R = Math.max(0, Math.round((1700000 - S.P - fees + S.E)/1000)*1000); S.ded = 75; }
+  const p = b.dataset.preset;
+  if (p === 'credit') { const fees = S.P*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - S.P - fees + S.E)/1000)*1000); S.ded = 75; }
   if (p === 'energy') { S.R = 500000; S.ded = 65; }
   if (p === 'a') { S.R = 1193700; S.ded = 23; }   // costs.py mid, variant A; deductible = heat pump, glazing, half the lower-floor refit
   if (p === 'b') { S.R = 1371600; S.ded = 20; }   // costs.py mid, variant B
@@ -322,7 +336,7 @@ function update(){
   document.getElementById('R-v').textContent = 'CHF ' + chf(S.R);
   document.getElementById('ded-v').textContent = S.ded + ' %';
   document.getElementById('split-v').textContent = S.split + ' / ' + (100 - S.split);
-  document.getElementById('cart').innerHTML = [[T.cart[0], chf(S.P)], [T.cart[1], chf(S.E)], [T.cart[2], chf(m.M)], [T.cart[3], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
+  document.getElementById('cart').innerHTML = [[T.cart[0], chf(S.P)], [T.cart[1], chf(S.P + m.fees)], [T.cart[2], chf(S.E)], [T.cart[3], chf(m.M)], [T.cart[4], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
 
   const m27 = (m.yrs[0].cost + m.yrs[1].cost) / 24, m29 = m.cost29 / 12;
   const incOK = S.income === '' || !(+S.income > 0) ? null : m.theo <= 0.33 * S.income;
@@ -344,6 +358,13 @@ function update(){
   else fl.push([incOK ? 'ok' : 'bad', fill(incOK ? F.incOk : F.inc, {x: 'CHF ' + chf(m.theo), y: pct(m.theo / S.income)})]);
   document.getElementById('flags').innerHTML = fl.map(([c,t]) => `<div class="flag ${c}">${t}</div>`).join('');
 
+  const U = T.u, x = m.fx, pp = v => (v / S.P * 100).toFixed(2) + ' %';
+  const ur = (l, v, cls='', p=true) => `<tr class="${cls}"><td>${l}</td><td>${chf(v)}</td><td>${p ? pp(v) : ''}</td></tr>`;
+  document.getElementById('uses').innerHTML = `<thead><tr>${T.usesCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
+    ur(U.price, S.P) + ur(U.mutC, x.mutC, 'sub') + ur(U.mutCom, x.mutCom, 'sub') + ur(U.rf, x.rf, 'sub') + ur(U.notary, x.notary, 'sub') +
+    ur(fill(U.ced, {x: 'CHF ' + chf(m.M)}), x.ced, 'sub') + ur(U.misc, x.misc, 'sub') + ur(U.fees, m.fees) +
+    ur(U.buy, S.P + m.fees, 'total') + ur(U.reno, S.R) + ur(U.tot, S.P + m.fees + S.R, 'total') +
+    `<tr class="sub"><td colspan="3">${U.fin}</td></tr>` + ur(U.eq, S.E, '', false) + ur(U.mort, m.M, '', false) + '</tbody>';
   const Rw = T.rows, y = m.yrs, dash = '–';
   const row = (l, a, b, c, cls='') => `<tr class="${cls}"><td>${l}</td><td>${a}</td><td>${b}</td><td>${c}</td></tr>`;
   const taxCls = v => v < 0 ? 'good' : v > 0 ? 'bad' : '';
