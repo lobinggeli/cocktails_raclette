@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
+<title>Financement Galatry 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F3F5F4; --sheet:#FBFCFB; --ink:#1B2530; --ink-2:#56626E; --rule:#C9D1D4;
+  --room:#E6ECEE; --accent:#2F6690;
+  --good:#0C7A3D; --good-soft:rgba(12,122,61,.12); --critical:#B3402A; --critical-soft:rgba(179,64,42,.12); --warning:#B8860B; --warning-soft:rgba(184,134,11,.16);
+  --f-draw:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10161B; --sheet:#151D23; --ink:#DCE4E9; --ink-2:#93A1AB; --rule:#2B3740;
+    --room:#1C262E; --accent:#7DB4E0;
+    --good:#3FBE72; --good-soft:rgba(63,190,114,.16); --critical:#E2725B; --critical-soft:rgba(226,114,91,.16); --warning:#E0B93D; --warning-soft:rgba(224,185,61,.18);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10161B; --sheet:#151D23; --ink:#DCE4E9; --ink-2:#93A1AB; --rule:#2B3740;
+  --room:#1C262E; --accent:#7DB4E0;
+  --good:#3FBE72; --good-soft:rgba(63,190,114,.16); --critical:#E2725B; --critical-soft:rgba(226,114,91,.16); --warning:#E0B93D; --warning-soft:rgba(224,185,61,.18);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body);padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{font-family:var(--f-draw);font-weight:600;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.5vw,40px);line-height:1.08}
+h2{font-size:21px;text-transform:uppercase;letter-spacing:.06em}
+h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+p{margin:0;max-width:70ch}
+.muted{color:var(--ink-2)}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:20px}
+.kicker{font-family:var(--f-draw);text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--accent);margin-bottom:6px}
+.cartouche{display:grid;grid-template-columns:auto auto;border:1.5px solid var(--ink);font-family:var(--f-draw);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.cartouche div{padding:5px 12px;border-bottom:1px solid var(--rule)}
+.cartouche div:nth-child(odd){color:var(--ink-2);border-right:1px solid var(--rule)}
+.cartouche div:nth-last-child(-n+2){border-bottom:0}
+.lede{display:flex;flex-direction:column;gap:10px}
+nav{display:flex;flex-wrap:wrap;gap:8px}
+nav a{font-family:var(--f-draw);text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--rule);padding:6px 12px;border-radius:2px;background:var(--sheet)}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+@media (max-width:720px){header{grid-template-columns:1fr}}
+
+section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+.sec-head{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:8px}
+
+.panel{background:var(--sheet);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:16px}
+.levers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px 28px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.field label{font-size:.82rem;color:var(--ink-2)}
+.field .val{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--ink);font-weight:600}
+.field .hint{font-size:.74rem;color:var(--ink-2)}
+input[type="range"]{width:100%;accent-color:var(--accent)}
+input[type="number"]{width:100%;border:1px solid var(--rule);padding:6px 9px;background:var(--room);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.presets span{font-size:.8rem;color:var(--ink-2);margin-right:4px}
+.presets button{border:1px solid var(--rule);background:var(--room);color:var(--ink);padding:5px 10px;font:inherit;font-size:.8rem;cursor:pointer}
+.presets button:hover,.presets button:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+
+.callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.callout{background:var(--room);padding:10px 14px;display:flex;flex-direction:column;gap:2px;border-left:3px solid transparent}
+.callout.good{border-left-color:var(--good)}
+.callout.bad{border-left-color:var(--critical)}
+.callout .k{font-family:var(--f-draw);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.callout .n{font-family:var(--f-mono);font-size:1.15rem;font-weight:600;font-variant-numeric:tabular-nums}
+.callout .s{font-size:.8rem;color:var(--ink-2)}
+.flags{display:flex;flex-direction:column;gap:6px}
+.flag{font-size:.86rem;padding:8px 12px}
+.flag.bad{background:var(--critical-soft);color:var(--critical)}
+.flag.warn{background:var(--warning-soft);color:color-mix(in srgb,var(--warning) 60%,var(--ink) 40%)}
+.flag.ok{background:var(--good-soft);color:var(--good)}
+
+.tbl-wrap{overflow-x:auto;background:var(--sheet);border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:.86rem}
+th,td{padding:7px 12px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{font-family:var(--f-draw);text-transform:uppercase;letter-spacing:.05em;font-size:.74rem;color:var(--ink-2);font-weight:600;vertical-align:bottom}
+td{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+td:first-child{font-family:var(--f-body)}
+tr.total td{font-weight:600;border-top:1.5px solid var(--ink)}
+tr.sub td{color:var(--ink-2);font-size:.8rem}
+tr.cur td{background:var(--room);font-weight:600}
+td.bad{color:var(--critical)}
+td.good{color:var(--good)}
+
+details.assumptions{background:var(--sheet);border:1px solid var(--rule);padding:4px 20px}
+details.assumptions summary{cursor:pointer;padding:14px 0;font-family:var(--f-draw);font-weight:600;font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)}
+details.assumptions[open] summary{border-bottom:1px solid var(--rule);margin-bottom:16px}
+.assumption-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;padding-bottom:18px}
+.assumption-group{display:flex;flex-direction:column;gap:10px}
+.assumption-group h3{color:var(--accent)}
+.reset{align-self:flex-start;border:1px solid var(--rule);background:var(--room);color:var(--ink-2);padding:5px 10px;font:inherit;font-size:.8rem;cursor:pointer;margin-bottom:16px}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.note{background:var(--sheet);border:1px solid var(--rule);padding:14px 18px}
+.note h3{margin-bottom:6px}
+.note ul{margin:0;padding-left:18px;font-size:.86rem;color:var(--ink-2);display:flex;flex-direction:column;gap:5px}
+.note a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function(){
+const LANG = document.documentElement.lang === 'en' ? 'en' : 'fr';
+const T = {
+fr: {
+  kicker:'Chemin de Galatry 3 · Corseaux VD',
+  h1:'Financement bottom-up',
+  lede:'On part de ce qu’on met : les fonds propres fixent le crédit, le crédit fixe la rénovation que la banque accepte, et le tout donne le « loyer » réel qu’on paie chaque mois, avant et après la fin de la valeur locative en 2029.',
+  nav:[['index.html','&#8617; Plans &amp; modèle 3D'],['projet.html','Projet de rénovation'],['scenarios-fr.html','Scénarios'],['#levers','Leviers'],['#result','Résultat'],['#equity','Selon les fonds propres'],['#notes','Notes'],['financing.html','EN']],
+  cart:['Prix demandé','Fonds propres','Crédit','Rénovation'],
+  levers:'Leviers', leversSub:'Tout se recalcule en direct · les valeurs restent dans ce navigateur',
+  eq:'Fonds propres apportés', eqHint:'Cash + titres vendus + 3a + 2e pilier. Les frais d’achat en sortent d’abord.',
+  reno:'Budget de rénovation (2027–2028)', renoHint:'Travaux + honoraires + réserve, TTC.',
+  ded:'Part fiscalement déductible', dedHint:'Entretien + énergie (PAC, isolation, PV, salles de bain refaites). Garage, piscine, agrandissement : 0 %.',
+  split:'Part payée en 2027', splitHint:'Le reste est payé en 2028. Tout doit être payé avant le 31.12.2028.',
+  presets:'Préréglages :',
+  pr:[['Crédit 1,7 M','credit'],['Énergie 500k','energy'],['Variante A · mid','a'],['Variante B · mid','b']],
+  result:'Résultat', resultSub:'Avec les leviers ci-dessus',
+  c:{mort:'Crédit hypothécaire', ltv:'avance', maxR:'Rénovation max acceptée', maxRs:'limite banque', m27:'Coût mensuel 2027–28', m27s:'moyenne, après impôts', m29:'Coût mensuel dès 2029', m29s:'sans valeur locative', tax:'Économie d’impôt 2027 + 2028', taxs:'des impôts actuels', inc:'Revenu brut requis', incs:'règle des 33 %'},
+  f:{ltv:'Avance de {x} % : au-dessus des 80 % acceptés par les banques. Il manque {y} de fonds propres, ou il faut réduire la rénovation à {z}.',
+     ltvOk:'Avance de {x} % : dans la limite des 80 %.',
+     hard:'Fonds propres « durs » (hors 2e pilier, après frais) : {x}, sous les 10 % exigés ({y}).',
+     inc:'Charges théoriques de {x} par an = {y} % du revenu indiqué : au-dessus des 33 %.',
+     incOk:'Charges théoriques = {y} % du revenu indiqué : ça passe.',
+     noInc:'Revenu brut non renseigné : la rénovation max ne tient compte que de l’avance de 80 %. Indiquez-le dans les hypothèses pour tester la tenue des charges.',
+     neg:'Les fonds propres couvrent tout : pas de crédit nécessaire.'},
+  bd:'Détail du coût annuel', bdCols:['','2027','2028','Dès 2029'],
+  rows:{int:'Intérêts ({r} %)', am:'Amortissement 2e rang', up:'Entretien courant', ch:'Charges (ECA, impôt foncier, taxes)', tax:'Effet fiscal vs aujourd’hui', tot:'Coût annuel', mo:'Par mois', ref:'Loyer de comparaison ({x}/mois)', opp:'Rendement perdu sur les fonds propres ({r} %)', work:'Travaux payés cette année', dedr:'dont déductibles'},
+  bdNote:'L’effet fiscal compare à la situation actuelle (sans maison) : valeur locative ajoutée, intérêts et travaux déduits (ou le forfait de 30 % de la valeur locative s’il est plus élevé), au taux marginal. En 2027–28, les travaux remplacent l’entretien courant. Dès 2029, plus de valeur locative ni de déductions.',
+  eqH:'Selon les fonds propres', eqSub:'Même rénovation et mêmes hypothèses, en faisant varier l’apport',
+  eqCols:['Fonds propres','Crédit','Avance','Rénovation max','Coût / mois 2027–28','Coût / mois dès 2029','Économie d’impôt 27+28','Revenu requis'],
+  asm:'Hypothèses',
+  g:{buy:'Achat', bank:'Banque', tax:'Impôts', own:'Coûts de propriétaire'},
+  a:{price:'Prix d’achat (CHF)', fees:'Frais d’achat (% du prix)', feesH:'Droits de mutation ~3,3 % + notaire, registre foncier, cédule.', p2:'dont 2e pilier dans les fonds propres (CHF)',
+     rate:'Taux hypothécaire effectif (%)', rateH:'Sept. 2026 : SARON ~1,2 %, fixe 10 ans ~2,0 %.', bankPct:'Part des travaux reconnue dans la valeur (%)', bankPctH:'La banque ajoute à la valeur la part des travaux qui crée de la valeur.', income:'Revenu brut du ménage (CHF / an)', incomeH:'Vide = test de revenu ignoré.',
+     marg:'Taux marginal d’imposition (%)', margH:'Fédéral + canton + commune. ~36 % supposé pour ~80k d’impôts.', curTax:'Impôts actuels (CHF / an)', vl:'Valeur locative (CHF / an)', vlH:'~65–70 % du loyer du marché tel quel. Le chiffre réel vient de l’estimation fiscale.',
+     upkeep:'Entretien courant dès 2029 (% de la valeur / an)', charges:'Charges annuelles (CHF)', ref:'Loyer de comparaison (CHF / mois)', refH:'Villa rénovée comparable à Corseaux : 5 350 net.', opp:'Rendement alternatif des fonds propres (%)'},
+  reset:'Revenir aux valeurs par défaut',
+  notesH:'Notes',
+  notes:[['Règles bancaires',['Avance max 80 % de la valeur ; 1er rang jusqu’à 66,7 %, le 2e rang s’amortit en 15 ans.','Au moins 10 % de fonds propres « durs » (pas du 2e pilier). Les frais d’achat se paient en cash, hors avance.','Charges théoriques = 5 % d’intérêt + 1 % d’entretien + amortissement, au plus 33 % du revenu brut. Les banques comptent partiellement bonus et RSU.','La valeur retenue ici = prix + part reconnue des travaux. La banque peut estimer le bien sous le prix demandé.']],
+         ['Fiscalité',['La valeur locative est supprimée au 1.1.2029 : 2027 et 2028 sont les dernières années où intérêts et entretien se déduisent pour un logement occupé.','Entretien et énergie : déductibles. Plus-value (garage, piscine, agrandissement) : non déductible, mais réduit l’impôt sur le gain à la revente.','Les frais d’énergie en excès se reportent sur 2 ans ; leur sort après 2029 dépend du canton (à vérifier).','L’économie par année est plafonnée aux impôts actuels ; le taux marginal baisse en réalité avec de grosses déductions.','L’impôt sur la fortune (qui baisse avec la dette) n’est pas compté : quelques milliers de CHF par an.']],
+         ['Limites',['Ordres de grandeur, pas une offre de financement ni un conseil fiscal.','Les coûts des variantes A et B viennent du modèle de coûts du projet (fourchettes, pas des devis).','Valeur locative, taux marginal et revenu à remplacer par les vrais chiffres (dernière taxation, offre de banque).','Sources : <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — taux</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — propriétaire vaudois</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — fin de la valeur locative</a>']]]
+},
+en: {
+  kicker:'Chemin de Galatry 3 · Corseaux VD',
+  h1:'Bottom-up financing',
+  lede:'Start from what we put in: equity sets the mortgage, the mortgage sets how much renovation the bank will accept, and together they give the real monthly “rent” we pay, before and after imputed rental value ends in 2029.',
+  nav:[['en.html','&#8617; Plans &amp; 3D model'],['project.html','Renovation project'],['scenarios.html','Scenarios'],['#levers','Levers'],['#result','Result'],['#equity','By equity'],['#notes','Notes'],['financement.html','FR']],
+  cart:['Asking price','Equity','Mortgage','Renovation'],
+  levers:'Levers', leversSub:'Recalculates live · values stay in this browser',
+  eq:'Equity put in', eqHint:'Cash + sold shares + 3a + pillar 2. Purchase costs come out of it first.',
+  reno:'Renovation budget (2027–2028)', renoHint:'Works + fees + contingency, VAT incl.',
+  ded:'Tax-deductible share', dedHint:'Maintenance + energy (heat pump, insulation, PV, redone bathrooms). Garage, pool, extension: 0%.',
+  split:'Share paid in 2027', splitHint:'The rest is paid in 2028. Everything must be paid by 31.12.2028.',
+  presets:'Presets:',
+  pr:[['1.7M mortgage','credit'],['Energy 500k','energy'],['Variant A · mid','a'],['Variant B · mid','b']],
+  result:'Result', resultSub:'With the levers above',
+  c:{mort:'Mortgage', ltv:'loan-to-value', maxR:'Max renovation accepted', maxRs:'bank limit', m27:'Monthly cost 2027–28', m27s:'average, after tax', m29:'Monthly cost from 2029', m29s:'no imputed rent', tax:'Tax saved 2027 + 2028', taxs:'of current tax', inc:'Gross income needed', incs:'33% rule'},
+  f:{ltv:'Loan-to-value {x}%: above the 80% banks accept. You are {y} short on equity, or the renovation must drop to {z}.',
+     ltvOk:'Loan-to-value {x}%: within the 80% limit.',
+     hard:'“Hard” equity (excl. pillar 2, after costs): {x}, below the 10% required ({y}).',
+     inc:'Theoretical costs of {x} a year = {y}% of the income entered: above 33%.',
+     incOk:'Theoretical costs = {y}% of the income entered: it passes.',
+     noInc:'Gross income not entered: the max renovation only reflects the 80% loan-to-value. Enter it under Assumptions to test affordability.',
+     neg:'Equity covers everything: no mortgage needed.'},
+  bd:'Annual cost breakdown', bdCols:['','2027','2028','From 2029'],
+  rows:{int:'Interest ({r}%)', am:'2nd-rank amortisation', up:'Ongoing upkeep', ch:'Charges (ECA, property tax, fees)', tax:'Tax effect vs today', tot:'Annual cost', mo:'Per month', ref:'Comparison rent ({x}/month)', opp:'Return forgone on equity ({r}%)', work:'Works paid this year', dedr:'of which deductible'},
+  bdNote:'The tax effect compares with today (no house): imputed rent added, interest and works deducted (or the 30% flat rate on imputed rent if higher), at the marginal rate. In 2027–28 the works replace ongoing upkeep. From 2029: no imputed rent and no deductions.',
+  eqH:'By equity', eqSub:'Same renovation and assumptions, varying how much we put in',
+  eqCols:['Equity','Mortgage','LTV','Max renovation','Cost / month 2027–28','Cost / month from 2029','Tax saved 27+28','Income needed'],
+  asm:'Assumptions',
+  g:{buy:'Purchase', bank:'Bank', tax:'Tax', own:'Owner costs'},
+  a:{price:'Purchase price (CHF)', fees:'Purchase costs (% of price)', feesH:'Transfer duty ~3.3% + notary, land registry, mortgage note.', p2:'of which pillar 2 in equity (CHF)',
+     rate:'Effective mortgage rate (%)', rateH:'Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%.', bankPct:'Share of works counted in value (%)', bankPctH:'The bank adds the value-creating part of the works to the collateral value.', income:'Gross household income (CHF / yr)', incomeH:'Empty = affordability test skipped.',
+     marg:'Marginal tax rate (%)', margH:'Federal + canton + commune. ~36% assumed for ~80k tax.', curTax:'Current tax (CHF / yr)', vl:'Imputed rental value (CHF / yr)', vlH:'~65–70% of market rent as-is. The real figure comes from the tax valuation.',
+     upkeep:'Ongoing upkeep from 2029 (% of value / yr)', charges:'Annual charges (CHF)', ref:'Comparison rent (CHF / month)', refH:'Comparable renovated villa in Corseaux: 5,350 net.', opp:'Alternative return on equity (%)'},
+  reset:'Reset to defaults',
+  notesH:'Notes',
+  notes:[['Bank rules',['Max loan 80% of value; 1st rank up to 66.7%, the 2nd rank is amortised within 15 years.','At least 10% “hard” equity (not pillar 2). Purchase costs are paid in cash, outside the loan.','Theoretical costs = 5% interest + 1% upkeep + amortisation, at most 33% of gross income. Banks count bonus and RSUs only partly.','Value here = price + counted share of works. The bank may value the house below the asking price.']],
+         ['Tax',['Imputed rental value ends on 1.1.2029: 2027 and 2028 are the last years interest and upkeep are deductible for an owner-occupied home.','Maintenance and energy: deductible. Value-adding work (garage, pool, extension): not deductible, but lowers gains tax on resale.','Excess energy costs carry forward 2 years; what happens after 2029 depends on the canton (to check).','Yearly savings are capped at current tax; in reality the marginal rate drops with large deductions.','Wealth tax (which falls with the debt) is not counted: a few thousand CHF a year.']],
+         ['Limits',['Orders of magnitude, not a financing offer or tax advice.','Variant A and B costs come from the project cost model (ranges, not quotes).','Replace imputed rent, marginal rate and income with real figures (last tax assessment, bank offer).','Sources: <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — rates</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — Vaud owners</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — end of imputed rent</a>']]]
+}}[LANG];
+
+const DEF = {E:600000, R:158000, ded:75, split:50, P:2050000, fees:4.5, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const KEY = 'galatry-financement-v1';
+let S = Object.assign({}, DEF);
+try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+
+const chf = n => (n < 0 ? '−' : '') + Math.round(Math.abs(n)).toLocaleString('de-CH');
+const k = n => { const a = Math.abs(n); const s = n < 0 ? '−' : ''; return a >= 1e6 ? s + (a/1e6).toFixed(2).replace(/0$/,'') + ' M' : s + Math.round(a/1000) + 'k'; };
+const pct = (n, d=1) => (n*100).toFixed(d);
+const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, x) => o[x]);
+
+// Core model. E = equity, R = renovation budget.
+function model(E, R){
+  const P = +S.P, fees = P * S.fees/100, r = S.rate/100;
+  const V = P + R * S.bankPct/100;
+  const M = Math.max(0, P + fees + R - E);
+  const ltv = M / V;
+  const amort = Math.max(0, M - V*2/3) / 15;
+  const theo = M*0.05 + V*0.01 + amort;
+  const reqInc = theo / 0.33;
+  const hard = E - S.p2 - fees;
+  const interest = M * r;
+  const yrs = [S.split/100, 1 - S.split/100].map(sh => {
+    const works = R * sh, dedW = works * S.ded/100;
+    const maint = Math.max(0.3 * S.vl, dedW);
+    let dTax = S.marg/100 * (S.vl - interest - maint);
+    dTax = Math.max(dTax, -S.curTax);
+    const cost = interest + amort + +S.charges + dTax;
+    return {works, dedW, dTax, cost};
+  });
+  const up = V * S.upkeep/100;
+  const cost29 = interest + amort + up + +S.charges;
+  return {P, fees, V, M, ltv, amort, theo, reqInc, hard, interest, yrs, up, cost29, taxSaved: -(yrs[0].dTax + yrs[1].dTax), E, R};
+}
+function ok(m){
+  if (m.ltv > 0.8 + 1e-9) return false;
+  if (m.hard < 0.1*m.V) return false;
+  if (S.income !== '' && +S.income > 0 && m.theo > 0.33 * S.income) return false;
+  return true;
+}
+function maxReno(E){
+  if (!ok(model(E, 0))) return 0;
+  let lo = 0, hi = 6e6;
+  if (ok(model(E, hi))) return hi;
+  for (let i = 0; i < 50; i++){ const mid = (lo+hi)/2; ok(model(E, mid)) ? lo = mid : hi = mid; }
+  return Math.floor(lo/1000)*1000;
+}
+
+// ---------- render shell ----------
+const app = document.getElementById('app');
+const fieldRange = (id, label, hint, min, max, step) => `<div class="field"><div class="field-row"><label for="${id}">${label}</label><span class="val" id="${id}-v"></span></div><input type="range" id="${id}" min="${min}" max="${max}" step="${step}">${hint ? `<span class="hint">${hint}</span>` : ''}</div>`;
+const fieldNum = (id, label, hint, step) => `<div class="field"><label for="${id}">${label}</label><input type="number" id="${id}" step="${step||'any'}" inputmode="decimal">${hint ? `<span class="hint">${hint}</span>` : ''}</div>`;
+const A = T.a;
+app.innerHTML = `
+<header>
+  <div class="lede">
+    <div class="kicker">${T.kicker}</div>
+    <h1>${T.h1}</h1>
+    <p class="muted">${T.lede}</p>
+    <nav aria-label="Sections">${T.nav.map(([h,l]) => `<a href="${h}">${l}</a>`).join('')}</nav>
+  </div>
+  <div class="cartouche" id="cart"></div>
+</header>
+<section id="levers">
+  <div class="sec-head"><h2>${T.levers}</h2><span class="muted" style="font-size:.84rem">${T.leversSub}</span></div>
+  <div class="panel">
+    <div class="levers">
+      ${fieldRange('E', T.eq, T.eqHint, 200000, 1500000, 10000)}
+      ${fieldRange('R', T.reno, T.renoHint, 0, 2500000, 5000)}
+      ${fieldRange('ded', T.ded, T.dedHint, 0, 100, 5)}
+      ${fieldRange('split', T.split, T.splitHint, 0, 100, 5)}
+    </div>
+    <div class="presets"><span>${T.presets}</span>${T.pr.map(([l,v]) => `<button type="button" data-preset="${v}">${l}</button>`).join('')}</div>
+  </div>
+</section>
+<section id="result">
+  <div class="sec-head"><h2>${T.result}</h2><span class="muted" style="font-size:.84rem">${T.resultSub}</span></div>
+  <div class="callouts" id="callouts"></div>
+  <div class="flags" id="flags"></div>
+  <h3>${T.bd}</h3>
+  <div class="tbl-wrap"><table id="bd"></table></div>
+  <p class="muted" style="font-size:.8rem">${T.bdNote}</p>
+</section>
+<section id="equity">
+  <div class="sec-head"><h2>${T.eqH}</h2><span class="muted" style="font-size:.84rem">${T.eqSub}</span></div>
+  <div class="tbl-wrap"><table id="eqt"></table></div>
+</section>
+<details class="assumptions" id="assumptions">
+  <summary>${T.asm}</summary>
+  <div class="assumption-groups">
+    <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('P', A.price, '', 10000)}${fieldNum('fees', A.fees, A.feesH, 0.1)}${fieldNum('p2', A.p2, '', 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('rate', A.rate, A.rateH, 0.05)}${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
+    <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
+  </div>
+  <button type="button" class="reset" id="reset">${T.reset}</button>
+</details>
+<section id="notes">
+  <div class="sec-head"><h2>${T.notesH}</h2></div>
+  <div class="notes">${T.notes.map(([h, li]) => `<div class="note"><h3>${h}</h3><ul>${li.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
+</section>`;
+
+const IDS = Object.keys(DEF);
+function syncInputs(){ IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = S[id]; }); }
+IDS.forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => { S[id] = id === 'income' && el.value === '' ? '' : +el.value; save(); update(); });
+});
+document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
+  const p = b.dataset.preset, fees = S.P * S.fees/100;
+  if (p === 'credit') { S.R = Math.max(0, Math.round((1700000 - S.P - fees + S.E)/1000)*1000); S.ded = 75; }
+  if (p === 'energy') { S.R = 500000; S.ded = 65; }
+  if (p === 'a') { S.R = 1193700; S.ded = 23; }   // costs.py mid, variant A; deductible = heat pump, glazing, half the lower-floor refit
+  if (p === 'b') { S.R = 1371600; S.ded = 20; }   // costs.py mid, variant B
+  save(); syncInputs(); update();
+}));
+document.getElementById('reset').addEventListener('click', () => { S = Object.assign({}, DEF); save(); syncInputs(); update(); });
+
+function update(){
+  const m = model(S.E, S.R), maxR = maxReno(S.E);
+  document.getElementById('E-v').textContent = 'CHF ' + chf(S.E);
+  document.getElementById('R-v').textContent = 'CHF ' + chf(S.R);
+  document.getElementById('ded-v').textContent = S.ded + ' %';
+  document.getElementById('split-v').textContent = S.split + ' / ' + (100 - S.split);
+  document.getElementById('cart').innerHTML = [[T.cart[0], chf(S.P)], [T.cart[1], chf(S.E)], [T.cart[2], chf(m.M)], [T.cart[3], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
+
+  const m27 = (m.yrs[0].cost + m.yrs[1].cost) / 24, m29 = m.cost29 / 12;
+  const incOK = S.income === '' || !(+S.income > 0) ? null : m.theo <= 0.33 * S.income;
+  const C = T.c, cl = [
+    [C.mort, 'CHF ' + chf(m.M), pct(m.ltv) + ' % ' + C.ltv, m.ltv > 0.8 ? 'bad' : 'good'],
+    [C.maxR, 'CHF ' + chf(maxR), C.maxRs, S.R > maxR ? 'bad' : 'good'],
+    [C.m27, 'CHF ' + chf(m27), C.m27s, ''],
+    [C.m29, 'CHF ' + chf(m29), C.m29s, ''],
+    [C.tax, 'CHF ' + chf(m.taxSaved), pct(m.taxSaved / (2*S.curTax), 0) + ' % ' + C.taxs, m.taxSaved > 0 ? 'good' : ''],
+    [C.inc, 'CHF ' + chf(m.reqInc), C.incs, incOK === null ? '' : incOK ? 'good' : 'bad']];
+  document.getElementById('callouts').innerHTML = cl.map(([a,b,c,d]) => `<div class="callout ${d}"><span class="k">${a}</span><span class="n">${b}</span><span class="s">${c}</span></div>`).join('');
+
+  const F = T.f, fl = [];
+  if (m.M === 0) fl.push(['ok', F.neg]);
+  else if (m.ltv > 0.8) { const V = m.V, short = m.M - 0.8*V; fl.push(['bad', fill(F.ltv, {x: pct(m.ltv), y: 'CHF ' + chf(short), z: 'CHF ' + chf(maxR)})]); }
+  else fl.push(['ok', fill(F.ltvOk, {x: pct(m.ltv)})]);
+  if (m.hard < 0.1*m.V) fl.push(['bad', fill(F.hard, {x: 'CHF ' + chf(m.hard), y: 'CHF ' + chf(0.1*m.V)})]);
+  if (incOK === null) fl.push(['warn', F.noInc]);
+  else fl.push([incOK ? 'ok' : 'bad', fill(incOK ? F.incOk : F.inc, {x: 'CHF ' + chf(m.theo), y: pct(m.theo / S.income)})]);
+  document.getElementById('flags').innerHTML = fl.map(([c,t]) => `<div class="flag ${c}">${t}</div>`).join('');
+
+  const Rw = T.rows, y = m.yrs, dash = '–';
+  const row = (l, a, b, c, cls='') => `<tr class="${cls}"><td>${l}</td><td>${a}</td><td>${b}</td><td>${c}</td></tr>`;
+  const taxCls = v => v < 0 ? 'good' : v > 0 ? 'bad' : '';
+  document.getElementById('bd').innerHTML = `<thead><tr>${T.bdCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
+    row(fill(Rw.int, {r: S.rate}), chf(m.interest), chf(m.interest), chf(m.interest)) +
+    row(Rw.am, chf(m.amort), chf(m.amort), chf(m.amort)) +
+    row(Rw.up, dash, dash, chf(m.up)) +
+    row(Rw.ch, chf(S.charges), chf(S.charges), chf(S.charges)) +
+    `<tr><td>${Rw.tax}</td><td class="${taxCls(y[0].dTax)}">${chf(y[0].dTax)}</td><td class="${taxCls(y[1].dTax)}">${chf(y[1].dTax)}</td><td>0</td></tr>` +
+    row(Rw.tot, chf(y[0].cost), chf(y[1].cost), chf(m.cost29), 'total') +
+    row(Rw.mo, chf(y[0].cost/12), chf(y[1].cost/12), chf(m.cost29/12), 'total') +
+    row(fill(Rw.ref, {x: chf(S.ref)}), chf(S.ref*12), chf(S.ref*12), chf(S.ref*12), 'sub') +
+    row(fill(Rw.opp, {r: S.opp}), chf(S.E*S.opp/100), chf(S.E*S.opp/100), chf(S.E*S.opp/100), 'sub') +
+    row(Rw.work, chf(y[0].works), chf(y[1].works), dash, 'sub') +
+    row(Rw.dedr, chf(y[0].dedW), chf(y[1].dedW), dash, 'sub') + '</tbody>';
+
+  const steps = [];
+  for (let e = 300000; e <= 1200000; e += 100000) steps.push(e);
+  if (!steps.includes(+S.E)) steps.push(+S.E);
+  steps.sort((a,b) => a-b);
+  document.getElementById('eqt').innerHTML = `<thead><tr>${T.eqCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` + steps.map(e => {
+    const q = model(e, S.R), mr = maxReno(e);
+    return `<tr class="${e === +S.E ? 'cur' : ''}"><td class="num">${chf(e)}</td><td>${chf(q.M)}</td><td class="${q.ltv > 0.8 ? 'bad' : ''}">${pct(q.ltv, 0)} %</td><td class="${S.R > mr ? 'bad' : 'good'}">${chf(mr)}</td><td>${chf((q.yrs[0].cost + q.yrs[1].cost)/24)}</td><td>${chf(q.cost29/12)}</td><td>${chf(q.taxSaved)}</td><td>${chf(q.reqInc)}</td></tr>`;
+  }).join('') + '</tbody>';
+}
+syncInputs(); update();
+})();
+</script>
+</body>
+</html>
