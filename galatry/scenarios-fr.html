@@ -491,7 +491,7 @@ footer{border-top:1px solid var(--rule);padding-top:14px;font-size:.78rem;color:
     out += bRow('Fonds propres (' + fmtCHF(r.hardEquity) + ' cash + ' + fmtCHF(r.pensionAmount) + ' prévoyance)', fmtCHF(r.equityAmount));
     out += bRow('Frais de transaction (' + G.txCostPct.toFixed(1) + '% du prix)', fmtCHF(r.txCost));
     if (r.renoCost > 0) out += bRow('Rénovation (' + RENO_LABELS[st.reno].toLowerCase() + ')', fmtCHF(r.renoCost));
-    out += bRow('= Cash nécessaire au départ', fmtCHF(r.upfrontCash), true);
+    out += bRow('= Liquidités nécessaires au départ', fmtCHF(r.upfrontCash), true);
 
     out += '<div class="b-group">Hypothèque</div>';
     out += bRow('Emprunté (' + mortgageRateLabel + ')', fmtCHF(r.mortgage));
