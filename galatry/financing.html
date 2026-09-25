@@ -206,10 +206,13 @@ en: {
   asm:'Assumptions',
   g:{buy:'Purchase', bank:'Bank', tax:'Tax', own:'Owner costs'},
   a:{price:'Purchase price (CHF)', mutC:'Cantonal transfer duty (%)', mutCH:'Set by law.', mutCom:'Communal transfer duty (%)', mutComH:'At most 1.1%; Corseaux’s exact rate to be confirmed.', rf:'Land registry (% of price)', notary:'Notary, deed of sale (% of price)', notaryH:'Negotiable: the buyer chooses the notary.', cedule:'Mortgage note (% of mortgage)', ceduleH:'A new note is needed: none is registered on the parcel.', misc:'Other (CHF)', p2:'of which pillar 2 in equity (CHF)',
-     rate:'Effective mortgage rate (%)', rateH:'Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%.', bankPct:'Share of works counted in value (%)', bankPctH:'The bank adds the value-creating part of the works to the collateral value.', nkBank:'Work in kind counted in value (%)', nkBankH:'100% if the bank treats it like invoiced work; 0% if not. To confirm with the bank.', income:'Gross household income (CHF / yr)', incomeH:'Empty = affordability test skipped.',
+     rate:'Effective mortgage rate (%)', rateH:'Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%.', bankPct:'Share of works counted in value (%)', bankPctH:'The bank adds the value-creating part of the works to the collateral value.', k1:'1st-rank repayment, after the 2nd rank (CHF / yr)', k1H:'Empty = keep paying the same amount as the 2nd-rank amortisation.', nkBank:'Work in kind counted in value (%)', nkBankH:'100% if the bank treats it like invoiced work; 0% if not. To confirm with the bank.', income:'Gross household income (CHF / yr)', incomeH:'Empty = affordability test skipped.',
      marg:'Marginal tax rate (%)', margH:'Federal + canton + commune. ~36% assumed for ~80k tax.', curTax:'Current tax (CHF / yr)', vl:'Imputed rental value (CHF / yr)', vlH:'~65–70% of market rent as-is. The real figure comes from the tax valuation.',
      upkeep:'Ongoing upkeep from 2029 (% of value / yr)', charges:'Annual charges (CHF)', ref:'Comparison rent (CHF / month)', refH:'Comparable renovated villa in Corseaux: 5,350 net.', opp:'Alternative return on equity (%)'},
   nkF:'Work in kind of {x}: banks usually ask for a quote and proof of qualification (e.g. an electrician). It cuts the mortgage but does not count as “hard” equity.', nkU:'of which work in kind', nkE:'Work in kind',
+  rp:'Paying off the mortgage', rpCols:['','Amount','Repaid per year','Duration','Period','Cost / month during','Cost / month after'],
+  rp2:'2nd rank (required, 15 years)', rp1:'1st rank (voluntary)', rp1k:'or: keep the 1st rank, interest only', rpForever:'not repaid', rpNone:'none', rpNever:'never (0 / yr)', yrs:'yrs',
+  rpNote:'The 2nd rank (above 66.7% of value) must be repaid within 15 years; the 1st rank need not be. Here the 1st rank starts being repaid once the 2nd rank is cleared, at the pace set under Assumptions. Cost / month = interest on the remaining debt + repayment + upkeep + charges, with no imputed rent (from 2029); “after” the 1st rank = no debt left, only upkeep and charges. Rate assumed constant.',
   reset:'Reset to defaults',
   notesH:'Notes',
   notes:[['Bank rules',['Max loan 80% of value; 1st rank up to 66.7%, the 2nd rank is amortised within 15 years.','At least 10% “hard” equity (not pillar 2). Purchase costs are paid in cash, outside the loan.','Theoretical costs = 5% interest + 1% upkeep + amortisation, at most 33% of gross income. Banks count bonus and RSUs only partly.','Value here = price + counted share of works. The bank may value the house below the asking price.']],
@@ -218,7 +221,7 @@ en: {
 }}[LANG];
 
 const ASK = 2050000;
-const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, N:0, nkBank:100, rate:1.6, rMode:'mix', per:'y', bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, N:0, nkBank:100, k1:'', rate:1.6, rMode:'mix', per:'y', bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
 const KEY = 'galatry-financement-v1';
 let S = Object.assign({}, DEF);
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
@@ -325,6 +328,9 @@ app.innerHTML = `
   <div class="bd-head"><h3 id="bd-h">${T.bd}</h3><div class="toggle-row" role="group" aria-label="${T.bd}">${T.per.map((l, i) => `<button type="button" class="toggle-btn" data-per="${i ? 'm' : 'y'}">${l}</button>`).join('')}</div></div>
   <div class="tbl-wrap"><table id="bd"></table></div>
   <p class="muted" style="font-size:.8rem">${T.bdNote}</p>
+  <h3>${T.rp}</h3>
+  <div class="tbl-wrap"><table id="rp"></table></div>
+  <p class="muted" style="font-size:.8rem">${T.rpNote}</p>
 </section>
 <section id="equity">
   <div class="sec-head"><h2>${T.eqH}</h2><span class="muted" style="font-size:.84rem">${T.eqSub}</span></div>
@@ -334,7 +340,7 @@ app.innerHTML = `
   <summary>${T.asm}</summary>
   <div class="assumption-groups">
     <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
-    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('nkBank', A.nkBank, A.nkBankH, 10)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('nkBank', A.nkBank, A.nkBankH, 10)}${fieldNum('k1', A.k1, A.k1H, 1000)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
     <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
     <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
   </div>
@@ -364,7 +370,7 @@ document.getElementById('Pn').addEventListener('change', e => { const v = +e.tar
 IDS.forEach(id => {
   const el = document.getElementById(id);
   if (!el) return;
-  el.addEventListener('input', () => { S[id] = id === 'income' && el.value === '' ? '' : +el.value; save(); update(); });
+  el.addEventListener('input', () => { S[id] = (id === 'income' || id === 'k1') && el.value === '' ? '' : +el.value; save(); update(); });
 });
 document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
   const p = b.dataset.preset;
@@ -434,6 +440,22 @@ function update(){
     row(fill(Rw.opp, {r: S.opp}), p(S.E*S.opp/100), p(S.E*S.opp/100), p(S.E*S.opp/100), 'sub') +
     row(Rw.work + (mo ? ' · ' + T.yrOnly : ''), chf(y[0].works), chf(y[1].works), dash, 'sub') +
     row(Rw.dedr + (mo ? ' · ' + T.yrOnly : ''), chf(y[0].dedW), chf(y[1].dedW), dash, 'sub') + '</tbody>';
+
+  // repayment timeline: 2nd rank over 15 years from 2027, then the 1st rank at k1 per year
+  const r = S.rate/100, oc = m.up + +S.charges, M1 = Math.min(m.M, m.V*2/3), M2 = m.M - M1, y0 = 2027;
+  const n2 = M2 > 0 ? 15 : 0, e2 = y0 + n2;
+  const K = S.k1 === '' ? (m.amort || 0) : +S.k1;
+  const n1 = M1 > 0 && K > 0 ? Math.ceil(M1 / K) : null;
+  const last = n1 ? M1 - K*(n1-1) : 0;   // what is left to repay in the final year
+  const d1s = (M1*r + Math.min(K, M1) + oc) / 12, d1e = (last*r + last + oc) / 12;
+  const moAfter2 = n1 === null || M1 === 0 ? (M1*r + oc)/12 : d1s;
+  const rrow = c => `<tr>${c.map(x => `<td>${x}</td>`).join('')}</tr>`;
+  document.getElementById('rp').innerHTML = `<thead><tr>${T.rpCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
+    (M2 > 0 ? rrow([T.rp2, chf(M2), chf(m.amort), '15 ' + T.yrs, y0 + '–' + (e2 - 1), chf(m.cost29/12), chf(moAfter2)]) : rrow([T.rp2, T.rpNone, '–', '–', '–', '–', '–'])) +
+    (M1 === 0 ? rrow([T.rp1, T.rpNone, '–', '–', '–', '–', '–'])
+      : n1 === null ? rrow([T.rp1, chf(M1), '0', T.rpNever, '–', chf((M1*r + oc)/12), '–'])
+      : rrow([T.rp1, chf(M1), chf(K), n1 + ' ' + T.yrs, e2 + '–' + (e2 + n1 - 1), chf(d1s) + (n1 > 1 ? ' → ' + chf(d1e) : ''), `<b>${chf(oc/12)}</b>`])) +
+    (M1 > 0 ? rrow([T.rp1k, chf(M1), '0', T.rpForever, e2 + '–', `<b>${chf((M1*r + oc)/12)}</b>`, '–']) : '') + '</tbody>';
 
   const steps = [];
   for (let e = 300000; e <= 1200000; e += 100000) steps.push(e);
