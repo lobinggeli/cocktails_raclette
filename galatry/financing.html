@@ -70,7 +70,7 @@ input[type="number"]{width:100%;border:1px solid var(--rule);padding:6px 9px;bac
 .toggle-row{display:flex;gap:6px}
 .toggle-btn{flex:1;border:1px solid var(--rule);background:var(--room);color:var(--ink-2);padding:6px 10px;font:inherit;font-size:.82rem;cursor:pointer}
 .toggle-btn.active{background:var(--accent);border-color:var(--accent);color:var(--sheet);font-weight:600}
-.price-lever{grid-column:1/-1}
+.price-lever{grid-column:1/-1}.bd-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.bd-head .toggle-row{min-width:220px}
 .price-custom{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:center}
 @media (max-width:520px){.price-custom{grid-template-columns:1fr}}
 .presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -185,6 +185,9 @@ en: {
   split:'Share paid in 2027', splitHint:'The rest is paid in 2028. Everything must be paid by 31.12.2028.',
   presets:'Presets:',
   pr:[['1.7M mortgage','credit'],['Energy 500k','energy'],['Variant A · mid','a'],['Variant B · mid','b']],
+  rateL:'Mortgage rate', rt:[['saron','SARON ~1.2%'],['mix','Mixed ~1.6%'],['fix10','10-yr fixed ~2.0%'],['custom','Other']],
+  rateHint:'Average effective rate on the whole mortgage. Sept 2026: SARON ~1.2%, 10-yr fixed ~2.0%; “Mixed” = half SARON, half fixed.',
+  per:['Annual','Monthly'], bdM:'Monthly cost breakdown', moTot:'Monthly cost', yr:'Per year', yrOnly:'full-year total',
   result:'Result', resultSub:'With the levers above',
   c:{mort:'Mortgage', ltv:'loan-to-value', maxR:'Max renovation accepted', maxRs:'bank limit', m27:'Monthly cost 2027–28', m27s:'average, after tax', m29:'Monthly cost from 2029', m29s:'no imputed rent', tax:'Tax saved 2027 + 2028', taxs:'of current tax', inc:'Gross income needed', incs:'33% rule'},
   f:{ltv:'Loan-to-value {x}%: above the 80% banks accept. You are {y} short on equity, or the renovation must drop to {z}.',
@@ -213,11 +216,13 @@ en: {
 }}[LANG];
 
 const ASK = 2050000;
-const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, rMode:'mix', per:'y', bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
 const KEY = 'galatry-financement-v1';
 let S = Object.assign({}, DEF);
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
 const PP = () => S.pMode === 'custom' ? +S.P : ASK;
+const RATES = {saron:1.2, mix:1.6, fix10:2.0};
+if (S.rMode !== 'custom' && RATES[S.rMode] !== +S.rate) S.rMode = Object.keys(RATES).find(k => RATES[k] === +S.rate) || 'custom';
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 
 const chf = n => (n < 0 ? '−' : '') + Math.round(Math.abs(n)).toLocaleString('de-CH');
@@ -292,6 +297,12 @@ app.innerHTML = `
         <div class="price-custom" id="price-custom"><input type="range" id="P" min="1500000" max="2300000" step="5000" aria-label="${T.pNeg}"><input type="number" id="Pn" step="5000" inputmode="numeric" aria-label="${T.pNeg}"></div>
         <span class="hint">${T.pHint}</span>
       </div>
+      <div class="field price-lever">
+        <div class="field-row"><label>${T.rateL}</label><span class="val" id="rate-v"></span></div>
+        <div class="toggle-row" role="group" aria-label="${T.rateL}">${T.rt.map(([v,l]) => `<button type="button" class="toggle-btn" data-rmode="${v}">${l}</button>`).join('')}</div>
+        <div class="price-custom" id="rate-custom"><input type="range" id="rateR" min="0.5" max="4" step="0.05" aria-label="${T.rateL}"><input type="number" id="rateN" min="0" max="8" step="0.05" inputmode="decimal" aria-label="${T.rateL}"></div>
+        <span class="hint">${T.rateHint}</span>
+      </div>
       ${fieldRange('E', T.eq, T.eqHint, 200000, 1500000, 10000)}
       ${fieldRange('R', T.reno, T.renoHint, 0, 2500000, 5000)}
       ${fieldRange('ded', T.ded, T.dedHint, 0, 100, 5)}
@@ -307,7 +318,7 @@ app.innerHTML = `
   <h3>${T.uses}</h3>
   <div class="tbl-wrap"><table id="uses"></table></div>
   <p class="muted" style="font-size:.8rem">${T.usesNote}</p>
-  <h3>${T.bd}</h3>
+  <div class="bd-head"><h3 id="bd-h">${T.bd}</h3><div class="toggle-row" role="group" aria-label="${T.bd}">${T.per.map((l, i) => `<button type="button" class="toggle-btn" data-per="${i ? 'm' : 'y'}">${l}</button>`).join('')}</div></div>
   <div class="tbl-wrap"><table id="bd"></table></div>
   <p class="muted" style="font-size:.8rem">${T.bdNote}</p>
 </section>
@@ -319,7 +330,7 @@ app.innerHTML = `
   <summary>${T.asm}</summary>
   <div class="assumption-groups">
     <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
-    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('rate', A.rate, A.rateH, 0.05)}${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
     <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
     <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
   </div>
@@ -336,8 +347,15 @@ function syncInputs(){
   document.getElementById('Pn').value = S.P;
   document.querySelectorAll('[data-pmode]').forEach(b => { const on = b.dataset.pmode === S.pMode; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
   document.getElementById('price-custom').hidden = S.pMode !== 'custom';
+  document.querySelectorAll('[data-rmode]').forEach(b => { const on = b.dataset.rmode === S.rMode; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
+  document.getElementById('rate-custom').hidden = S.rMode !== 'custom';
+  document.getElementById('rateR').value = S.rate; if (document.activeElement !== document.getElementById('rateN')) document.getElementById('rateN').value = S.rate;
+  document.querySelectorAll('[data-per]').forEach(b => { const on = b.dataset.per === S.per; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
 }
 document.querySelectorAll('[data-pmode]').forEach(b => b.addEventListener('click', () => { S.pMode = b.dataset.pmode; save(); syncInputs(); update(); }));
+document.querySelectorAll('[data-rmode]').forEach(b => b.addEventListener('click', () => { S.rMode = b.dataset.rmode; if (RATES[S.rMode]) S.rate = RATES[S.rMode]; save(); syncInputs(); update(); }));
+['rateR', 'rateN'].forEach(id => document.getElementById(id).addEventListener('input', e => { const v = +e.target.value; if (e.target.value !== '' && v >= 0) { S.rate = v; save(); syncInputs(); update(); } }));
+document.querySelectorAll('[data-per]').forEach(b => b.addEventListener('click', () => { S.per = b.dataset.per; save(); syncInputs(); update(); }));
 document.getElementById('Pn').addEventListener('change', e => { const v = +e.target.value; if (v > 0) { S.P = v; save(); syncInputs(); update(); } });
 IDS.forEach(id => {
   const el = document.getElementById(id);
@@ -358,6 +376,7 @@ function update(){
   const m = model(S.E, S.R), maxR = maxReno(S.E);
   document.getElementById('P-v').textContent = 'CHF ' + chf(PP()) + (S.pMode === 'custom' ? ' · ' + fill(T.disc, {x: ((PP()/ASK - 1)*100).toFixed(1).replace(/^(\d)/, '+$1').replace('-', '−')}) : '');
   if (document.activeElement !== document.getElementById('Pn')) document.getElementById('Pn').value = S.P;
+  document.getElementById('rate-v').textContent = (+S.rate).toFixed(2).replace(/0$/, '') + ' %' + (m.M > 0 ? ' · CHF ' + chf(m.interest) + ' / ' + (LANG === 'en' ? 'yr' : 'an') : '');
   document.getElementById('E-v').textContent = 'CHF ' + chf(S.E);
   document.getElementById('R-v').textContent = 'CHF ' + chf(S.R);
   document.getElementById('ded-v').textContent = S.ded + ' %';
@@ -392,20 +411,23 @@ function update(){
     ur(U.buy, PP() + m.fees, 'total') + ur(U.reno, S.R) + ur(U.tot, PP() + m.fees + S.R, 'total') +
     `<tr class="sub"><td colspan="3">${U.fin}</td></tr>` + ur(U.eq, S.E, '', false) + ur(U.mort, m.M, '', false) + '</tbody>';
   const Rw = T.rows, y = m.yrs, dash = '–';
+  const dv = S.per === 'm' ? 12 : 1, mo = S.per === 'm';
+  document.getElementById('bd-h').textContent = mo ? T.bdM : T.bd;
   const row = (l, a, b, c, cls='') => `<tr class="${cls}"><td>${l}</td><td>${a}</td><td>${b}</td><td>${c}</td></tr>`;
+  const p = v => chf(v / dv);
   const taxCls = v => v < 0 ? 'good' : v > 0 ? 'bad' : '';
   document.getElementById('bd').innerHTML = `<thead><tr>${T.bdCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
-    row(fill(Rw.int, {r: S.rate}), chf(m.interest), chf(m.interest), chf(m.interest)) +
-    row(Rw.am, chf(m.amort), chf(m.amort), chf(m.amort)) +
-    row(Rw.up, dash, dash, chf(m.up)) +
-    row(Rw.ch, chf(S.charges), chf(S.charges), chf(S.charges)) +
-    `<tr><td>${Rw.tax}</td><td class="${taxCls(y[0].dTax)}">${chf(y[0].dTax)}</td><td class="${taxCls(y[1].dTax)}">${chf(y[1].dTax)}</td><td>0</td></tr>` +
-    row(Rw.tot, chf(y[0].cost), chf(y[1].cost), chf(m.cost29), 'total') +
-    row(Rw.mo, chf(y[0].cost/12), chf(y[1].cost/12), chf(m.cost29/12), 'total') +
-    row(fill(Rw.ref, {x: chf(S.ref)}), chf(S.ref*12), chf(S.ref*12), chf(S.ref*12), 'sub') +
-    row(fill(Rw.opp, {r: S.opp}), chf(S.E*S.opp/100), chf(S.E*S.opp/100), chf(S.E*S.opp/100), 'sub') +
-    row(Rw.work, chf(y[0].works), chf(y[1].works), dash, 'sub') +
-    row(Rw.dedr, chf(y[0].dedW), chf(y[1].dedW), dash, 'sub') + '</tbody>';
+    row(fill(Rw.int, {r: S.rate}), p(m.interest), p(m.interest), p(m.interest)) +
+    row(Rw.am, p(m.amort), p(m.amort), p(m.amort)) +
+    row(Rw.up, dash, dash, p(m.up)) +
+    row(Rw.ch, p(S.charges), p(S.charges), p(S.charges)) +
+    `<tr><td>${Rw.tax}</td><td class="${taxCls(y[0].dTax)}">${p(y[0].dTax)}</td><td class="${taxCls(y[1].dTax)}">${p(y[1].dTax)}</td><td>0</td></tr>` +
+    (mo ? row(T.moTot, p(y[0].cost), p(y[1].cost), p(m.cost29), 'total') + row(T.yr, chf(y[0].cost), chf(y[1].cost), chf(m.cost29), 'sub')
+        : row(Rw.tot, chf(y[0].cost), chf(y[1].cost), chf(m.cost29), 'total') + row(Rw.mo, chf(y[0].cost/12), chf(y[1].cost/12), chf(m.cost29/12), 'total')) +
+    row(fill(Rw.ref, {x: chf(S.ref)}), p(S.ref*12), p(S.ref*12), p(S.ref*12), 'sub') +
+    row(fill(Rw.opp, {r: S.opp}), p(S.E*S.opp/100), p(S.E*S.opp/100), p(S.E*S.opp/100), 'sub') +
+    row(Rw.work + (mo ? ' · ' + T.yrOnly : ''), chf(y[0].works), chf(y[1].works), dash, 'sub') +
+    row(Rw.dedr + (mo ? ' · ' + T.yrOnly : ''), chf(y[0].dedW), chf(y[1].dedW), dash, 'sub') + '</tbody>';
 
   const steps = [];
   for (let e = 300000; e <= 1200000; e += 100000) steps.push(e);
