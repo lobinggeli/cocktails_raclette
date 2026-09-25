@@ -67,6 +67,12 @@ section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
 .field .hint{font-size:.74rem;color:var(--ink-2)}
 input[type="range"]{width:100%;accent-color:var(--accent)}
 input[type="number"]{width:100%;border:1px solid var(--rule);padding:6px 9px;background:var(--room);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.toggle-row{display:flex;gap:6px}
+.toggle-btn{flex:1;border:1px solid var(--rule);background:var(--room);color:var(--ink-2);padding:6px 10px;font:inherit;font-size:.82rem;cursor:pointer}
+.toggle-btn.active{background:var(--accent);border-color:var(--accent);color:var(--sheet);font-weight:600}
+.price-lever{grid-column:1/-1}
+.price-custom{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:center}
+@media (max-width:520px){.price-custom{grid-template-columns:1fr}}
 .presets{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .presets span{font-size:.8rem;color:var(--ink-2);margin-right:4px}
 .presets button{border:1px solid var(--rule);background:var(--room);color:var(--ink);padding:5px 10px;font:inherit;font-size:.8rem;cursor:pointer}
@@ -124,11 +130,12 @@ fr: {
   h1:'Financement bottom-up',
   lede:'On part de ce qu’on met : les fonds propres fixent le crédit, le crédit fixe la rénovation que la banque accepte, et le tout donne le « loyer » réel qu’on paie chaque mois, avant et après la fin de la valeur locative en 2029.',
   nav:[['index.html','&#8617; Plans &amp; modèle 3D'],['projet.html','Projet de rénovation'],['scenarios-fr.html','Scénarios'],['#levers','Leviers'],['#result','Résultat'],['#equity','Selon les fonds propres'],['#notes','Notes'],['financing.html','EN']],
-  cart:['Prix demandé','Prix + frais','Fonds propres','Crédit','Rénovation'],
+  cart:['Prix d’achat','Prix + frais','Fonds propres','Crédit','Rénovation'],
   uses:'Coût total du projet', usesCols:['','CHF','% du prix'],
   u:{price:'Prix d’achat', mutC:'Droit de mutation cantonal', mutCom:'Droit de mutation communal (Corseaux)', rf:'Registre foncier (transfert)', notary:'Notaire (acte de vente)', ced:'Cédule hypothécaire (notaire + RF, sur {x})', misc:'Divers (expertise, dossier bancaire)', fees:'Frais d’achat', buy:'Prix + frais', reno:'Rénovation', tot:'Coût total', fin:'Financé par', eq:'Fonds propres', mort:'Crédit hypothécaire'},
   usesNote:'Les frais d’achat se paient avec les fonds propres : la banque ne les finance pas et ils n’augmentent pas la valeur retenue du bien.',
   levers:'Leviers', leversSub:'Tout se recalcule en direct · les valeurs restent dans ce navigateur',
+  price:'Prix d’achat', pAsk:'Prix demandé · 2’050’000', pNeg:'Prix négocié', pHint:'Vente de succession, déjà ~16 % sous la moyenne au m² de Corseaux : la marge de négociation est sans doute limitée.', disc:'{x} % vs prix demandé',
   eq:'Fonds propres apportés', eqHint:'Cash + titres vendus + 3a + 2e pilier. Les frais d’achat en sortent d’abord.',
   reno:'Budget de rénovation (2027–2028)', renoHint:'Travaux + honoraires + réserve, TTC.',
   ded:'Part fiscalement déductible', dedHint:'Entretien + énergie (PAC, isolation, PV, salles de bain refaites). Garage, piscine, agrandissement : 0 %.',
@@ -166,11 +173,12 @@ en: {
   h1:'Bottom-up financing',
   lede:'Start from what we put in: equity sets the mortgage, the mortgage sets how much renovation the bank will accept, and together they give the real monthly “rent” we pay, before and after imputed rental value ends in 2029.',
   nav:[['en.html','&#8617; Plans &amp; 3D model'],['project.html','Renovation project'],['scenarios.html','Scenarios'],['#levers','Levers'],['#result','Result'],['#equity','By equity'],['#notes','Notes'],['financement.html','FR']],
-  cart:['Asking price','Price + costs','Equity','Mortgage','Renovation'],
+  cart:['Purchase price','Price + costs','Equity','Mortgage','Renovation'],
   uses:'Total project cost', usesCols:['','CHF','% of price'],
   u:{price:'Purchase price', mutC:'Cantonal transfer duty', mutCom:'Communal transfer duty (Corseaux)', rf:'Land registry (transfer)', notary:'Notary (deed of sale)', ced:'Mortgage note (notary + registry, on {x})', misc:'Other (valuation, bank file)', fees:'Purchase costs', buy:'Price + costs', reno:'Renovation', tot:'Total cost', fin:'Financed by', eq:'Equity', mort:'Mortgage'},
   usesNote:'Purchase costs are paid from equity: the bank does not finance them and they do not add to the property’s collateral value.',
   levers:'Levers', leversSub:'Recalculates live · values stay in this browser',
+  price:'Purchase price', pAsk:'Asking price · 2,050,000', pNeg:'Negotiated price', pHint:'Estate sale, already ~16% below the Corseaux average per m²: room to negotiate is probably limited.', disc:'{x}% vs asking',
   eq:'Equity put in', eqHint:'Cash + sold shares + 3a + pillar 2. Purchase costs come out of it first.',
   reno:'Renovation budget (2027–2028)', renoHint:'Works + fees + contingency, VAT incl.',
   ded:'Tax-deductible share', dedHint:'Maintenance + energy (heat pump, insulation, PV, redone bathrooms). Garage, pool, extension: 0%.',
@@ -204,10 +212,12 @@ en: {
          ['Limits',['Orders of magnitude, not a financing offer or tax advice.','Variant A and B costs come from the project cost model (ranges, not quotes).','Replace imputed rent, marginal rate and income with real figures (last tax assessment, bank offer).','Sources: <a href="https://en.comparis.ch/hypotheken/zinssatz">Comparis — rates</a> · <a href="https://www.taxclick.ch/guide-proprietaire-vaud">TaxClick — Vaud owners</a> · <a href="https://www.bcv.ch/pointsforts/votre-argent/2026/valeur-locative-renover-aujourdhui-ou-demain.html">BCV — end of imputed rent</a>']]]
 }}[LANG];
 
-const DEF = {E:600000, R:154000, ded:75, split:50, P:2050000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
+const ASK = 2050000;
+const DEF = {pMode:'ask', E:600000, R:154000, ded:75, split:50, P:1950000, mutC:2.2, mutCom:1.1, rf:0.3, notary:0.6, cedule:0.4, misc:3000, p2:0, rate:1.6, bankPct:80, income:'', marg:36, curTax:80000, vl:36000, upkeep:0.8, charges:4000, ref:5350, opp:3};
 const KEY = 'galatry-financement-v1';
 let S = Object.assign({}, DEF);
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) Object.assign(S, s); } catch(e) {}
+const PP = () => S.pMode === 'custom' ? +S.P : ASK;
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 
 const chf = n => (n < 0 ? '−' : '') + Math.round(Math.abs(n)).toLocaleString('de-CH');
@@ -217,7 +227,7 @@ const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, x) => o[x]);
 
 // Core model. E = equity, R = renovation budget.
 function model(E, R){
-  const P = +S.P, r = S.rate/100, c = S.cedule/100;
+  const P = PP(), r = S.rate/100, c = S.cedule/100;
   const fx = {mutC: P*S.mutC/100, mutCom: P*S.mutCom/100, rf: P*S.rf/100, notary: P*S.notary/100, misc: +S.misc};
   const base = fx.mutC + fx.mutCom + fx.rf + fx.notary + fx.misc;
   const V = P + R * S.bankPct/100;
@@ -276,6 +286,12 @@ app.innerHTML = `
   <div class="sec-head"><h2>${T.levers}</h2><span class="muted" style="font-size:.84rem">${T.leversSub}</span></div>
   <div class="panel">
     <div class="levers">
+      <div class="field price-lever">
+        <div class="field-row"><label>${T.price}</label><span class="val" id="P-v"></span></div>
+        <div class="toggle-row" role="group" aria-label="${T.price}"><button type="button" class="toggle-btn" data-pmode="ask">${T.pAsk}</button><button type="button" class="toggle-btn" data-pmode="custom">${T.pNeg}</button></div>
+        <div class="price-custom" id="price-custom"><input type="range" id="P" min="1500000" max="2300000" step="5000" aria-label="${T.pNeg}"><input type="number" id="Pn" step="5000" inputmode="numeric" aria-label="${T.pNeg}"></div>
+        <span class="hint">${T.pHint}</span>
+      </div>
       ${fieldRange('E', T.eq, T.eqHint, 200000, 1500000, 10000)}
       ${fieldRange('R', T.reno, T.renoHint, 0, 2500000, 5000)}
       ${fieldRange('ded', T.ded, T.dedHint, 0, 100, 5)}
@@ -302,7 +318,7 @@ app.innerHTML = `
 <details class="assumptions" id="assumptions">
   <summary>${T.asm}</summary>
   <div class="assumption-groups">
-    <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('P', A.price, '', 10000)}${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
+    <div class="assumption-group"><h3>${T.g.buy}</h3>${fieldNum('mutC', A.mutC, A.mutCH, 0.1)}${fieldNum('mutCom', A.mutCom, A.mutComH, 0.1)}${fieldNum('rf', A.rf, '', 0.05)}${fieldNum('notary', A.notary, A.notaryH, 0.05)}${fieldNum('cedule', A.cedule, A.ceduleH, 0.05)}${fieldNum('misc', A.misc, '', 500)}${fieldNum('p2', A.p2, '', 10000)}</div>
     <div class="assumption-group"><h3>${T.g.bank}</h3>${fieldNum('rate', A.rate, A.rateH, 0.05)}${fieldNum('bankPct', A.bankPct, A.bankPctH, 5)}${fieldNum('income', A.income, A.incomeH, 10000)}</div>
     <div class="assumption-group"><h3>${T.g.tax}</h3>${fieldNum('marg', A.marg, A.margH, 1)}${fieldNum('curTax', A.curTax, '', 1000)}${fieldNum('vl', A.vl, A.vlH, 1000)}</div>
     <div class="assumption-group"><h3>${T.g.own}</h3>${fieldNum('upkeep', A.upkeep, '', 0.1)}${fieldNum('charges', A.charges, '', 500)}${fieldNum('ref', A.ref, A.refH, 50)}${fieldNum('opp', A.opp, '', 0.5)}</div>
@@ -315,14 +331,22 @@ app.innerHTML = `
 </section>`;
 
 const IDS = Object.keys(DEF);
-function syncInputs(){ IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = S[id]; }); }
+function syncInputs(){
+  IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = S[id]; });
+  document.getElementById('Pn').value = S.P;
+  document.querySelectorAll('[data-pmode]').forEach(b => { const on = b.dataset.pmode === S.pMode; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
+  document.getElementById('price-custom').hidden = S.pMode !== 'custom';
+}
+document.querySelectorAll('[data-pmode]').forEach(b => b.addEventListener('click', () => { S.pMode = b.dataset.pmode; save(); syncInputs(); update(); }));
+document.getElementById('Pn').addEventListener('change', e => { const v = +e.target.value; if (v > 0) { S.P = v; save(); syncInputs(); update(); } });
 IDS.forEach(id => {
   const el = document.getElementById(id);
+  if (!el) return;
   el.addEventListener('input', () => { S[id] = id === 'income' && el.value === '' ? '' : +el.value; save(); update(); });
 });
 document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
   const p = b.dataset.preset;
-  if (p === 'credit') { const fees = S.P*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - S.P - fees + S.E)/1000)*1000); S.ded = 75; }
+  if (p === 'credit') { const fees = PP()*(S.mutC + S.mutCom + S.rf + S.notary)/100 + +S.misc + 1700000*S.cedule/100; S.R = Math.max(0, Math.round((1700000 - PP() - fees + S.E)/1000)*1000); S.ded = 75; }
   if (p === 'energy') { S.R = 500000; S.ded = 65; }
   if (p === 'a') { S.R = 1193700; S.ded = 23; }   // costs.py mid, variant A; deductible = heat pump, glazing, half the lower-floor refit
   if (p === 'b') { S.R = 1371600; S.ded = 20; }   // costs.py mid, variant B
@@ -332,11 +356,13 @@ document.getElementById('reset').addEventListener('click', () => { S = Object.as
 
 function update(){
   const m = model(S.E, S.R), maxR = maxReno(S.E);
+  document.getElementById('P-v').textContent = 'CHF ' + chf(PP()) + (S.pMode === 'custom' ? ' · ' + fill(T.disc, {x: ((PP()/ASK - 1)*100).toFixed(1).replace(/^(\d)/, '+$1').replace('-', '−')}) : '');
+  if (document.activeElement !== document.getElementById('Pn')) document.getElementById('Pn').value = S.P;
   document.getElementById('E-v').textContent = 'CHF ' + chf(S.E);
   document.getElementById('R-v').textContent = 'CHF ' + chf(S.R);
   document.getElementById('ded-v').textContent = S.ded + ' %';
   document.getElementById('split-v').textContent = S.split + ' / ' + (100 - S.split);
-  document.getElementById('cart').innerHTML = [[T.cart[0], chf(S.P)], [T.cart[1], chf(S.P + m.fees)], [T.cart[2], chf(S.E)], [T.cart[3], chf(m.M)], [T.cart[4], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
+  document.getElementById('cart').innerHTML = [[T.cart[0], chf(PP())], [T.cart[1], chf(PP() + m.fees)], [T.cart[2], chf(S.E)], [T.cart[3], chf(m.M)], [T.cart[4], chf(S.R)]].map(([a,b]) => `<div>${a}</div><div>CHF ${b}</div>`).join('');
 
   const m27 = (m.yrs[0].cost + m.yrs[1].cost) / 24, m29 = m.cost29 / 12;
   const incOK = S.income === '' || !(+S.income > 0) ? null : m.theo <= 0.33 * S.income;
@@ -358,12 +384,12 @@ function update(){
   else fl.push([incOK ? 'ok' : 'bad', fill(incOK ? F.incOk : F.inc, {x: 'CHF ' + chf(m.theo), y: pct(m.theo / S.income)})]);
   document.getElementById('flags').innerHTML = fl.map(([c,t]) => `<div class="flag ${c}">${t}</div>`).join('');
 
-  const U = T.u, x = m.fx, pp = v => (v / S.P * 100).toFixed(2) + ' %';
+  const U = T.u, x = m.fx, pp = v => (v / PP() * 100).toFixed(2) + ' %';
   const ur = (l, v, cls='', p=true) => `<tr class="${cls}"><td>${l}</td><td>${chf(v)}</td><td>${p ? pp(v) : ''}</td></tr>`;
   document.getElementById('uses').innerHTML = `<thead><tr>${T.usesCols.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>` +
-    ur(U.price, S.P) + ur(U.mutC, x.mutC, 'sub') + ur(U.mutCom, x.mutCom, 'sub') + ur(U.rf, x.rf, 'sub') + ur(U.notary, x.notary, 'sub') +
+    ur(U.price, PP()) + ur(U.mutC, x.mutC, 'sub') + ur(U.mutCom, x.mutCom, 'sub') + ur(U.rf, x.rf, 'sub') + ur(U.notary, x.notary, 'sub') +
     ur(fill(U.ced, {x: 'CHF ' + chf(m.M)}), x.ced, 'sub') + ur(U.misc, x.misc, 'sub') + ur(U.fees, m.fees) +
-    ur(U.buy, S.P + m.fees, 'total') + ur(U.reno, S.R) + ur(U.tot, S.P + m.fees + S.R, 'total') +
+    ur(U.buy, PP() + m.fees, 'total') + ur(U.reno, S.R) + ur(U.tot, PP() + m.fees + S.R, 'total') +
     `<tr class="sub"><td colspan="3">${U.fin}</td></tr>` + ur(U.eq, S.E, '', false) + ur(U.mort, m.M, '', false) + '</tbody>';
   const Rw = T.rows, y = m.yrs, dash = '–';
   const row = (l, a, b, c, cls='') => `<tr class="${cls}"><td>${l}</td><td>${a}</td><td>${b}</td><td>${c}</td></tr>`;
